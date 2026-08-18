@@ -1,0 +1,454 @@
+/* .claude/skills/cafe-site-builder/assets/template/styles.css
+   Cafe site template — design system.
+   Rebrand by editing the :root token block only. Nothing below it hardcodes a color. */
+
+/* ============================================================
+   1. TOKENS  — the entire brand lives here
+   ============================================================ */
+:root {
+  /* --- Color: warm duotone (dark roast + cream) + one accent --- */
+  --c-espresso:    #1a1208;  /* darkest — hero scrim, dark sections, body text on cream */
+  --c-espresso-2:  #30281d;  /* raised dark surface — cards on dark */
+  --c-cream:       #f2ebd9;  /* primary light bg + text on dark */
+  --c-cream-2:     #e8dfc8;  /* alt light bg — banded sections */
+  --c-sand:        #dcd5c4;  /* hairlines, dividers, muted rules */
+  --c-stone:       #6b5a45;  /* muted body text on cream */
+  --c-accent:      #8b3a1e;  /* burnt orange — PRIMARY CTA ONLY */
+  --c-accent-dk:   #7a3219;  /* accent hover */
+  --c-tan:         #d4b483;  /* eyebrow labels on dark, subtle highlights */
+  --c-white:       #ffffff;
+
+  /* Semantic aliases — use these in components, not the raw ramp above */
+  --bg-dark:       var(--c-espresso);
+  --bg-light:      var(--c-cream);
+  --bg-band:       var(--c-cream-2);
+  --text-on-dark:  var(--c-cream);
+  --text-on-light: var(--c-espresso);
+  --text-muted:    var(--c-stone);
+  --rule:          var(--c-sand);
+
+  /* --- Type: display / body / mono-label triad --- */
+  --f-display: "Bebas Neue", "Oswald", Impact, sans-serif;
+  --f-body:    "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --f-label:   "DM Mono", "SFMono-Regular", Menlo, monospace;
+
+  /* Fluid display scale — condensed faces can go enormous without breaking */
+  --t-hero:  clamp(4.5rem, 13vw, 11rem);
+  --t-h2:    clamp(2.75rem, 7vw, 6rem);
+  --t-h3:    clamp(1.5rem, 3vw, 2.25rem);
+  --t-body:  1.05rem;
+  --t-small: 0.9rem;
+  --t-label: 0.72rem;
+
+  /* --- Optical alignment ---
+     Bebas Neue carries a ~.041em left side bearing, so its glyphs sit visibly
+     right of the container edge while the text BOX aligns perfectly (7px at the
+     hero's 176px). Pull left-edge display type back by that amount so it goes
+     flush with the body and label text above and below it. Measured per-letter:
+     flat-sided caps (F H L M D I) sit at .041em; round caps (O C) and T
+     naturally sit less, and are left to overhang slightly — which is correct.
+     Expressed in em so it scales with each element's own font-size.
+
+     Bearing depends on the FIRST letter, so this is three tuned values, not one.
+     The default suits flat-stem caps; override per-heading with the
+     .display--round / .display--flush modifiers. Measured from Bebas Neue. */
+  --bearing-display: .041em;  /* flat stems: B D E F H I J K L M N P R U (and digits) */
+  --bearing-round:   .034em;  /* round caps: C G O Q S — already overhang a little */
+  --bearing-flush:   .012em;  /* T A V W Y X Z — crossbar/diagonal reaches the edge */
+  --track-label: .14em;   /* button/label letter-spacing; see .btn text-indent */
+
+  /* --- Space & layout --- */
+  --content:    1320px;   /* max content width */
+  --narrow:     680px;    /* prose measure */
+  --gutter:     clamp(1.25rem, 5vw, 4rem);
+  --section-y:  clamp(4rem, 10vw, 8rem);
+  --radius:     0;        /* SHARP CORNERS — deliberate. See design-system.md */
+  --header-h:   84px;
+  --utility-h:  38px;
+}
+
+/* ============================================================
+   2. RESET / BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+/* Anchor targets must clear the sticky header */
+section[id] { scroll-margin-top: calc(var(--header-h) + var(--utility-h)); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+body {
+  font-family: var(--f-body);
+  font-size: var(--t-body);
+  line-height: 1.6;
+  color: var(--text-on-light);
+  background: var(--bg-light);
+  -webkit-font-smoothing: antialiased;
+}
+
+img, picture, video { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+
+:focus-visible { outline: 3px solid var(--c-accent); outline-offset: 3px; }
+
+.skip-link {
+  position: absolute; left: -9999px; top: 0; z-index: 999;
+  background: var(--c-accent); color: var(--c-cream); padding: .75rem 1.25rem;
+}
+.skip-link:focus { left: 0; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+
+/* ============================================================
+   3. TYPE PRIMITIVES
+   ============================================================ */
+
+/* Display headings — condensed, uppercase, tight leading, slight tracking.
+   margin-left (not text-indent) so multi-line headings shift every line. */
+.display {
+  font-family: var(--f-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: .88;
+  letter-spacing: .02em;
+  margin-left: calc(-1 * var(--bearing, var(--bearing-display)));
+}
+/* Match the correction to the heading's FIRST letter. Only worth doing above
+   ~40px, where the difference is visible; smaller Bebas text can stay default. */
+.display--round { --bearing: var(--bearing-round); }  /* C G O Q S */
+.display--flush { --bearing: var(--bearing-flush); }  /* T A V W Y X Z */
+/* Centered display type must NOT be bearing-corrected — it would decenter it. */
+.display--centered { --bearing: 0em; }
+.display--hero { font-size: var(--t-hero); }
+.display--section { font-size: var(--t-h2); }
+
+/* Mono eyebrow label — the connective tissue of the whole system */
+.eyebrow {
+  font-family: var(--f-label);
+  font-size: var(--t-label);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  color: var(--c-accent);
+  display: block;
+  margin-bottom: 1.25rem;
+}
+.on-dark .eyebrow { color: var(--c-tan); }
+
+.lede { font-size: 1.15rem; color: var(--text-muted); max-width: var(--narrow); }
+.on-dark .lede { color: var(--c-sand); }
+
+/* ============================================================
+   4. LAYOUT PRIMITIVES
+   ============================================================ */
+.wrap { width: 100%; max-width: var(--content); margin-inline: auto; padding-inline: var(--gutter); }
+
+.section { padding-block: var(--section-y); }
+.section--dark  { background: var(--bg-dark);  color: var(--text-on-dark); }
+.section--light { background: var(--bg-light); color: var(--text-on-light); }
+.section--band  { background: var(--bg-band);  color: var(--text-on-light); }
+
+.on-dark { color: var(--text-on-dark); }
+
+/* Section media — images and video share one slot treatment.
+   Bare .media keeps the asset's own ratio (no crop). Add --portrait to force the
+   4:5 the design system asks for, and --anchor-* when the subject isn't centred. */
+.media { display: block; width: 100%; height: auto; }
+.media--portrait { aspect-ratio: 4 / 5; height: auto; object-fit: cover; }
+.media--anchor-right  { object-position: right center; }
+.media--anchor-left   { object-position: left center; }
+.media--anchor-bottom { object-position: center bottom; }
+
+/* Two-column: content + media. Collapses to stack under 900px. */
+.split { display: grid; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+@media (min-width: 900px) { .split { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 900px) { .split--media-first > :first-child { order: 2; } }
+
+/* ============================================================
+   5. BUTTONS — three tiers, sharp corners, mono labels
+   ============================================================ */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+  font-family: var(--f-label);
+  font-size: var(--t-label);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--track-label);
+  /* letter-spacing appends a trailing space AFTER the last glyph, so centered
+     text lands half a space left of true center. Nudge back by half. */
+  text-indent: calc(var(--track-label) / 2);
+  text-decoration: none;
+  padding: 1.15rem 2rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+  min-height: 48px; /* tap target */
+}
+
+/* Primary = the money action. Exactly one per viewport. */
+.btn--primary { background: var(--c-accent); color: var(--c-cream); }
+.btn--primary:hover { background: var(--c-accent-dk); }
+
+/* Secondary = solid cream, for use on dark imagery */
+.btn--secondary { background: var(--c-cream); color: var(--c-espresso); }
+.btn--secondary:hover { background: var(--c-white); }
+
+/* Ghost = tertiary, lowest priority */
+.btn--ghost { background: transparent; color: currentColor; border-color: currentColor; }
+.btn--ghost:hover { background: currentColor; color: var(--c-espresso); }
+.section--dark .btn--ghost:hover { color: var(--c-espresso); }
+
+.btn-row { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.25rem; }
+
+/* ============================================================
+   6. UTILITY BAR + HEADER
+   ============================================================ */
+.utility {
+  background: var(--c-espresso);
+  color: var(--c-sand);
+  font-size: var(--t-small);
+  min-height: var(--utility-h);
+  display: flex; align-items: center;
+}
+.utility .wrap { display: flex; flex-wrap: wrap; gap: 1rem 2rem; justify-content: center; }
+.utility a { text-decoration: none; }
+.utility a:hover { color: var(--c-cream); }
+
+.header {
+  position: sticky; top: 0; z-index: 100;
+  background: color-mix(in srgb, var(--c-espresso) 92%, transparent);
+  backdrop-filter: blur(8px);
+  color: var(--c-cream);
+  border-bottom: 1px solid color-mix(in srgb, var(--c-sand) 25%, transparent);
+}
+.header__inner {
+  display: flex; align-items: center; justify-content: space-between;
+  min-height: var(--header-h); gap: 1.5rem;
+}
+
+/* Center-logo split nav: nav | logo | nav */
+.nav { display: none; gap: clamp(1.25rem, 3vw, 2.5rem); }
+@media (min-width: 1000px) { .nav { display: flex; } }
+.nav a {
+  font-family: var(--f-display);
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  text-decoration: none;
+  padding-block: .25rem;
+  border-bottom: 2px solid transparent;
+}
+.nav a:hover, .nav a[aria-current="true"] { border-bottom-color: var(--c-accent); }
+
+.logo { flex-shrink: 0; }
+.logo img { height: 60px; width: auto; }
+.logo__text { /* fallback if no logo image yet */
+  font-family: var(--f-display); font-size: 1.9rem; text-transform: uppercase;
+  letter-spacing: .06em; text-decoration: none; line-height: 1;
+}
+
+/* Mobile menu toggle */
+.nav-toggle {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: none; border: 1px solid currentColor; color: inherit;
+  font-family: var(--f-label); font-size: var(--t-label); font-weight: 600;
+  text-transform: uppercase; letter-spacing: .14em;
+  padding: .75rem 1rem; cursor: pointer; min-height: 44px;
+}
+@media (min-width: 1000px) { .nav-toggle { display: none; } }
+
+/* Off-canvas mobile panel */
+.offcanvas {
+  position: fixed; inset: 0; z-index: 200;
+  background: var(--c-espresso); color: var(--c-cream);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 1.5rem;
+  transform: translateX(100%);
+  transition: transform .3s ease;
+}
+.offcanvas[data-open="true"] { transform: translateX(0); }
+.offcanvas a {
+  font-family: var(--f-display); font-size: clamp(2.5rem, 10vw, 4rem);
+  text-transform: uppercase; text-decoration: none; line-height: 1;
+}
+.offcanvas__close {
+  position: absolute; top: 1.5rem; right: var(--gutter);
+  background: none; border: 1px solid currentColor; color: inherit;
+  font-family: var(--f-label); font-size: var(--t-label); text-transform: uppercase;
+  letter-spacing: .14em; padding: .75rem 1rem; cursor: pointer; min-height: 44px;
+}
+
+/* ============================================================
+   7. HERO — full-bleed image, scrim, oversized display type
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: clamp(560px, 88vh, 900px);
+  display: flex; align-items: flex-end;
+  color: var(--c-cream);
+  overflow: hidden;
+}
+.hero__media { position: absolute; inset: 0; background: var(--c-espresso); }
+.hero__media img,
+.hero__media video { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* Background video is decorative: never interactive, never a focus stop. */
+.hero__video { pointer-events: none; }
+
+/* Scrim is non-negotiable — guarantees AA contrast over any photo */
+.hero__media::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--c-espresso) 92%, transparent) 0%,
+    color-mix(in srgb, var(--c-espresso) 62%, transparent) 45%,
+    color-mix(in srgb, var(--c-espresso) 35%, transparent) 100%
+  );
+}
+.hero__inner { position: relative; z-index: 1; padding-block: clamp(3rem, 8vw, 6rem); width: 100%; }
+.hero .display--hero { margin-bottom: 1.5rem; }
+.hero__sub { font-size: clamp(1.05rem, 2vw, 1.35rem); max-width: 46ch; color: var(--c-cream); }
+
+/* Facts strip pinned under the hero — hours/address/phone at a glance */
+.factbar { background: var(--c-espresso-2); color: var(--c-cream); }
+.factbar .wrap {
+  display: flex; flex-wrap: wrap; gap: 1rem 2.5rem;
+  align-items: center; justify-content: space-between;
+  padding-block: 1.25rem;
+}
+.factbar__item { font-family: var(--f-label); font-size: var(--t-label);
+  text-transform: uppercase; letter-spacing: .12em; }
+.factbar a { text-decoration: none; }
+
+/* ============================================================
+   8. MENU — tabbed categories, dot-leader rows
+   ============================================================ */
+.tabs { margin-top: 3rem; }
+.tabs__list {
+  display: flex; flex-wrap: wrap; gap: .5rem;
+  border-bottom: 1px solid var(--rule);
+  padding: 0; margin: 0; list-style: none;
+}
+.tabs__btn {
+  background: none; border: none; border-bottom: 3px solid transparent;
+  font-family: var(--f-label); font-size: var(--t-label); font-weight: 600;
+  text-transform: uppercase; letter-spacing: .14em;
+  color: var(--text-muted);
+  padding: 1rem 1.25rem; cursor: pointer; min-height: 48px;
+}
+.tabs__btn[aria-selected="true"] { color: var(--c-accent); border-bottom-color: var(--c-accent); }
+
+.tabs__panel { padding-top: 2.5rem; }
+.tabs__panel[hidden] { display: none; }
+
+.menu-grid { display: grid; gap: 0; }
+@media (min-width: 760px) { .menu-grid { grid-template-columns: 1fr 1fr; column-gap: clamp(2rem, 6vw, 5rem); } }
+
+/* align-items: baseline sits the price ON the item name's baseline. Without it
+   the row defaults to aligning text TOPS, which left the price ~4px high. */
+.menu-item {
+  display: grid; grid-template-columns: 1fr auto; gap: .25rem 1rem;
+  align-items: baseline;
+  padding-block: 1.15rem;
+  border-bottom: 1px solid var(--rule);
+}
+.menu-item__name {
+  font-family: var(--f-display); font-size: 1.5rem; text-transform: uppercase;
+  letter-spacing: .03em; line-height: 1.1;
+  margin-left: calc(-1 * var(--bearing-display)); /* flush with the description below */
+}
+.menu-item__price { font-family: var(--f-label); font-size: var(--t-small); font-weight: 600; }
+.menu-item__desc { grid-column: 1 / -1; font-size: var(--t-small); color: var(--text-muted); }
+
+.menu-note { margin-top: 2rem; font-size: var(--t-small); color: var(--text-muted); font-style: italic; }
+
+/* ============================================================
+   9. HOURS + LOCATION
+   ============================================================ */
+.hours { list-style: none; padding: 0; margin: 0; }
+.hours li {
+  display: flex; justify-content: space-between; gap: 1.5rem;
+  align-items: baseline;   /* time sits on the day's baseline, not floated mid-row */
+  padding-block: 1rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--c-sand) 30%, transparent);
+}
+.hours__day {
+  font-family: var(--f-display); font-size: 1.5rem; text-transform: uppercase;
+  letter-spacing: .03em;
+  margin-left: calc(-1 * var(--bearing-display));
+}
+.hours__time { font-family: var(--f-label); font-size: var(--t-small); }
+.hours li[data-closed="true"] .hours__time { color: var(--c-accent); }
+.on-dark .hours li[data-closed="true"] .hours__time { color: var(--c-tan); }
+
+.map-embed { width: 100%; aspect-ratio: 4 / 3; border: 0; filter: grayscale(1) contrast(1.1); }
+@media (min-width: 900px) { .map-embed { aspect-ratio: 1 / 1; } }
+
+/* ============================================================
+   10. EVENTS
+   ============================================================ */
+.events { display: grid; gap: 1px; background: color-mix(in srgb, var(--c-sand) 30%, transparent); margin-top: 3rem; }
+@media (min-width: 800px) { .events { grid-template-columns: repeat(3, 1fr); } }
+.event { background: var(--bg-dark); padding: 2rem; }
+.section--light .event, .section--band .event { background: var(--bg-light); }
+.event__when {
+  font-family: var(--f-label); font-size: var(--t-label); font-weight: 600;
+  text-transform: uppercase; letter-spacing: .14em; color: var(--c-tan);
+  display: block; margin-bottom: .75rem;
+}
+.section--light .event__when, .section--band .event__when { color: var(--c-accent); }
+.event__what {
+  font-family: var(--f-display); font-size: 1.75rem; text-transform: uppercase; line-height: 1.05;
+  margin-left: calc(-1 * var(--bearing-display)); /* flush with the .event__when label above */
+}
+
+/* ============================================================
+   11. FOOTER
+   ============================================================ */
+.footer { background: var(--c-espresso); color: var(--c-sand); padding-block: clamp(3rem, 7vw, 5rem) 2rem; }
+.footer__cols { display: grid; gap: 2.5rem; }
+@media (min-width: 800px) { .footer__cols { grid-template-columns: 2fr 1fr 1fr; } }
+.footer h2 {
+  font-family: var(--f-label); font-size: var(--t-label); font-weight: 600;
+  text-transform: uppercase; letter-spacing: .14em; color: var(--c-cream);
+  margin-bottom: 1.25rem;
+}
+.footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: .65rem; }
+.footer a { text-decoration: none; }
+.footer a:hover { color: var(--c-cream); text-decoration: underline; }
+.footer__legal {
+  margin-top: 3rem; padding-top: 1.75rem;
+  border-top: 1px solid color-mix(in srgb, var(--c-sand) 22%, transparent);
+  font-size: var(--t-small);
+}
+
+/* ============================================================
+   12. STICKY MOBILE ACTION BAR — the highest-ROI mobile element
+   ============================================================ */
+.action-bar {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 150;
+  display: grid; grid-template-columns: 1fr 1fr;
+  border-top: 1px solid color-mix(in srgb, var(--c-sand) 25%, transparent);
+}
+@media (min-width: 1000px) { .action-bar { display: none; } }
+.action-bar .btn { padding-block: 1.1rem; }
+/* Keep the bar from covering the footer's last line */
+@media (max-width: 999px) { body { padding-bottom: 66px; } }
+
+/* ============================================================
+   13. SCROLL REVEAL (progressive enhancement — visible by default)
+   ============================================================ */
+.reveal { opacity: 1; }
+.js .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+.js .reveal.is-visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal { opacity: 1; transform: none; }
+}

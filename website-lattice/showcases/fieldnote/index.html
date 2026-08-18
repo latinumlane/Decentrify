@@ -1,0 +1,507 @@
+<!-- .claude/skills/cafe-site-builder/assets/template/index.html
+     Cafe one-pager template. Demo content is for a FICTIONAL cafe (Fieldnote Coffee Co.).
+     Swap every {{TOKEN}}-style value listed in README.md before shipping. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ===== SEO: title = "<Category> in <City>, <ST> | <Brand>" ===== -->
+<title>Coffee Shop in Ridgeline, CO | Fieldnote Coffee Co.</title>
+<meta name="description" content="Fieldnote Coffee Co. is a neighborhood coffee shop on Bellweather Street in downtown Ridgeline, serving organic espresso, cold brew, pastries, beer, and wine.">
+<link rel="canonical" href="https://example.com/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Coffee Shop in Ridgeline, CO | Fieldnote Coffee Co.">
+<meta property="og:description" content="Organic espresso, cold brew, pastries, beer, and wine on Bellweather Street in downtown Ridgeline.">
+<meta property="og:url" content="https://example.com/">
+<meta property="og:image" content="https://example.com/img/storefront.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Fonts: preconnect first, display=swap always -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@500&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+
+<!-- ===== LocalBusiness schema — see references/local-seo-and-schema.md ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CafeOrCoffeeShop",
+  "@id": "https://example.com/#cafe",
+  "name": "Fieldnote Coffee Co.",
+  "url": "https://example.com/",
+  "telephone": "+1-555-0142",
+  "image": "https://example.com/img/storefront.jpg",
+  "priceRange": "$",
+  "servesCuisine": ["Coffee", "Pastries", "Beer", "Wine"],
+  "hasMenu": "https://example.com/#menu",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "418 Bellweather Street",
+    "addressLocality": "Ridgeline",
+    "addressRegion": "CO",
+    "postalCode": "80401",
+    "addressCountry": "US"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": "39.7392", "longitude": "-105.2211" },
+  "sameAs": [
+    "https://www.facebook.com/example",
+    "https://www.instagram.com/example"
+  ],
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday"], "opens": "07:00", "closes": "14:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Thursday","Friday"], "opens": "07:00", "closes": "17:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:00", "closes": "17:00" }
+  ]
+}
+</script>
+</head>
+
+<body>
+<script>document.documentElement.classList.add('js'); // gate reveal animations on JS</script>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ============ UTILITY BAR: contact always one glance away ============ -->
+<div class="utility">
+  <div class="wrap">
+    <a href="https://www.instagram.com/example" rel="noopener">Instagram</a>
+    <a href="https://www.facebook.com/example" rel="noopener">Facebook</a>
+    <a href="tel:+15550142">(555) 014-2000</a>
+    <a href="https://maps.google.com/?q=418+Bellweather+Street+Ridgeline+CO+80401" rel="noopener">418 Bellweather St, Ridgeline CO</a>
+  </div>
+</div>
+
+<!-- ============ HEADER: split nav around a center logo ============ -->
+<header class="header">
+  <div class="wrap header__inner">
+    <nav class="nav" aria-label="Primary">
+      <a href="#menu">Menu</a>
+      <a href="#hours">Hours</a>
+    </nav>
+
+    <a class="logo logo__text" href="/">Fieldnote</a>
+    <!-- Production: <a class="logo" href="/"><img src="img/logo.svg" alt="Fieldnote Coffee Co."></a> -->
+
+    <nav class="nav" aria-label="Secondary">
+      <a href="#events">Events</a>
+      <a href="#find-us">Find Us</a>
+    </nav>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="offcanvas">Menu</button>
+  </div>
+</header>
+
+<!-- ============ MOBILE OFF-CANVAS ============ -->
+<div class="offcanvas" id="offcanvas" data-open="false" aria-hidden="true">
+  <button class="offcanvas__close" type="button">Close</button>
+  <a href="#menu">Menu</a>
+  <a href="#hours">Hours</a>
+  <a href="#events">Events</a>
+  <a href="#find-us">Find Us</a>
+</div>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <!-- .on-dark switches the eyebrow from the burnt-orange accent to tan. Over
+       video that is not cosmetic: the accent measures 1.72:1 against bright
+       frames (fails AA), tan measures 6.75:1. -->
+  <section class="hero on-dark">
+    <div class="hero__media">
+      <!-- Decorative background video. The poster is what actually paints first
+           (and is the LCP element), so it must be a real frame of the video.
+           autoplay+muted+playsinline is the only combination browsers will
+           autoplay; JS pauses it under prefers-reduced-motion, which drops the
+           element back to showing the poster. -->
+      <video
+        class="hero__video"
+        poster="img/cafe-hero-poster.jpg"
+        autoplay muted loop playsinline
+        preload="metadata"
+        width="1268" height="726"
+        aria-hidden="true" tabindex="-1">
+        <source src="media/cafe-hero.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="hero__inner">
+      <div class="wrap">
+        <span class="eyebrow">Organic Coffee &middot; Pastries &middot; Beer &middot; Wine</span>
+        <h1 class="display display--hero">Fieldnote<br>Coffee</h1>
+        <p class="hero__sub">Downtown Ridgeline, Colorado. Slow mornings and good espresso on Bellweather Street.</p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href="tel:+15550142">Call to Order</a>
+          <a class="btn btn--secondary" href="#menu">See the Menu</a>
+          <a class="btn btn--ghost" href="https://maps.google.com/?q=418+Bellweather+Street+Ridgeline+CO+80401" rel="noopener">Get Directions</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FACT BAR: address / phone / hours at a glance ============ -->
+  <div class="factbar">
+    <div class="wrap">
+      <span class="factbar__item"><a href="https://maps.google.com/?q=418+Bellweather+Street+Ridgeline+CO+80401" rel="noopener">418 Bellweather St, Ridgeline CO</a></span>
+      <span class="factbar__item"><a href="tel:+15550142">(555) 014-2000</a></span>
+      <span class="factbar__item">Mon&ndash;Wed 7&ndash;2 &middot; Thu&ndash;Fri 7&ndash;5 &middot; Sat 8&ndash;5</span>
+      <a class="btn btn--primary" href="tel:+15550142">Order To-Go</a>
+    </div>
+  </div>
+
+  <!-- ============ STORY ============ -->
+  <section class="section section--light" id="story">
+    <div class="wrap split reveal">
+      <div>
+        <span class="eyebrow">Our Story</span>
+        <h2 class="display display--section display--round">Coffee worth<br>the walk</h2>
+        <p class="lede">We roast in small batches and pull every shot to order. The bar is the same one that has been in this building since it was a hardware store &mdash; we just added better espresso.</p>
+        <p class="lede" style="margin-top:1.25rem">Oat, whole, and local dairy. Pastries baked two doors down. A short list of beer and wine for the after-four crowd.</p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href="#menu">See the Menu</a>
+          <a class="btn btn--ghost" href="https://maps.google.com/?q=418+Bellweather+Street+Ridgeline+CO+80401" rel="noopener">Get Directions</a>
+        </div>
+      </div>
+      <div>
+        <img class="media" src="img/cafe-table.jpg" width="749" height="1001" loading="lazy" decoding="async"
+             alt="Two coffees and a book on a wooden table on the patio at Fieldnote Coffee Co.">
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MENU: tabbed by category ============ -->
+  <section class="section section--dark on-dark" id="menu">
+    <div class="wrap reveal">
+      <span class="eyebrow">What we&rsquo;re pouring</span>
+      <h2 class="display display--section display--flush">The Menu</h2>
+      <p class="lede">Espresso, drip, and cold brew all day. Beer and wine after four.</p>
+
+      <div class="tabs">
+        <ul class="tabs__list" role="tablist" aria-label="Menu categories">
+          <li role="presentation"><button class="tabs__btn" role="tab" id="tab-espresso" aria-controls="panel-espresso" aria-selected="true">Espresso</button></li>
+          <li role="presentation"><button class="tabs__btn" role="tab" id="tab-signature" aria-controls="panel-signature" aria-selected="false">Signature</button></li>
+          <li role="presentation"><button class="tabs__btn" role="tab" id="tab-cold" aria-controls="panel-cold" aria-selected="false">Cold</button></li>
+          <li role="presentation"><button class="tabs__btn" role="tab" id="tab-other" aria-controls="panel-other" aria-selected="false">Not Coffee</button></li>
+          <li role="presentation"><button class="tabs__btn" role="tab" id="tab-bar" aria-controls="panel-bar" aria-selected="false">Beer &amp; Wine</button></li>
+        </ul>
+
+        <div class="tabs__panel" role="tabpanel" id="panel-espresso" aria-labelledby="tab-espresso">
+          <div class="menu-grid">
+            <div class="menu-item"><span class="menu-item__name">Drip Coffee</span><span class="menu-item__price">3.25</span><span class="menu-item__desc">House blend, organic</span></div>
+            <div class="menu-item"><span class="menu-item__name">Espresso</span><span class="menu-item__price">3.00</span><span class="menu-item__desc">Double shot</span></div>
+            <div class="menu-item"><span class="menu-item__name">Americano</span><span class="menu-item__price">3.75</span><span class="menu-item__desc">Espresso and hot water</span></div>
+            <div class="menu-item"><span class="menu-item__name">Cortado</span><span class="menu-item__price">4.25</span><span class="menu-item__desc">Equal parts espresso and milk</span></div>
+            <div class="menu-item"><span class="menu-item__name">Latte</span><span class="menu-item__price">4.75</span><span class="menu-item__desc">Your choice of milk</span></div>
+            <div class="menu-item"><span class="menu-item__name">Cappuccino</span><span class="menu-item__price">4.50</span><span class="menu-item__desc">Dry, if you like</span></div>
+          </div>
+        </div>
+
+        <div class="tabs__panel" role="tabpanel" id="panel-signature" aria-labelledby="tab-signature" hidden>
+          <div class="menu-grid">
+            <div class="menu-item"><span class="menu-item__name">Juniper Latte</span><span class="menu-item__price">5.75</span><span class="menu-item__desc">House juniper syrup, oat milk</span></div>
+            <div class="menu-item"><span class="menu-item__name">Honey Cardamom</span><span class="menu-item__price">5.75</span><span class="menu-item__desc">Local honey, ground cardamom</span></div>
+            <div class="menu-item"><span class="menu-item__name">Maple Oat Latte</span><span class="menu-item__price">5.50</span><span class="menu-item__desc">Grade A maple, oat milk</span></div>
+            <div class="menu-item"><span class="menu-item__name">Dirty Chai</span><span class="menu-item__price">5.95</span><span class="menu-item__desc">Masala chai, double shot</span></div>
+          </div>
+        </div>
+
+        <div class="tabs__panel" role="tabpanel" id="panel-cold" aria-labelledby="tab-cold" hidden>
+          <div class="menu-grid">
+            <div class="menu-item"><span class="menu-item__name">Cold Brew</span><span class="menu-item__price">4.50</span><span class="menu-item__desc">Steeped eighteen hours</span></div>
+            <div class="menu-item"><span class="menu-item__name">Nitro Cold Brew</span><span class="menu-item__price">5.50</span><span class="menu-item__desc">Nitrogen-infused</span></div>
+            <div class="menu-item"><span class="menu-item__name">Iced Latte</span><span class="menu-item__price">5.00</span><span class="menu-item__desc">Espresso over ice</span></div>
+            <div class="menu-item"><span class="menu-item__name">Iced Matcha</span><span class="menu-item__price">5.75</span><span class="menu-item__desc">Ceremonial grade, oat milk</span></div>
+          </div>
+        </div>
+
+        <div class="tabs__panel" role="tabpanel" id="panel-other" aria-labelledby="tab-other" hidden>
+          <div class="menu-grid">
+            <div class="menu-item"><span class="menu-item__name">Matcha Latte</span><span class="menu-item__price">5.50</span><span class="menu-item__desc">Ceremonial grade, steamed oat</span></div>
+            <div class="menu-item"><span class="menu-item__name">Chai Latte</span><span class="menu-item__price">5.00</span><span class="menu-item__desc">Masala spice blend</span></div>
+            <div class="menu-item"><span class="menu-item__name">Hot Chocolate</span><span class="menu-item__price">4.50</span><span class="menu-item__desc">Dark chocolate, steamed milk</span></div>
+            <div class="menu-item"><span class="menu-item__name">Loose Leaf Tea</span><span class="menu-item__price">3.75</span><span class="menu-item__desc">Rotating selection</span></div>
+          </div>
+        </div>
+
+        <div class="tabs__panel" role="tabpanel" id="panel-bar" aria-labelledby="tab-bar" hidden>
+          <div class="menu-grid">
+            <div class="menu-item"><span class="menu-item__name">Draft Beer</span><span class="menu-item__price">6.00</span><span class="menu-item__desc">Colorado taps, rotating</span></div>
+            <div class="menu-item"><span class="menu-item__name">Bottled Beer</span><span class="menu-item__price">5.00</span><span class="menu-item__desc">Ask your barista</span></div>
+            <div class="menu-item"><span class="menu-item__name">House Red</span><span class="menu-item__price">9.00</span><span class="menu-item__desc">Glass or bottle</span></div>
+            <div class="menu-item"><span class="menu-item__name">House White</span><span class="menu-item__price">9.00</span><span class="menu-item__desc">Glass or bottle</span></div>
+          </div>
+        </div>
+      </div>
+
+      <p class="menu-note">Menu and specials change seasonally. Ask your barista what&rsquo;s on today.</p>
+      <div class="btn-row"><a class="btn btn--primary" href="tel:+15550142">Call to Order To-Go</a></div>
+    </div>
+  </section>
+
+  <!-- ============ HOURS + LOCATION ============ -->
+  <section class="section section--band" id="hours">
+    <div class="wrap split reveal">
+      <div>
+        <span class="eyebrow">When to find us</span>
+        <h2 class="display display--section">Hours &amp;<br>Location</h2>
+        <ul class="hours">
+          <li><span class="hours__day">Mon &ndash; Wed</span><span class="hours__time">7:00 AM &ndash; 2:00 PM</span></li>
+          <li><span class="hours__day">Thu &ndash; Fri</span><span class="hours__time">7:00 AM &ndash; 5:00 PM</span></li>
+          <li><span class="hours__day">Saturday</span><span class="hours__time">8:00 AM &ndash; 5:00 PM</span></li>
+          <li data-closed="true"><span class="hours__day">Sunday</span><span class="hours__time">Closed</span></li>
+        </ul>
+        <p class="menu-note">Hours run later on live music nights.</p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href="tel:+15550142">(555) 014-2000</a>
+          <a class="btn btn--ghost" href="https://maps.google.com/?q=418+Bellweather+Street+Ridgeline+CO+80401" rel="noopener">Get Directions</a>
+        </div>
+      </div>
+      <div>
+        <!-- Landscape footage in a portrait slot: the cup sits right of centre,
+             so object-position pins the crop right. A default centre crop clips it. -->
+        <video
+          class="media media--portrait media--anchor-right"
+          poster="img/cafe-pour-poster.jpg"
+          autoplay muted loop playsinline
+          preload="none"
+          width="1276" height="720"
+          aria-hidden="true" tabindex="-1">
+          <source src="media/cafe-pour.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EVENTS ============ -->
+  <section class="section section--dark on-dark" id="events">
+    <div class="wrap reveal">
+      <span class="eyebrow">More than coffee</span>
+      <h2 class="display display--section">Live Music<br>Most Weekends</h2>
+      <p class="lede">Local players on the small stage by the window. Free to sit in, no cover.</p>
+      <div class="events">
+        <div class="event"><span class="event__when">Most Fridays &middot; 6&ndash;8 PM</span><h3 class="event__what">Open Mic Night</h3></div>
+        <div class="event"><span class="event__when">Second Saturdays &middot; 10 AM&ndash;1 PM</span><h3 class="event__what">Acoustic Brunch Set</h3></div>
+        <div class="event"><span class="event__when">Last Sunday &middot; 2&ndash;4 PM</span><h3 class="event__what">Neighborhood Jazz Trio</h3></div>
+      </div>
+      <div class="btn-row"><a class="btn btn--secondary" href="https://www.instagram.com/example" rel="noopener">Full Events Calendar</a></div>
+    </div>
+  </section>
+
+  <!-- ============ FIND US + MAP ============ -->
+  <section class="section section--light" id="find-us">
+    <div class="wrap split reveal">
+      <div>
+        <span class="eyebrow">Come find us</span>
+        <h2 class="display display--section display--round">On Bellweather<br>Street</h2>
+        <p class="lede">Two blocks off the main square in downtown Ridgeline. Street parking out front, lot around back.</p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href="https://maps.google.com/?q=418+Bellweather+Street+Ridgeline+CO+80401" rel="noopener">Open in Google Maps</a>
+          <a class="btn btn--ghost" href="tel:+15550142">(555) 014-2000</a>
+        </div>
+      </div>
+      <div>
+        <!-- Replace src with the embed URL from Google Maps → Share → Embed a map -->
+        <iframe class="map-embed" src="https://www.google.com/maps?q=418+Bellweather+Street+Ridgeline+CO&output=embed"
+                title="Map to Fieldnote Coffee Co." loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__cols">
+      <div>
+        <a class="logo__text" href="/" style="color:var(--c-cream)">Fieldnote</a>
+        <p style="margin-top:1rem;max-width:38ch">Organic coffee, pastries, beer, and wine on Bellweather Street in downtown Ridgeline, Colorado.</p>
+      </div>
+      <div>
+        <h2>Quick Links</h2>
+        <ul>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#hours">Hours</a></li>
+          <li><a href="#events">Events</a></li>
+          <li><a href="#find-us">Find Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Visit Us</h2>
+        <ul>
+          <li>418 Bellweather Street<br>Ridgeline, CO 80401</li>
+          <li><a href="tel:+15550142">(555) 014-2000</a></li>
+          <li><a href="https://www.instagram.com/example" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.facebook.com/example" rel="noopener">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer__legal">&copy; 2026 Fieldnote Coffee Co. &middot; Ridgeline, CO</p>
+  </div>
+</footer>
+
+<!-- ============ STICKY MOBILE ACTION BAR ============ -->
+<div class="action-bar">
+  <a class="btn btn--secondary" href="https://maps.google.com/?q=418+Bellweather+Street+Ridgeline+CO+80401" rel="noopener">Directions</a>
+  <a class="btn btn--primary" href="tel:+15550142">Call to Order</a>
+</div>
+
+<script>
+/* ---- Mobile off-canvas ---- */
+(function () {
+  var toggle = document.querySelector('.nav-toggle');
+  var panel  = document.getElementById('offcanvas');
+  if (!toggle || !panel) return;
+  var closeBtn = panel.querySelector('.offcanvas__close');
+
+  function setOpen(open) {
+    panel.dataset.open = String(open);
+    panel.setAttribute('aria-hidden', String(!open));
+    toggle.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (open) { panel.querySelector('a').focus(); } else { toggle.focus(); }
+  }
+  toggle.addEventListener('click', function () { setOpen(panel.dataset.open !== 'true'); });
+  closeBtn.addEventListener('click', function () { setOpen(false); });
+  panel.addEventListener('click', function (e) { if (e.target.tagName === 'A') setOpen(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && panel.dataset.open === 'true') setOpen(false); });
+  setOpen(false);
+})();
+
+/* ---- Menu tabs (roving focus, arrow-key navigable) ---- */
+(function () {
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tabs__btn'));
+  if (!tabs.length) return;
+
+  function select(tab) {
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+  }
+  tabs.forEach(function (tab, i) {
+    tab.tabIndex = tab.getAttribute('aria-selected') === 'true' ? 0 : -1;
+    tab.addEventListener('click', function () { select(tab); });
+    tab.addEventListener('keydown', function (e) {
+      var next = e.key === 'ArrowRight' ? i + 1 : e.key === 'ArrowLeft' ? i - 1 : null;
+      if (next === null) return;
+      e.preventDefault();
+      var t = tabs[(next + tabs.length) % tabs.length];
+      select(t); t.focus();
+    });
+  });
+})();
+
+/* ---- Scroll reveal ----
+   Deliberately NOT IntersectionObserver. On an anchor-nav one-pager, jumping to
+   #menu moves a section from below the viewport to above it with no threshold
+   crossing, so IO never fires and that section stays invisible permanently.
+   A position check can't miss: `top < trigger` is also true for anything
+   already scrolled past (negative top). */
+(function () {
+  var els = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+  if (!els.length) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    els.forEach(function (el) { el.classList.add('is-visible'); });
+    return;
+  }
+
+  function revealAll() {
+    els.forEach(function (el) { el.classList.add('is-visible'); });
+    els = [];
+    window.removeEventListener('scroll', request);
+    window.removeEventListener('resize', request);
+  }
+
+  // FAILSAFE: never let an animation permanently hide real content. If anything
+  // is still unrevealed after 4s (odd viewport, zero-height frame, stalled
+  // events), show it. Content loss is always worse than a missed animation.
+  setTimeout(revealAll, 4000);
+
+  function check() {
+    var vh = window.innerHeight || document.documentElement.clientHeight || 0;
+    // If the viewport can't be measured, show everything rather than hide it.
+    if (!vh) { revealAll(); return; }
+    var trigger = vh * 0.88;
+    els = els.filter(function (el) {
+      if (el.getBoundingClientRect().top < trigger) {
+        el.classList.add('is-visible');
+        return false;
+      }
+      return true;
+    });
+    if (!els.length) {
+      window.removeEventListener('scroll', request);
+      window.removeEventListener('resize', request);
+    }
+  }
+  // Timestamp throttle rather than requestAnimationFrame: rAF does not fire in a
+  // non-painting context (background tab, prerender, some headless renderers),
+  // which would gate the reveal off entirely. 10Hz of getBoundingClientRect is free.
+  var lastRun = 0, timer = null;
+  function request() {
+    var now = Date.now();
+    if (now - lastRun > 100) { lastRun = now; check(); }
+    else if (!timer) {
+      timer = setTimeout(function () { timer = null; lastRun = Date.now(); check(); }, 100);
+    }
+  }
+
+  window.addEventListener('scroll', request, { passive: true });
+  window.addEventListener('resize', request);
+  window.addEventListener('load', check);      // after the browser's anchor jump
+  window.addEventListener('hashchange', check);
+  check();
+})();
+
+/* ---- Background video: honour prefers-reduced-motion ----
+   The autoplay attribute is in the HTML so video works without JS. CSS cannot
+   stop playback, so pause it here when the user asks for reduced motion — a
+   paused video that has not rendered a frame falls back to its poster, which is
+   why every background video below MUST carry one. Reacts live to the setting. */
+(function () {
+  var vids = Array.prototype.slice.call(document.querySelectorAll('video[autoplay]'));
+  if (!vids.length) return;
+  var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function apply() {
+    vids.forEach(function (v) {
+      if (mq.matches) {
+        v.autoplay = false;
+        v.pause();
+        try { v.currentTime = 0; } catch (e) {}   // back to the poster frame
+      } else if (v.paused) {
+        // play() rejects if the browser blocks it; the poster just stays up.
+        var p = v.play();
+        if (p && p.catch) p.catch(function () {});
+      }
+    });
+  }
+  apply();
+  if (mq.addEventListener) mq.addEventListener('change', apply);
+  else if (mq.addListener) mq.addListener(apply);
+})();
+
+/* ---- Nav scroll-spy ---- */
+(function () {
+  var sections = document.querySelectorAll('main section[id]');
+  var links = {};
+  document.querySelectorAll('.nav a[href^="#"]').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+  if (!('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      var link = links[entry.target.id];
+      if (link) link.setAttribute('aria-current', entry.isIntersecting ? 'true' : 'false');
+    });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  sections.forEach(function (s) { io.observe(s); });
+})();
+</script>
+</body>
+</html>
