@@ -1,0 +1,4025 @@
+/* SITE NEW/McMarden_Noir/styles.css
+   McMARDEN · NOIR EDITION — editorial / avant-garde design system.
+   All lengths use rem = design-pixels via the scale engine below.
+   Rebrand via :root only. Nothing renders above 24px anywhere. */
+
+/* ═══ 0. FONTS ══════════════════════════════════════════════════════ */
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&display=swap");
+
+/* ═══ 1. SCALE ENGINE ══════════════════════════════════════════════════
+   1rem = 1px at design width. Every value in this file is in unitless
+   design-pixels. Media queries stay in px — they ignore font-size root. */
+
+:root {
+  --vr: 0.26667vw;               /* 1rem = 1px @ 375 */
+
+  --grid-columns: 4;
+  --grid-gutter: 12rem;
+  --grid-margin: 20rem;
+
+  /* Two voices, split by job. */
+  --font-text:  "EB Garamond", "Adobe Garamond Pro", Garamond, Georgia, serif;
+  --font-label: "Bodoni Moda", "Bodoni 72", Didot, "Big Caslon", Georgia, serif;
+
+  --track-label: .14em;
+
+  /* Palette — cream, ink, navy. Nothing else. */
+  --paper:    #f2ecdf;           /* warm parchment */
+  --paper-2:  #ebe3d2;           /* one shade darker for hairline zones */
+  --ink:      #0d0d0d;
+  --graphite: #1a1a1a;           /* 15.4:1 on paper */
+  --muted:    #5c574d;           /* 6.1:1 on paper — AA */
+  --navy:     #0f1d3a;           /* the accent — used sparingly */
+  --navy-2:   #1a2a4a;           /* denim-raw, for tags/hover */
+  --rule:     rgba(13,13,13,.16);
+  --white:    #fff;
+
+  /* Hero scrim (near-ink with faint navy bias). */
+  --scrim: 10 10 12;
+  --tint:  15 29 58;
+
+  --dur-fast:  240ms;
+  --dur-base:  400ms;
+  --dur-slow:  700ms;
+  --dur-vslow: 1200ms;
+  --dur-enter: 1800ms;          /* loader → site dissolve */
+  --ease-out:   cubic-bezier(.16, 1, .3, 1);
+  --ease-in:    cubic-bezier(.12, 0, .39, 0);
+  --ease-inout: cubic-bezier(.65, 0, .35, 1);
+  --ease-paper: cubic-bezier(.19,1,.22,1);
+
+  /* Real header height: wordmark (38rem) + 14rem padding top and bottom.
+     Every page's top padding is calc(var(--hh) + …), so this token has to
+     track the header or content tucks under it. */
+  --hh: 68rem;
+
+  color-scheme: only light;
+}
+
+@media (min-width: 768px) {
+  :root {
+    /* 1rem = 1px @ 1440 and frozen above, with a FLOOR so the desktop
+       layout can't shrink itself into illegibility on the way down.
+
+       Without the floor this was a bare min(0.06944vw, 1px), which meant
+       the scale fell away linearly below 1440 and hit its worst exactly
+       at the breakpoint that turns this system on: 0.533px per rem at
+       768px — body copy at 9px, a product name at 8.5px, the page title
+       at 21px. Measured, not estimated. Worse, it was a cliff rather
+       than a curve: at 767px the mobile track (0.26667vw) is 2.05px per
+       rem, so crossing 768px shrank the entire design ~3.8x in one
+       pixel of viewport. Every tablet and small laptop landed in that
+       band — 0.71px per rem at 1024, 0.89 at 1280.
+
+       clamp() holds 0.88px from 768 up to ~1267px, then lets the vw
+       term take over and arrive at exactly 1px at 1440 as before. The
+       1440-and-above rendering is untouched; the band below it now
+       keeps its type readable and simply gives the grid more room as
+       the viewport grows, which is what it should have been doing.
+       Verified at 768/1024/1280 across cart, product, shop and journal:
+       no horizontal overflow introduced. */
+    --vr: clamp(0.88px, 0.06944vw, 1px);
+    --grid-columns: 12;
+    --grid-gutter: 20rem;
+    --grid-margin: 32rem;
+    --hh: 74rem;              /* wordmark 44rem + 14rem padding × 2 */
+  }
+}
+
+html { font-size: var(--vr); -webkit-text-size-adjust: none; }
+
+/* ═══ 2. RESET ══════════════════════════════════════════════════════ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { background: var(--paper); }
+
+body {
+  color: var(--graphite);
+  font-family: var(--font-text);
+  font-size: 15rem;
+  line-height: 1.14;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+}
+@media (min-width: 768px) { body { font-size: 17rem; } }
+
+ul, ol, dl { list-style: none; }
+a { color: inherit; text-decoration: none; }
+button { background: none; border: 0; color: inherit; font: inherit; cursor: pointer; }
+/* height:auto is the required companion to the width/height attributes
+   on every <img>. Those attributes are presentational hints, so with no
+   CSS height declared they WIN — which pinned images to their intrinsic
+   pixel height and made `aspect-ratio` inert (the journal polaroids blew
+   up to 1402px tall). Rules that genuinely want a fixed height set it on
+   a class and still override this. */
+img, video { display: block; max-width: 100%; height: auto; user-select: none; -webkit-user-drag: none; }
+input, textarea, select { background: none; border: 0; border-radius: 0; color: inherit; font: inherit; }
+i, em { font-style: italic; }
+
+::selection { background: var(--navy); color: var(--paper); }
+:focus-visible { outline: 1px solid var(--navy); outline-offset: 2px; }
+
+.vh {
+  position: absolute; width: 1px; height: 1px;
+  clip-path: inset(50%); overflow: hidden; white-space: nowrap;
+}
+
+/* ═══ 3. GRAIN OVERLAY — de-templates the flat paper ═══════════════════
+   From the Effects Library. Zero JS. inset:-12% keeps the filtered
+   layer at ~2MP instead of 20MP.
+
+   z-index: sits above ordinary page content (photos, text — all
+   z-index:auto) so the texture actually reads over them, but below
+   every piece of UI chrome: .chrome (40), .mobile-nav (55), .header
+   (60), and the cart/toast/quick-view/dialog layers (79-100) above
+   that. It was previously 90 — above the header and nearly everything
+   else — with no functional reason found for that value; multiply
+   blend mode was darkening the header, cart, and every open overlay
+   with noise texture on every single page, permanently. */
+
+.grain {
+  position: fixed; inset: -12%;
+  pointer-events: none; z-index: 30;
+  opacity: .55;
+  mix-blend-mode: multiply;
+  background:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.05  0 0 0 0 0.05  0 0 0 0 0.05  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* ═══ 3b. NOIR → COLORIZE ═════════════════════════════════════════════
+   The site opens black-and-white and bleeds into colour a beat after
+   entry. The palette is already cream/ink/navy, so desaturating the
+   photography is enough to read as noir — the type and rules need no
+   treatment at all.
+
+   Scoped to <img>: filtering an ancestor of the header would make it a
+   containing block and break `position: fixed`. Scoped to `.js` so that
+   without the script the photography is simply in colour rather than
+   stuck grey forever. */
+
+.js img {
+  filter: grayscale(1) contrast(1.06) brightness(.96);
+  /* Slow on purpose — the bleed should be something you notice having
+     happened, not something you watch happen. */
+  transition: filter 4800ms cubic-bezier(.22, .61, .36, 1);
+}
+.js img[data-colorized="true"] {
+  filter: grayscale(0) contrast(1) brightness(1);
+}
+
+/* The denim strip was removed: a 15MB texture rendered as a 6px-wide
+   hairline at 28% opacity — effectively invisible, and the single
+   heaviest asset on the site. Markup dropped from all pages too. */
+
+/* ═══ 4. LABEL VOICE ═══════════════════════════════════════════════ */
+
+.meta, .tag, .nav__link, .brand, .clock, .clock *, .lang, .price, .row__year,
+.row__num, .stack__num, .btn, .cta, .toast__inner, .toast__inner *, .cart *,
+.footer *, .form__submit, .form__input, .form__label, .filter,
+.marquee, .marquee *, .breadcrumb, .breadcrumb *, .swatch,
+.card__num, .card__price, .journal__meta, .journal__meta *, .about__meta,
+.spec dt, .spec dd, .index__num, .index__year, .index__ref {
+  font-family: var(--font-label);
+  font-variant-numeric: lining-nums tabular-nums;
+  font-optical-sizing: auto;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  letter-spacing: var(--track-label);
+}
+.form__input { letter-spacing: .02em; }
+
+/* Prose leading. */
+.p, .intro__text, .about__body, .journal__body, .product__body,
+.spec dd, .row__title, .card__title {
+  line-height: 1.4;
+}
+
+.meta {
+  font-size: 10rem;
+  line-height: 1.3;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.meta::before { content: "["; padding-right: 2rem; }
+.meta::after  { content: "]"; padding-left: 2rem; }
+@media (min-width: 768px) { .meta { font-size: 11rem; } }
+
+.tags { display: flex; flex-wrap: wrap; gap: 6rem; }
+.tag {
+  font-size: 10rem;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 3rem 6rem;
+  border: 1px solid var(--rule);
+}
+.tag--accent { color: var(--navy); border-color: var(--navy); }
+
+/* ═══ 5. GRID ══════════════════════════════════════════════════════ */
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  column-gap: var(--grid-gutter);
+  width: calc(100% - var(--grid-margin) * 2);
+  margin-inline: auto;
+}
+
+/* ═══ 6. LOADER — always time-boxed. ══════════════════════════════════ */
+
+.loader {
+  position: fixed; inset: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--paper);
+  font-family: var(--font-label);
+  font-size: 11rem;
+  color: var(--ink);
+  /* A long, eased dissolve rather than a curtain snapping up. */
+  transition: opacity var(--dur-enter) var(--ease-out),
+              filter  var(--dur-enter) var(--ease-out);
+}
+body[data-loaded="true"] .loader { opacity: 0; filter: blur(8px); pointer-events: none; }
+
+/* The story fades a beat before the sheet does, so the line is seen to
+   settle rather than being yanked off with the background. */
+.loader__inner { transition: opacity 900ms var(--ease-out); }
+body[data-loaded="true"] .loader__inner { opacity: 0; }
+/* The loader is JS-driven; without the script it must never cover the
+   page. (It previously did — a permanent full-bleed blocker.) */
+html:not(.js) .loader { display: none; }
+
+/* Second and later pages in a session: the opening has already played,
+   so the sheet is never built into the paint at all. `display: none`
+   rather than opacity/visibility, so there is no frame in which it
+   exists to be dissolved — the class is set by the inline head script in
+   theme.liquid, before first paint. The companion rules re-assert the
+   content that §7 hides while [data-loaded] is still absent; without
+   them the page would sit blank for the ~300ms until the script marks it
+   loaded, which is the same flash wearing a different costume. */
+html.intro-done .loader { display: none; }
+html.intro-done body:not([data-loaded="true"]) main,
+html.intro-done body:not([data-loaded="true"]) .header,
+html.intro-done body:not([data-loaded="true"]) .footer { opacity: 1; }
+html.intro-done body:not([data-loaded="true"]) main { transform: none; }
+
+/* Wordmark centred over the line being typed. Nothing else — no rules,
+   no progress bar, no version chrome. */
+.loader__inner {
+  width: min(620rem, 84vw);
+  text-align: center;
+}
+.loader__mark {
+  height: 46rem;
+  margin: 0 auto 30rem;
+  color: var(--ink);
+}
+@media (min-width: 768px) { .loader__mark { height: 58rem; margin-bottom: 36rem; } }
+
+/* The house story, typed while the page loads. */
+.loader__story {
+  font-family: var(--font-text);
+  font-size: 17rem; line-height: 1.55;
+  color: var(--ink);
+  min-height: 6em;              /* held open so the block doesn't jump */
+  text-wrap: pretty;
+}
+@media (min-width: 768px) {
+  .loader__story { font-size: 21rem; min-height: 4.5em; }
+}
+
+/* Content sits under the sheet slightly faded and fractionally scaled,
+   and eases up as the sheet dissolves — so the site arrives rather than
+   appearing. Scoped to `.js` and to "not yet loaded" (rather than an
+   explicit data-loaded="false") so that without the script nothing is
+   ever left hidden. */
+main, .header, .footer {
+  transition: opacity var(--dur-enter) var(--ease-out),
+              transform var(--dur-enter) var(--ease-out);
+}
+html.js body:not([data-loaded="true"]) main,
+html.js body:not([data-loaded="true"]) .header,
+html.js body:not([data-loaded="true"]) .footer {
+  opacity: 0;
+}
+html.js body:not([data-loaded="true"]) main { transform: scale(1.012); }
+
+/* ═══ 7. SMOOTH SCROLL — damped scroll shell ═════════════════════════
+   The <body> is transformed by JS. Anything sticky OR fixed should sit
+   OUTSIDE the transformed layer, so we mark them .fixed-layer and the
+   JS keeps them out of the transform. */
+
+body.smooth {
+  will-change: transform;
+}
+.smooth-off body { will-change: auto; }
+
+/* ═══ 8. HEADER ═══════════════════════════════════════════════════════
+   Fixed. Sits above the smooth-scroll transform via position:fixed
+   and its own stacking context. Two states: default and scrolled. */
+
+/* .header's own z-index below is meaningless on its own: Dawn wraps
+   {% sections 'header-group' %} in a sibling container that carries ITS
+   OWN z-index of 4 (base.css, .shopify-section-group-header-group) —
+   .header's z-index:60 only ever gets compared against other things
+   INSIDE that wrapper, never against content in <main>. mcmarden-panels
+   .liquid's .panel elements are genuine root-level participants (no
+   isolating ancestor traps them), each carrying its own z-index straight
+   from forloop.index — so the 4th block (max_blocks: 6, and the Journal
+   teaser preset's own last block lands on exactly 4) ties the header
+   wrapper's z-index:4, and a tie is broken by DOM order: <main> paints
+   after the header, so the panel won. Raised here to a value safely
+   above anything ordinary in-flow content in <main> can reach (panels
+   cap at 6), and safely below every real full-screen overlay — cart,
+   toast, dialogs, the lightbox — which are meant to cover the header
+   when open and still will. */
+.shopify-section-group-header-group { z-index: 65; }
+
+.header {
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 60;
+  padding: 14rem var(--grid-margin);
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  column-gap: var(--grid-gutter);
+  align-items: center;
+  color: var(--ink);
+  transition: color var(--dur-fast) var(--ease-inout),
+              background-color var(--dur-fast) var(--ease-inout),
+              border-color var(--dur-fast) var(--ease-inout);
+  border-bottom: 1px solid transparent;
+}
+.header[data-mode="light"] { color: var(--paper); }
+.header[data-scrolled="true"] {
+  background: color-mix(in oklab, var(--paper) 84%, transparent);
+  backdrop-filter: blur(10px) saturate(1.05);
+  border-bottom-color: var(--rule);
+  color: var(--ink);
+}
+/* Both rules above are .header + one attribute — equal specificity — so
+   which one wins a light-resting header's color once scrolled came down
+   to source order alone. That's a tie any later edit could flip by
+   accident. This compound selector is unambiguously more specific than
+   either rule alone, so "scrolled" always beats "light at rest" now,
+   regardless of where either rule sits in the file. */
+.header[data-mode="light"][data-scrolled="true"] { color: var(--ink); }
+
+.brand {
+  grid-column: 1 / 5;
+  display: inline-flex; align-items: center;
+  justify-self: start;
+}
+
+/* ── The wordmark ───────────────────────────────────────────────────
+   Painted as a MASK rather than an <img>, so the one supplied asset
+   (assets/logo-black.webp — a clean transparent PNG of the lockup)
+   renders in whatever colour its context calls for: ink on paper,
+   paper over the hero, paper in the footer.
+
+   The supplied "white" file is not usable — it is a fully opaque white
+   raster with no alpha, i.e. white artwork on a white ground, so it
+   shows as a blank rectangle wherever it is placed. Masking one good
+   asset is both correct and one fewer file to keep in sync. */
+/* The element carries the real brand text. Only when masking is actually
+   supported is that text swapped out for the masked artwork — otherwise a
+   browser without mask support would paint a solid currentColor block. */
+.wordmark {
+  display: block;
+  font-family: var(--font-label);
+  font-size: 12rem;
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  white-space: nowrap;
+}
+
+@supports ((-webkit-mask-image: url("logo-black.webp")) or (mask-image: url("logo-black.webp"))) {
+  .wordmark {
+    aspect-ratio: 1901 / 691;        /* native proportions of the lockup */
+    background-color: currentColor;
+    -webkit-mask: url("logo-black.webp") center / contain no-repeat;
+            mask: url("logo-black.webp") center / contain no-repeat;
+    transition: background-color var(--dur-fast) var(--ease-inout);
+    /* hide the fallback text behind the mask */
+    text-indent: -200vw;
+    overflow: hidden;
+  }
+}
+
+/* The supplied lockup carries roughly 25% clear space top and bottom, so
+   the box is set taller than the glyphs need to read at this size. */
+.brand .wordmark { height: 38rem; }
+@media (min-width: 768px) { .brand .wordmark { height: 44rem; } }
+
+/* Centred on the VIEWPORT, not on its grid cell — the brand and the
+   right-hand controls are different widths, so a grid-centred nav reads
+   as off-centre. Taken out of flow and pinned to the true centre. */
+.nav { display: none; }
+@media (min-width: 768px) {
+  .nav {
+    display: flex; gap: 32rem; align-items: center;
+    position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+  }
+}
+.nav__link {
+  font-size: 11rem;
+  text-transform: uppercase;
+  position: relative;
+  padding-block: 4rem;
+}
+.nav__link::after {
+  content: ""; position: absolute; left: 0; right: 100%; bottom: 0;
+  height: 1px; background: currentColor;
+  transition: right var(--dur-base) var(--ease-out);
+}
+.nav__link:hover::after, .nav__link[aria-current="page"]::after { right: 0; }
+
+.header__end {
+  grid-column: 11 / -1;
+  display: flex; gap: 16rem; justify-content: flex-end; align-items: center;
+}
+.header__end .nav__link { font-size: 11rem; }
+
+.cart-toggle {
+  font-family: var(--font-label);
+  font-size: 11rem; text-transform: uppercase;
+  letter-spacing: var(--track-label);
+  display: inline-flex; align-items: center; gap: 5rem;
+}
+/* The count is never shown — the bag reads as "Bag" on desktop and as a
+   bare icon on mobile. It stays in the DOM and keeps updating so screen
+   readers still announce how many pieces are in the bag. */
+.cart-toggle__n {
+  position: absolute; width: 1px; height: 1px;
+  clip-path: inset(50%); overflow: hidden; white-space: nowrap;
+}
+.cart-toggle__icon { display: none; width: 17rem; height: 19rem; }
+
+/* ── Burger ────────────────────────────────────────────────────────
+   Three rules drawn from one box; the middle line is the box's own
+   background, the outer two are its pseudo-elements. */
+.menu-toggle { display: none; padding: 6rem 0; }
+.menu-toggle__bars,
+.menu-toggle__bars::before,
+.menu-toggle__bars::after {
+  display: block; width: 20rem; height: 1px;
+  background: currentColor;
+  transition: transform var(--dur-fast) var(--ease-out),
+              opacity   var(--dur-fast) var(--ease-out);
+}
+.menu-toggle__bars { position: relative; }
+.menu-toggle__bars::before,
+.menu-toggle__bars::after { content: ""; position: absolute; left: 0; }
+.menu-toggle__bars::before { top: -6rem; }
+.menu-toggle__bars::after  { top:  6rem; }
+
+/* Open state folds the bars into a cross. */
+.menu-toggle[aria-expanded="true"] .menu-toggle__bars { background: transparent; }
+.menu-toggle[aria-expanded="true"] .menu-toggle__bars::before { transform: translateY(6rem) rotate(45deg); }
+.menu-toggle[aria-expanded="true"] .menu-toggle__bars::after  { transform: translateY(-6rem) rotate(-45deg); }
+
+/* ── Mobile header: burger · logo · bag ───────────────────────────── */
+@media (max-width: 767px) {
+  .header {
+    grid-template-columns: 1fr auto 1fr;
+    column-gap: 12rem;
+    padding-inline: var(--grid-margin);
+  }
+  .menu-toggle { display: block; grid-column: 1; justify-self: start; }
+  .brand       { grid-column: 2; justify-self: center; }
+  .header__end { grid-column: 3; justify-self: end; gap: 0; }
+
+  /* Contact moves into the drawer; the bag becomes a bare icon. */
+  .nav__link--contact,
+  .cart-toggle__label { display: none; }
+  .cart-toggle__icon  { display: block; }
+  .cart-toggle        { gap: 0; }
+
+  /* The burger and the bag are 20×13 and 17×19 of drawn marks. Both are
+     primary controls, so each gets a 44px hit area centred on the mark —
+     see the .tap utility below. The mark itself doesn't move. */
+  .menu-toggle, .cart-toggle { position: relative; }
+  .menu-toggle::after, .cart-toggle::after {
+    content: ""; position: absolute; top: 50%; left: 50%;
+    width: 44px; height: 44px; transform: translate(-50%, -50%);
+  }
+}
+
+
+/* Mobile drawer */
+.mobile-nav {
+  position: fixed; inset: 0; z-index: 55;
+  background: var(--paper); color: var(--ink);
+  padding: 88rem var(--grid-margin) 32rem;
+  transform: translateY(-100%);
+  transition: transform var(--dur-slow) var(--ease-paper);
+}
+.mobile-nav[data-open="true"] { transform: none; }
+.mobile-nav ul { display: flex; flex-direction: column; gap: 18rem; }
+.mobile-nav a { font-family: var(--font-text); font-size: 24rem; }
+
+/* ═══ 9. AMBIENT CHROME — clock, coords, version ══════════════════════ */
+
+/* Absolute, not fixed: the coordinates and clock belong to the first
+   screen and scroll away with it. Fixed chrome followed the reader down
+   every page and collided with the footer's own legal row. */
+.chrome {
+  position: absolute; z-index: 40; pointer-events: none;
+  font-family: var(--font-label); font-size: 10rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted);
+}
+
+/* Only ever placed over the homepage hero, which is a full 100svh of
+   photograph. The old .chrome--bl sat at calc(100svh - 44rem) on the
+   assumption that every page opened with a hero — on the Studio and Shop
+   pages that offset landed in the middle of the copy, so those two now
+   carry the same information in flow (.about__meta, .shop__meta). */
+.chrome--tl { top: 68rem; left: var(--grid-margin); }
+.chrome__row { display: block; padding-block: 1rem; }
+.chrome__row + .chrome__row { margin-top: 2rem; }
+.chrome__row .meta { color: inherit; }
+
+/* Ambient chrome is a desktop luxury — on a phone it just collides with
+   the hero's own footer row. */
+@media (max-width: 767px) { .chrome { display: none; } }
+/* Over the hero photograph the chrome has to go light to stay readable. */
+body[data-page="home"] .chrome { color: color-mix(in oklab, var(--paper) 78%, transparent); }
+
+/* ═══ 10. HERO ═══════════════════════════════════════════════════════ */
+
+.hero {
+  position: relative;
+  height: 100svh; min-height: 640rem;
+  overflow: hidden;
+}
+
+/* On a phone the eyebrow + headline + excerpt + meta stack is taller than
+   the viewport, and a fixed 100svh clipped the top row off. Let the hero
+   grow past the fold instead of cropping its own content. */
+@media (max-width: 767px) {
+  .hero { height: auto; min-height: 100svh; }
+  .hero__inner { position: relative; padding-top: 96rem; padding-bottom: 40rem; }
+  .hero__stack { position: absolute; }
+}
+.hero__scrim { position: absolute; inset: 0; }
+
+/* ── Look stack ─────────────────────────────────────────────────────
+   Three looks occupying the same box, crossfaded through blur. The
+   stack carries the perspective so the plates can take a real rotation
+   from the pointer rather than a flat slide. */
+.hero__stack {
+  position: absolute; inset: 0;
+  perspective: 1400rem;
+  perspective-origin: 50% 50%;
+  overflow: hidden;
+}
+.hero__look {
+  position: absolute; inset: 0;
+  opacity: 0;
+  transition: opacity var(--dur-vslow) var(--ease-out),
+              filter  var(--dur-vslow) var(--ease-out);
+  filter: blur(14px);
+  pointer-events: none;
+}
+.hero__look[data-active="true"] { opacity: 1; filter: blur(0); }
+
+.hero__look img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  /* Generous overscan: the parallax translates the plate well past its
+     frame, and without this the edges would swing into view. */
+  transform: scale(1.26);
+  will-change: transform;
+}
+
+/* Scrim: painted BOTTOM-UP so top & bottom are the darkest, middle is
+   image. Keeps the hero copy legible without dulling the photo. */
+.hero__scrim {
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom,
+      rgb(var(--scrim) / .70) 0%,
+      rgb(var(--scrim) / .28) 22%,
+      rgb(var(--scrim) / .12) 50%,
+      rgb(var(--scrim) / .48) 82%,
+      rgb(var(--scrim) / .78) 100%),
+    linear-gradient(to right,
+      rgb(var(--scrim) / .40) 0%,
+      rgb(var(--scrim) / .0)  38%,
+      rgb(var(--scrim) / .0)  62%,
+      rgb(var(--scrim) / .28) 100%),
+    linear-gradient(rgb(var(--tint) / .16), rgb(var(--tint) / .16));
+}
+
+.hero__inner {
+  position: absolute; inset: 0;
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  column-gap: var(--grid-gutter);
+  padding: 108rem var(--grid-margin) 60rem;
+  align-content: end;
+  color: var(--paper);
+}
+@media (min-width: 768px) { .hero__inner { padding-bottom: 84rem; } }
+
+.hero__eyebrow {
+  grid-column: 1 / -1;
+  font-family: var(--font-label);
+  font-size: 11rem; text-transform: uppercase; letter-spacing: var(--track-label);
+  color: color-mix(in oklab, var(--paper) 80%, transparent);
+  display: flex; gap: 14rem; align-items: baseline;
+  /* Sits as a label on the headline, not as a separate band above it. */
+  margin-bottom: 10rem;
+}
+.hero__eyebrow span::before { content: "["; padding-right: 3rem; }
+.hero__eyebrow span::after  { content: "]"; padding-left: 3rem; }
+
+.hero__title {
+  grid-column: 1 / -1;
+  font-family: var(--font-text);
+  font-weight: 400;
+  font-size: 44rem; line-height: .96;
+  letter-spacing: -.01em;
+  font-style: italic;
+  color: var(--paper);
+  /* No cap on desktop — the line is held to one row by `nowrap`, and a
+     900px cap left only ~40px of headroom on the longest phrase. */
+  max-width: 100%;
+  /* One line reserved, not two. `.hero__inner` is `align-content: end`,
+     so a headline that wraps grows UPWARD and the rule below stays put —
+     reserving two lines here only opened a dead gap under the eyebrow. */
+  min-height: .96em;
+  margin-bottom: 4rem;
+}
+@media (min-width: 768px) {
+  /* Held to one line: the phrase swaps between looks and the longest of
+     them ("as an exploration.") must not be the one that wraps. */
+  .hero__title { font-size: 88rem; grid-column: 1 / -1; white-space: nowrap; }
+}
+
+/* ── Intro gate ──────────────────────────────────────────────────── */
+
+body[data-intro="true"] { overflow: hidden; }
+
+.hero__skip {
+  grid-column: 1 / -1;
+  justify-self: start;
+  margin-top: 16rem;
+  font-family: var(--font-label);
+  font-size: 10rem; text-transform: uppercase;
+  letter-spacing: var(--track-label);
+  color: color-mix(in oklab, var(--paper) 62%, transparent);
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--dur-base) var(--ease-out), color var(--dur-fast);
+}
+.hero__skip::before { content: "["; padding-right: 3rem; }
+.hero__skip::after  { content: "]"; padding-left: 3rem; }
+.hero__skip:hover { color: var(--paper); }
+/* Only offered while the gate is actually holding the reader. */
+body[data-intro="true"] .hero__skip { opacity: 1; pointer-events: all; }
+
+/* The lead word breaks upright and heavy against the italic remainder —
+   the headline states the noun, then leans into the phrase. */
+.hero__lead {
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: -.02em;
+}
+
+/* ── Typewriter ──────────────────────────────────────────────────────
+   The caret exists only while keys are landing, and is solid rather
+   than blinking — once the line is written it is removed entirely so
+   the headline is left as plain type. */
+.hero__type[data-caret="typing"]::after {
+  content: "";
+  display: inline-block;
+  width: .05em; height: .78em;
+  background: currentColor;
+  margin-left: .07em;
+  vertical-align: -.04em;
+}
+
+/* Split reveal — words rise from under a mask.
+
+   The masking box is padded in `em` so it scales with the type: a fixed
+   4px gutter clipped the descenders and the italic overshoot once the
+   headline was set at 96px.
+
+   The hidden state is scoped to `.js`, which is set by script.js at parse
+   time. If the script never runs the words are simply visible — this text
+   is the page's headline and must not depend on JS. */
+.reveal {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-block: .16em .22em;
+  margin-block: -.16em -.22em;
+}
+.reveal > span { display: inline-block; }
+
+.js .reveal > span {
+  transform: translateY(115%);
+  transition: transform var(--dur-slow) var(--ease-paper);
+}
+.js .reveal.in-view > span,
+.js .in-view .reveal > span,
+.js [data-in="true"] .reveal > span { transform: none; }
+.reveal:nth-child(1)  > span { transition-delay: 100ms; }
+.reveal:nth-child(2)  > span { transition-delay: 200ms; }
+.reveal:nth-child(3)  > span { transition-delay: 300ms; }
+.reveal:nth-child(4)  > span { transition-delay: 400ms; }
+.reveal:nth-child(5)  > span { transition-delay: 500ms; }
+
+.hero__meta {
+  grid-column: 1 / -1;
+  margin-top: 16rem;
+  display: flex; justify-content: space-between; align-items: baseline; gap: 24rem;
+  border-top: 1px solid color-mix(in oklab, var(--paper) 40%, transparent);
+  padding-top: 14rem;
+  color: color-mix(in oklab, var(--paper) 82%, transparent);
+  font-family: var(--font-label);
+  font-size: 11rem; text-transform: uppercase; letter-spacing: var(--track-label);
+}
+.hero__meta__l { display: flex; gap: 24rem; }
+.hero__meta__r { text-align: right; }
+
+/* Advances the look stack. Bracketed like every other control. */
+.hero__next {
+  font-family: var(--font-label);
+  font-size: 11rem; text-transform: uppercase;
+  letter-spacing: var(--track-label);
+  color: inherit;
+  display: inline-flex; align-items: baseline; gap: 6rem;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.hero__next::before { content: "["; }
+.hero__next::after  { content: "]  →"; white-space: pre; }
+.hero__next:hover { color: var(--paper); }
+@media (hover: hover) { .hero__next:hover::after { content: "]  ⟶"; } }
+
+/* Scroll cue */
+.hero__cue {
+  position: absolute; left: var(--grid-margin); bottom: 20rem;
+  color: color-mix(in oklab, var(--paper) 78%, transparent);
+  font-family: var(--font-label); font-size: 10rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  display: none;
+}
+@media (min-width: 768px) { .hero__cue { display: block; } }
+
+/* ═══ 11. MARQUEE ═════════════════════════════════════════════════════ */
+
+.marquee {
+  border-block: 1px solid var(--rule);
+  overflow: hidden;
+  padding-block: 14rem;
+  font-size: 18rem;
+  color: var(--ink);
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: var(--track-label);
+}
+@media (min-width: 768px) { .marquee { font-size: 24rem; padding-block: 18rem; } }
+.marquee__track {
+  display: inline-flex; width: max-content; gap: 40rem;
+  animation: marquee 42s linear infinite;
+}
+.marquee:hover .marquee__track { animation-play-state: paused; }
+.marquee__item { display: inline-flex; gap: 40rem; align-items: baseline; white-space: nowrap; }
+.marquee__item::after { content: "◆"; color: var(--navy); font-size: .55em; align-self: center; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* ═══ 12. SECTION / INDEX BLOCKS ══════════════════════════════════════ */
+
+/* Tightened: the page was breathing so hard the sections stopped
+   reading as one document. Top padding is lighter than bottom so each
+   head sits close to the rule above it. */
+.section { padding-block: 34rem 46rem; position: relative; }
+@media (min-width: 768px) { .section { padding-block: 60rem 84rem; } }
+
+.section__head {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  column-gap: var(--grid-gutter);
+  padding-bottom: 22rem;
+  border-bottom: 1px solid var(--rule);
+}
+.section__num {
+  grid-column: 1 / 3;
+  font-family: var(--font-label);
+  font-size: 11rem; color: var(--muted);
+  text-transform: uppercase; letter-spacing: var(--track-label);
+}
+.section__label {
+  grid-column: 3 / 7;
+  font-family: var(--font-label);
+  font-size: 11rem; color: var(--muted);
+  text-transform: uppercase; letter-spacing: var(--track-label);
+}
+.section__title {
+  grid-column: 1 / -1; margin-top: 20rem;
+  font-family: var(--font-text); font-weight: 400;
+  font-size: 24rem; line-height: 1.05;
+}
+@media (min-width: 768px) {
+  .section__title { grid-column: 3 / 12; font-size: 24rem; }
+  .section__num  { grid-column: 1 / 2; }
+  .section__label { grid-column: 2 / 5; }
+}
+
+/* ── Stacked panels ───────────────────────────────────────────────────
+   Sections 02 · 03 · 04 pile up like tabs in a drawer. Each panel is
+   sticky at a slightly lower offset than the one before (--p is its
+   index), so as you scroll each new panel slides up and parks over the
+   last, leaving its head row showing as a tab.
+
+   Requirements for this to work: every panel needs an OPAQUE background
+   (otherwise the one beneath shows through) and a top rule so the seam
+   between stacked tabs is legible. */
+
+.panels { position: relative; }
+
+.panel {
+  position: sticky;
+  /* 36rem per step: four tabs stack to ~108rem, which still leaves the
+     panel body a full screen. A wider step ate the content. */
+  top: calc(var(--hh) + var(--p, 0) * 36rem);
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  /* Each panel must be SHORTER than the space it is given, or its own
+     bottom is still on screen when the next one parks over it — which
+     is exactly what clipped the second half of the old Look section.
+     One feature block per panel keeps that true. */
+  min-height: var(--panel-h, 72svh);
+  padding-block: 24rem 48rem;
+  /* the lifted edge that sells the stack */
+  box-shadow: 0 -12rem 30rem rgba(13, 13, 13, .06);
+}
+/* Later panels sit above earlier ones as they rise. */
+.panel:nth-child(1) { z-index: 1; }
+.panel:nth-child(2) { z-index: 2; }
+.panel:nth-child(3) { z-index: 3; }
+.panel:nth-child(4) { z-index: 4; }
+
+/* The head row is the tab: pin it to the top of its own panel so it
+   stays readable once the next panel parks over the body. */
+.panel .section__head { padding-bottom: 16rem; }
+.panel .section__title { margin-top: 14rem; }
+
+/* ── Split panel: full-bleed photograph beside the copy ───────────────
+   The panel is its own two-column grid rather than a centred .wrapper,
+   so the media column can run edge to edge and top to bottom:
+
+     · no wrapper margin on the outer side  → flush with the page edge
+     · the panel's own block padding moves onto .panel__text
+       → the photograph reaches the panel's top and bottom rules
+     · a single stretched grid row           → the image is as tall as
+       the panel, which is itself floored at --panel-h
+
+   .panel--right puts the media on the right; without it, on the left.
+   Source order carries the layout so it still reads correctly with no
+   CSS: media-left panels lead with the image, media-right with the copy. */
+
+.panel--split {
+  display: grid;
+  grid-template-columns: 1fr;
+  /* Padding lives on the text column now — see above. */
+  padding-block: 0;
+}
+@media (min-width: 768px) {
+  .panel--split { grid-template-columns: 44% 1fr; }
+  .panel--split.panel--right { grid-template-columns: 1fr 44%; }
+  /* One row, stretched, so the media matches the panel's full height. */
+  .panel--split { grid-template-rows: minmax(0, 1fr); align-items: stretch; }
+  /* Floor the panel tall enough for the photograph to carry the section,
+     while still clearing the tab that parks over it (see the stacking
+     note above — panel p has 100svh − --hh − (p+1)×36rem to play with,
+     and the deepest of those is ~80svh). */
+  .panel--split { --panel-h: 78svh; }
+}
+
+.panel__media {
+  position: relative;
+  overflow: hidden;
+  background: var(--paper-2);
+}
+/* Taken out of flow on purpose. Left in flow, the photograph's own
+   intrinsic height sizes the grid row — a 633px-wide 4:5 frame made the
+   panel 792px tall and pushed it past the tab parked above it. Out of
+   flow, the row is set by --panel-h and the copy, and the image fills
+   whatever that comes to. */
+.panel__media > img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  /* Bias to the upper body — these are full-length figures and a centre
+     crop cut heads off at this aspect. */
+  object-position: 50% 28%;
+}
+@media (max-width: 767px) {
+  /* Stacked: the image gets a generous band of its own, still full-bleed
+     left and right, and always leads the panel. */
+  .panel--split { display: flex; flex-direction: column; }
+  .panel__media { order: -1; height: 68svh; }
+}
+
+.panel__text {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 28rem var(--grid-margin) 40rem;
+  min-width: 0;
+}
+@media (min-width: 768px) {
+  /* Page margin on the outer side, a wider trough against the photo.
+     Kept tight on the block axis: this column sets the panel's height,
+     and the panel has to clear the tab that parks over it. */
+  .panel--split .panel__text { padding: 26rem var(--grid-margin) 30rem 52rem; }
+  .panel--split.panel--right .panel__text { padding: 26rem 52rem 30rem var(--grid-margin); }
+}
+
+/* The head is a 12-column grid at page width; inside a single column it
+   needs to collapse to a simple label row with the title beneath. */
+.panel--split .section__head {
+  display: flex; flex-wrap: wrap; align-items: baseline;
+  gap: 6rem 20rem;
+  padding-bottom: 14rem;
+}
+.panel--split .section__num,
+.panel--split .section__label { grid-column: auto; }
+.panel--split .section__title {
+  grid-column: auto;
+  flex: 1 0 100%;
+  margin-top: 14rem;
+}
+
+.panel--split .feature__body { padding-top: 18rem; }
+/* A wider measure than the page default: the copy shares the panel's
+   height budget with nothing else, so fewer, longer lines are cheaper
+   than a narrow column that runs deep. */
+.panel--split .feature__body p { margin-top: 12rem; max-width: 56ch; }
+
+/* Collections list sits in the text column; its preview is the media. */
+.panel--split .collections__list { padding-top: 24rem; }
+.panel--split .collections__row { padding-block: 14rem; }
+/* Neutralise the standalone preview's own sizing — as a panel media
+   column it takes its height from the grid row, not from an aspect
+   ratio or a sticky offset of its own. */
+.panel__media.collections__preview {
+  position: relative;
+  top: auto;
+  aspect-ratio: auto;
+  height: auto;
+  align-self: stretch;
+  margin-left: 0;
+}
+@media (max-width: 767px) {
+  .panel__media.collections__preview { height: 68svh; }
+}
+
+/* The journal card is markup, not a photograph — centre it on the paper
+   rather than bleeding it, so the torn mask isn't cropped. */
+.panel__media--card {
+  background: transparent;
+  overflow: visible;
+  display: flex; align-items: center; justify-content: center;
+  padding: 34rem var(--grid-margin);
+}
+@media (min-width: 768px) {
+  .panel__media--card { padding: 40rem 24rem 40rem var(--grid-margin); }
+}
+@media (max-width: 767px) {
+  .panel__media--card { height: auto; }
+}
+.panel__media--card .diary { width: 100%; max-width: 380rem; }
+
+@media (max-width: 767px) {
+  /* Sticky stacking on a short viewport hides more than it reveals —
+     the panels simply run one after another. */
+  .panel {
+    position: static;
+    min-height: 0;
+    box-shadow: none;
+  }
+  .panel:not(.panel--split) { padding-block: 30rem 40rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel { position: static; min-height: 0; box-shadow: none; }
+}
+
+/* Scroll reveal — the default fade-up-with-blur. */
+.rise {
+  opacity: 0; transform: translateY(24rem); filter: blur(6px);
+  transition: opacity var(--dur-slow) var(--ease-out),
+              transform var(--dur-slow) var(--ease-out),
+              filter var(--dur-slow) var(--ease-out);
+  will-change: opacity, transform, filter;
+}
+.rise.in-view { opacity: 1; transform: none; filter: blur(0); }
+
+/* ═══ 13. COLLECTION INDEX — hover swaps sticky preview ═══════════════ */
+
+.collections {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32rem;
+  padding-top: 32rem;
+}
+@media (min-width: 768px) {
+  .collections { grid-template-columns: 1fr 1fr; gap: 0; padding-top: 56rem; }
+}
+
+.collections__list {
+  padding-top: 8rem;
+  display: flex; flex-direction: column;
+}
+.collections__row {
+  display: grid;
+  grid-template-columns: 32rem 1fr auto;
+  align-items: baseline;
+  padding-block: 22rem;
+  border-top: 1px solid var(--rule);
+  gap: 16rem;
+  cursor: pointer;
+  transition: color var(--dur-fast) var(--ease-out),
+              opacity var(--dur-fast) var(--ease-out);
+}
+.collections__row:last-child { border-bottom: 1px solid var(--rule); }
+.collections__num {
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted);
+}
+.collections__name {
+  font-family: var(--font-text); font-size: 24rem; line-height: 1.05;
+  font-style: italic;
+}
+@media (min-width: 768px) { .collections__name { font-size: 24rem; } }
+.collections__meta {
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted);
+  text-align: right;
+}
+@media (hover: hover) {
+  .collections__list:has(.collections__row:hover) .collections__row:not(:hover) { opacity: .35; }
+  .collections__row:hover { color: var(--navy); }
+}
+
+.collections__preview {
+  position: relative;
+  aspect-ratio: 4/5;
+  background: var(--paper-2);
+  overflow: hidden;
+}
+@media (min-width: 768px) {
+  .collections__preview {
+    position: sticky; top: 0; align-self: start;
+    height: 92svh; aspect-ratio: auto;
+    margin-left: 40rem;
+  }
+}
+.collections__preview img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; filter: blur(12px) saturate(.9);
+  transition: opacity var(--dur-base) var(--ease-out),
+              filter var(--dur-base) var(--ease-out),
+              transform var(--dur-vslow) var(--ease-out);
+  transform: scale(1.04);
+}
+.collections__preview img[data-active="true"] {
+  opacity: 1; filter: blur(0) saturate(1); transform: scale(1);
+}
+/* Caption overlay for whichever row is active — populated by
+   wirePreviewSwap() (mcmarden.js §8) from the hovered row's data-label.
+   Was styled as part of .shop__viewer, removed with it when the shop
+   page moved to a plain grid; still emitted here (and by
+   mcmarden-collection-shop.liquid) so it needs its own rule now rather
+   than inheriting one that no longer exists. */
+.shop__viewer__meta {
+  position: absolute; bottom: 14rem; left: 14rem;
+  z-index: 2; color: var(--paper);
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  mix-blend-mode: difference;
+}
+
+/* mcmarden-spotify-playlist.liquid — everything inside the iframe is
+   Spotify's own UI, sandboxed and out of reach; this only spaces and
+   labels the frames the site controls the edges of. */
+
+/* Centered header for this section only — every other section's
+   .section__head is the asymmetric num/label/title grid (see §7 above);
+   this one just stacks the three lines centered instead, so it needs
+   its own rule rather than a change to the shared component every other
+   section relies on. */
+.spotify-embed .section__head {
+  grid-template-columns: 1fr;
+  justify-items: center;
+  text-align: center;
+}
+.spotify-embed .section__num,
+.spotify-embed .section__label,
+.spotify-embed .section__title {
+  grid-column: 1 / -1;
+}
+
+/* grid-column is the whole ballgame here. .wrapper is the site's
+   12-column grid, so every direct child of it has to claim its columns
+   or it silently lands in column 1 alone — 96px at a 1440px viewport.
+   That is exactly what happened to this row: the section heading looked
+   right (.section__head carries `grid-column: 1 / -1` of its own, §7)
+   while the player below it collapsed to a 96px slot and Spotify's
+   embed, which lays itself out responsively to whatever width it is
+   given, shrank to a bare album thumbnail to fit. Measured live on the
+   published store: 97px with this missing, 1393px with it. */
+.spotify-embed__row {
+  grid-column: 1 / -1;
+  display: flex; flex-direction: column; gap: 32rem;
+  padding-top: 32rem;
+}
+@media (min-width: 768px) {
+  /* row-reverse, not `order` — `order` and `flex-direction` both only
+     reorder paint, not DOM/tab order, so either way a keyboard or screen
+     reader user still meets the copy before the list. row-reverse is
+     used here (over the CSS Grid placement this replaced) to match the
+     plain-flexbox shape of VNMS's working Spotify section: two flex
+     children with a flex-basis each, no grid track-sizing involved.
+     .spotify-embed__copy is first in the DOM (so mobile, a single flex
+     column, already reads copy-then-list with no rule of its own
+     needed); row-reverse puts it visually on the right at desktop
+     without changing that DOM order. */
+  .spotify-embed__row { flex-direction: row-reverse; align-items: flex-start; gap: 40rem; }
+  .spotify-embed__list { flex: 1 1 380rem; min-width: 0; }
+  .spotify-embed__copy { flex: 1 1 320rem; }
+}
+
+.spotify-embed__copy {
+  font-family: var(--font-text); font-size: 15rem; line-height: 1.6;
+  color: var(--ink);
+}
+.spotify-embed__copy p + p { margin-top: 14rem; }
+
+.spotify-embed__list {
+  display: flex; flex-direction: column; gap: 20rem;
+  min-width: 0;
+}
+/* No block yet, or its link is blank: the list rendered nothing at all
+   here before this — no error, no box, just a silent gap the width of
+   half the row, easy to read as a broken layout rather than an
+   unfinished one. */
+.spotify-embed__empty {
+  min-height: 152rem;
+  background: var(--paper-2);
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 20rem;
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted);
+}
+.spotify-embed__item { display: flex; flex-direction: column; gap: 8rem; min-width: 0; }
+.spotify-embed__caption {
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted);
+}
+/* width is set here, not via the iframe's width="" attribute — a
+   presentational HTML attribute is the lowest-priority width source in
+   the cascade, and lost to it here (a 300px default iframe intrinsic
+   width, clipping Spotify's own UI to a narrow column) for reasons that
+   weren't worth chasing once a real CSS rule sidesteps the question
+   entirely. */
+.spotify-embed__frame { display: block; width: 100%; border-radius: 8rem; }
+
+/* ═══ 14. FEATURE STRIP — diary teaser & about intro ══════════════════ */
+
+.feature {
+  grid-column: 1 / -1;
+  display: grid; grid-template-columns: 1fr; gap: 32rem;
+  padding-top: 48rem;
+}
+@media (min-width: 768px) {
+  .feature { grid-template-columns: 5fr 7fr; gap: 40rem; padding-top: 72rem; }
+}
+.feature__media { position: relative; aspect-ratio: 4/5; background: var(--paper-2); overflow: hidden; }
+.feature__media img { width: 100%; height: 100%; object-fit: cover; }
+
+/* For a media slot holding markup rather than a photograph (the diary
+   card in the journal teaser). The fixed 4/5 ratio was forcing a 696px
+   box around a 357px card — ~340px of dead space. */
+.feature__media--free {
+  aspect-ratio: auto;
+  background: transparent;
+  overflow: visible;
+}
+.feature__body { padding-block: 8rem; }
+.feature__kicker {
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted); margin-bottom: 14rem;
+}
+.feature__title { font-family: var(--font-text); font-size: 24rem; font-style: italic; line-height: 1.06; }
+.feature__body p,
+.feature__body > .rise { margin-top: 18rem; font-size: 15rem; line-height: 1.45; max-width: 560rem; }
+/* First child shouldn't inherit the 18rem top gap meant to separate
+   it from a sibling above it. */
+.feature__body > :first-child { margin-top: 0; }
+@media (min-width: 768px) {
+  .feature__body p,
+  .feature__body > .rise { font-size: 16rem; }
+}
+
+/* ── Culture + Community (Studio page) ────────────────────────────────
+   The founder's own statement, so it is set as a quoted address rather
+   than as body copy: wider measure, a little more air between lines,
+   one pulled line, and a signature block. */
+.culture .feature__media { aspect-ratio: 3/4; }
+.culture .feature__body p,
+.culture .feature__body > .rise { max-width: 60ch; line-height: 1.5; }
+.culture__pull {
+  font-family: var(--font-text);
+  font-size: 20rem !important;
+  font-style: italic;
+  line-height: 1.2 !important;
+  color: var(--ink);
+  padding-left: 18rem;
+  border-left: 1px solid var(--rule);
+}
+@media (min-width: 768px) { .culture__pull { font-size: 24rem !important; } }
+.culture__sign {
+  margin-top: 24rem;
+  padding-top: 14rem;
+  border-top: 1px solid var(--rule);
+  display: flex; flex-direction: column; gap: 4rem;
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted);
+}
+.culture__sign span:first-child { color: var(--ink); }
+
+/* ═══ 15. CTA / BUTTONS ═════════════════════════════════════════════ */
+
+.btn {
+  display: inline-flex; align-items: baseline; gap: 8rem;
+  font-size: 11rem;
+  text-transform: uppercase;
+  padding: 12rem 18rem;
+  border: 1px solid currentColor;
+  color: var(--ink);
+  transition: color var(--dur-fast) var(--ease-out),
+              background var(--dur-fast) var(--ease-out);
+  position: relative;
+}
+.btn::before { content: "[ "; }
+.btn::after  { content: " ]"; margin-left: 4rem; }
+.btn:hover { background: var(--ink); color: var(--paper); }
+.btn--navy { color: var(--paper); background: var(--navy); border-color: var(--navy); }
+.btn--navy:hover { background: var(--ink); border-color: var(--ink); }
+.btn--ghost { border-color: var(--rule); }
+
+/* ═══ 16. FOOTER ═════════════════════════════════════════════════════ */
+
+.footer {
+  border-top: 1px solid var(--rule);
+  background: var(--ink); color: var(--paper);
+  padding: 56rem var(--grid-margin) 24rem;
+  position: relative;
+  z-index: 1;
+}
+.footer__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  column-gap: var(--grid-gutter); row-gap: 32rem;
+}
+.footer__mark {
+  grid-column: 1 / -1;
+  font-family: var(--font-text); font-style: italic;
+  font-size: 24rem; line-height: 1;
+}
+@media (min-width: 768px) {
+  .footer__mark { grid-column: 1 / 7; font-size: 24rem; }
+}
+.footer__mark .wordmark { height: 46rem; margin-bottom: 18rem; }
+.footer__col {
+  grid-column: span 6;
+}
+@media (min-width: 768px) { .footer__col { grid-column: span 2; } }
+.footer h4 {
+  font-family: var(--font-label); font-size: 10rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: color-mix(in oklab, var(--paper) 62%, transparent);
+  margin-bottom: 14rem; font-weight: 400;
+}
+.footer li { padding-block: 3rem; font-size: 13rem; }
+.footer li a:hover { color: var(--paper); text-decoration: underline; text-underline-offset: 3px; }
+
+.footer__bottom {
+  grid-column: 1 / -1;
+  margin-top: 32rem; padding-top: 20rem;
+  border-top: 1px solid color-mix(in oklab, var(--paper) 18%, transparent);
+  display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 12rem;
+  font-family: var(--font-label); font-size: 10rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: color-mix(in oklab, var(--paper) 62%, transparent);
+}
+
+/* ═══ 17. SHOP — sticky-image ledger ═════════════════════════════════ */
+
+/* ═══ 20a. FEATURED — THE UNIFORM ═════════════════════════════════════
+   A lookbook band above the index: the complete set worn together, one
+   row per colourway. These are looks rather than products, so they link
+   out to the pieces instead of carrying a price or an add-to-bag. */
+
+.uniform {
+  padding-top: 48rem;
+  padding-inline: var(--grid-margin);
+  padding-bottom: 96rem;
+  border-top: 1px solid var(--rule);
+  position: relative;
+}
+@media (min-width: 768px) { .uniform { padding-top: 64rem; } }
+.uniform__meta {
+  display: flex; flex-wrap: wrap; gap: 4rem 18rem;
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted);
+}
+.uniform__title {
+  margin-top: 12rem;
+  font-family: var(--font-text); font-weight: 400; font-style: italic;
+  font-size: 32rem; line-height: 1.02;
+}
+@media (min-width: 768px) { .uniform__title { font-size: 44rem; } }
+.uniform__note {
+  margin-top: 12rem; max-width: 520rem;
+  font-size: 15rem; line-height: 1.5; color: var(--muted);
+}
+
+.uniform__ways { margin-top: 32rem; display: flex; flex-direction: column; gap: 40rem; }
+@media (min-width: 768px) { .uniform__ways { margin-top: 48rem; gap: 56rem; } }
+
+.uniform__way__head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  flex-wrap: wrap; gap: 8rem 20rem;
+  padding-bottom: 10rem;
+  border-bottom: 1px solid var(--rule);
+}
+.uniform__way__name {
+  font-family: var(--font-text); font-weight: 400; font-style: italic;
+  font-size: 24rem; line-height: 1;
+}
+.uniform__way__shop {
+  display: flex; flex-wrap: wrap; gap: 6rem 14rem;
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted);
+}
+.uniform__way__shop a::before { content: "["; padding-right: 4rem; }
+.uniform__way__shop a::after  { content: "]"; padding-left: 4rem; }
+.uniform__way__shop a:hover { color: var(--navy); }
+
+/* Four frames of one look. Two-up on a phone so each is still big
+   enough to read as a full-length figure. */
+.uniform__strip {
+  margin-top: 16rem;
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 10rem;
+}
+@media (min-width: 768px) {
+  .uniform__strip { grid-template-columns: repeat(4, 1fr); gap: 16rem; margin-top: 20rem; }
+}
+.uniform__strip img {
+  width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
+  background: var(--paper-2);
+  display: block;
+}
+
+.shop {
+  padding-top: calc(var(--hh) + 24rem);
+  padding-inline: var(--grid-margin);
+  /* The Uniform follows on this page and opens with its own rule and
+     top padding, so the index doesn't also need a deep tail. */
+  padding-bottom: 48rem;
+  position: relative;
+}
+.shop__head {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  column-gap: var(--grid-gutter);
+  padding-block: 24rem 20rem;
+  border-bottom: 1px solid var(--rule);
+}
+.shop__meta {
+  grid-column: 1 / -1;
+  display: flex; flex-wrap: wrap; gap: 4rem 18rem;
+  margin-bottom: 14rem;
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted);
+}
+.shop__title {
+  grid-column: 1 / -1;
+  font-family: var(--font-text); font-style: italic; font-size: 24rem;
+}
+@media (min-width: 768px) { .shop__title { grid-column: 1 / 7; } }
+
+/* Collection mark — the collection's own lockup, shown when you arrive
+   via ?c=. Black artwork on a transparent ground, so it sits straight on
+   the paper with no plate behind it.
+
+   On desktop it occupies the right of the header block and scales to
+   that block's height rather than adding a row of its own: the copy
+   keeps the left columns and nothing is pushed down. `data-mark` is set
+   on .shop__head by script.js — an attribute on the ancestor being
+   styled, rather than :has() on the figure, because the figure's hidden
+   state is flipped at runtime. */
+.colmark { margin: 0; }
+.colmark[hidden] { display: none; }
+.colmark img { display: block; }
+
+/* Phone: no room for a side-by-side, so it sits above — but small and
+   right-aligned, reading as a mark rather than a banner. */
+@media (max-width: 767px) {
+  .colmark {
+    grid-column: 1 / -1;
+    margin-bottom: 16rem;
+    text-align: right;
+  }
+  .colmark img {
+    width: 100%; max-width: 132rem; height: auto;
+    margin-left: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  /* The copy (count, title, switcher) keeps the left columns; the mark
+     takes the empty right block those three rows leave behind. The
+     filters are untouched — they stay right-aligned on their own row
+     below, so nothing in the header moves to make room. */
+  .shop__head[data-mark] .shop__meta,
+  .shop__head[data-mark] .shop__title,
+  .shop__head[data-mark] .colsel { grid-column: 1 / 8; }
+
+  .shop__head[data-mark] .colmark {
+    grid-column: 8 / -1;
+    grid-row: 1 / 4;
+    position: relative;
+  }
+  /* Absolutely positioned so the artwork takes its size FROM the block
+     it spans rather than contributing height to it: the mark fits the
+     header instead of stretching it, and centres in the gap. */
+  .shop__head[data-mark] .colmark img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: contain;
+    object-position: center;
+  }
+}
+
+/* ── Collection switcher ──────────────────────────────────────────────
+   The primary axis of the shop: which body of work you're looking at.
+   Sits above the category filters and is styled heavier than them, so
+   the live collection reads as the headline choice and the archived
+   ones read as what they are — closed. */
+.colsel {
+  grid-column: 1 / -1;
+  margin-top: 20rem;
+  display: flex; flex-wrap: wrap; align-items: baseline;
+  gap: 8rem 24rem;
+  padding-bottom: 14rem;
+}
+@media (min-width: 768px) { .colsel { gap: 10rem 36rem; margin-top: 26rem; } }
+
+.colsel__label {
+  font-family: var(--font-label); font-size: 10rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted);
+}
+
+.colsel__opt {
+  position: relative;
+  font-family: var(--font-text); font-size: 17rem; line-height: 1.1;
+  color: var(--muted);
+  padding-bottom: 3rem;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+@media (min-width: 768px) { .colsel__opt { font-size: 19rem; } }
+
+/* The live collection: full ink, italic, and underscored. */
+.colsel__opt[aria-current="true"] {
+  color: var(--ink);
+  font-style: italic;
+}
+/* Underline is pinned to a variable rather than 0 so the coarse-pointer
+   rules can grow the tap target without dragging the rule away from the
+   word it belongs to. */
+.colsel__opt[aria-current="true"]::after {
+  content: ""; position: absolute; left: 0; right: 0;
+  bottom: var(--colsel-rule, 0);
+  height: 1px; background: var(--ink);
+}
+.colsel__opt:hover { color: var(--ink); }
+
+/* Sold out: kept legible and clickable — the point is to show the house
+   has history, not to hide it — but clearly closed. */
+.colsel__opt[data-sold="true"] { color: var(--muted); }
+.colsel__opt[data-sold="true"]:hover { color: var(--graphite); }
+.colsel__tag {
+  font-family: var(--font-label); font-size: 9rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted);
+  border: 1px solid var(--rule);
+  padding: 2rem 5rem;
+  margin-left: 4rem;
+  vertical-align: 2rem;
+  white-space: nowrap;
+  font-style: normal;
+}
+
+/* Nothing to show: drop the grid, which would otherwise render as an
+   empty row framing the message. Driven by data-empty on .shop, set in
+   the filter's apply(). */
+.shop[data-empty="true"] .pgrid { display: none; }
+
+.shop__empty {
+  padding-block: 40rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--font-text); font-size: 17rem; font-style: italic;
+  color: var(--muted);
+}
+.shop__empty a { color: var(--ink); text-decoration: underline; text-underline-offset: 3rem; }
+.shop__empty a:hover { color: var(--navy); }
+
+.shop__filters {
+  grid-column: 1 / -1; margin-top: 16rem;
+  display: flex; flex-wrap: wrap; gap: 8rem;
+}
+@media (min-width: 768px) {
+  .shop__filters { grid-column: 7 / -1; justify-content: flex-end; margin-top: 0; align-self: end; }
+}
+.filter {
+  font-size: 10rem; text-transform: uppercase;
+  padding: 5rem 10rem; border: 1px solid var(--rule);
+  color: var(--muted);
+  transition: color var(--dur-fast), border-color var(--dur-fast), background var(--dur-fast);
+}
+.filter::before { content: "[ ] "; }
+.filter[aria-pressed="true"] { color: var(--paper); background: var(--ink); border-color: var(--ink); }
+.filter[aria-pressed="true"]::before { content: "[×] "; }
+.filter:hover { color: var(--ink); border-color: var(--ink); }
+.filter[aria-pressed="true"]:hover { color: var(--paper); }
+
+.shop__body {
+  padding-top: 24rem;
+}
+@media (min-width: 768px) {
+  .shop__body { padding-top: 40rem; }
+}
+
+/* ═══ 18. CART DRAWER ══════════════════════════════════════════════ */
+
+.cart {
+  position: fixed; top: 0; right: 0; bottom: 0;
+  width: min(420rem, 92vw);
+  background: var(--paper);
+  border-left: 1px solid var(--rule);
+  z-index: 80;
+  transform: translateX(100%);
+  transition: transform var(--dur-slow) var(--ease-paper);
+  display: flex; flex-direction: column;
+  will-change: transform;
+}
+.cart[data-open="true"] { transform: none; box-shadow: -1px 0 60rem rgba(13,13,13,.14); }
+
+.cart__scrim {
+  position: fixed; inset: 0; z-index: 79;
+  background: rgba(13,13,13,.42);
+  backdrop-filter: blur(4px);
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+.cart__scrim[data-open="true"] { opacity: 1; pointer-events: all; }
+
+.cart__head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  padding: 22rem 24rem 14rem;
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+}
+.cart__close::before { content: "[×]"; }
+.cart__close:hover { color: var(--navy); }
+
+/* Scoped to the drawer root. Unscoped, this also matched the CART PAGE's
+   own <div class="cart__items" id="main-cart-items"> — Dawn's markup uses
+   the same class name — and its 24rem inline padding was what pushed the
+   whole line-item table 24px right of the page title, the only thing on
+   the page not sharing the same left edge. */
+.cart .cart__items { flex: 1 1 auto; overflow-y: auto; padding: 8rem 24rem; }
+.cart__empty {
+  padding: 40rem 0; text-align: center;
+  font-family: var(--font-text); font-style: italic;
+  color: var(--muted); font-size: 15rem;
+}
+.cart__item {
+  display: grid; grid-template-columns: 64rem 1fr auto; gap: 14rem;
+  padding-block: 16rem;
+  border-bottom: 1px solid var(--rule);
+  align-items: start;
+}
+.cart__item img { width: 64rem; height: 80rem; object-fit: cover; background: var(--paper-2); }
+.cart__item__name { font-family: var(--font-text); font-size: 15rem; line-height: 1.15; }
+.cart__item__meta {
+  font-family: var(--font-label); font-size: 10rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted); margin-top: 6rem;
+}
+.cart__item__price {
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  text-align: right;
+}
+.cart__item__ctl {
+  grid-column: 2 / 4; display: flex; justify-content: space-between; align-items: center;
+  margin-top: 8rem;
+  font-family: var(--font-label); font-size: 10rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+}
+.cart__qty { display: inline-flex; gap: 8rem; align-items: center; }
+.cart__qty button { padding: 2rem 6rem; border: 1px solid var(--rule); font-size: 10rem; }
+.cart__qty button:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.cart__remove:hover { color: var(--navy); text-decoration: underline; }
+
+.cart__foot { padding: 20rem 24rem 24rem; border-top: 1px solid var(--rule); }
+.cart__row { display: flex; justify-content: space-between; padding-block: 4rem;
+  font-family: var(--font-label); font-size: 12rem;
+  text-transform: uppercase; letter-spacing: var(--track-label); }
+.cart__row--total { padding-top: 12rem; margin-top: 8rem; border-top: 1px solid var(--rule); font-size: 14rem; }
+.cart__checkout { width: 100%; margin-top: 16rem; justify-content: center; }
+.cart__note { margin-top: 12rem; font-size: 10rem; color: var(--muted); text-align: center; text-transform: uppercase; letter-spacing: var(--track-label); font-family: var(--font-label); }
+
+/* ═══ 19. TOAST ═══════════════════════════════════════════════════════ */
+
+.toast {
+  position: fixed; bottom: 24rem; left: 50%; z-index: 85;
+  transform: translate(-50%, 120%);
+  transition: transform var(--dur-base) var(--ease-paper);
+  pointer-events: none;
+}
+.toast[data-open="true"] { transform: translate(-50%, 0); }
+.toast__inner {
+  background: var(--ink); color: var(--paper);
+  padding: 12rem 18rem;
+  font-size: 11rem; text-transform: uppercase; letter-spacing: var(--track-label);
+  display: inline-flex; gap: 14rem; align-items: baseline;
+}
+.toast__inner b { color: var(--paper); font-weight: 500; }
+.toast__inner em { color: color-mix(in oklab, var(--paper) 62%, transparent); font-style: normal; }
+
+/* ═══ 20. PRODUCT PAGE ══════════════════════════════════════════════ */
+
+.product {
+  padding-top: calc(var(--hh) + 24rem);
+}
+.product__wrap {
+  display: grid; grid-template-columns: 1fr; gap: 32rem;
+  padding: 0 var(--grid-margin);
+}
+@media (min-width: 768px) {
+  .product__wrap { grid-template-columns: 7fr 5fr; gap: 40rem; }
+}
+.product__gallery { display: flex; flex-direction: column; gap: 12rem; }
+.product__gallery img { width: 100%; height: auto; background: var(--paper-2); display: block; }
+/* No photograph uploaded yet: .product__gallery has no min-height of its
+   own (sized only by real <img> children), so without this the gallery
+   column collapses to zero height and the piece's name/price/buy box
+   just sit next to a blank gap. */
+.product__gallery-empty {
+  aspect-ratio: 4 / 5;
+  background: var(--paper-2);
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted);
+}
+
+.product__side {
+  padding-block: 24rem;
+}
+@media (min-width: 768px) {
+  .product__side { position: sticky; top: calc(var(--hh) + 24rem); align-self: start; padding-block: 40rem; }
+}
+.product__crumb { font-family: var(--font-label); font-size: 10rem;
+  text-transform: uppercase; letter-spacing: var(--track-label); color: var(--muted); }
+.product__crumb a:hover { color: var(--navy); text-decoration: underline; }
+.product__title { font-family: var(--font-text); font-style: italic; font-size: 24rem; line-height: 1.05; margin-top: 12rem; }
+.product__price { margin-top: 8rem; font-size: 12rem; text-transform: uppercase; letter-spacing: var(--track-label); font-family: var(--font-label); }
+.product__body {
+  margin-top: 20rem; font-size: 15rem; line-height: 1.5; color: var(--graphite);
+  padding-block: 20rem; border-block: 1px solid var(--rule);
+}
+
+.spec { margin-top: 20rem; display: grid; grid-template-columns: 90rem 1fr; row-gap: 8rem; }
+.spec dt { font-size: 10rem; text-transform: uppercase; letter-spacing: var(--track-label); color: var(--muted); padding-top: 2rem; }
+.spec dd { font-size: 12rem; text-transform: uppercase; letter-spacing: var(--track-label); }
+
+.sizes { margin-top: 24rem; display: flex; gap: 6rem; flex-wrap: wrap; }
+.swatch {
+  min-width: 40rem; padding: 8rem 10rem;
+  border: 1px solid var(--rule);
+  font-size: 11rem; text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted);
+  text-align: center;
+  transition: color var(--dur-fast), border-color var(--dur-fast), background var(--dur-fast);
+}
+.swatch[aria-pressed="true"] { color: var(--paper); background: var(--ink); border-color: var(--ink); }
+.swatch:hover:not([aria-pressed="true"]) { color: var(--ink); border-color: var(--ink); }
+
+.product__buy { margin-top: 24rem; display: flex; gap: 10rem; align-items: stretch; }
+.product__buy .btn { flex: 1; justify-content: center; padding: 16rem 18rem; }
+
+.product__notes { margin-top: 32rem; font-size: 11rem; color: var(--muted); font-family: var(--font-label);
+  text-transform: uppercase; letter-spacing: var(--track-label); line-height: 1.6; }
+.product__notes__item { display: block; padding-block: 3rem; }
+
+/* ═══ 21. JOURNAL — ripped diary pages ══════════════════════════════ */
+
+.journal {
+  padding-top: calc(var(--hh) + 24rem);
+  padding-bottom: 96rem;
+  padding-inline: var(--grid-margin);
+}
+.journal__intro {
+  display: grid; grid-template-columns: repeat(var(--grid-columns), 1fr);
+  column-gap: var(--grid-gutter);
+  padding-bottom: 40rem; border-bottom: 1px solid var(--rule);
+}
+.journal__intro h1 {
+  grid-column: 1 / -1;
+  font-family: var(--font-text); font-style: italic; font-weight: 400;
+  font-size: 24rem; line-height: 1.05;
+}
+@media (min-width: 768px) { .journal__intro h1 { grid-column: 1 / 8; } }
+.journal__intro p {
+  grid-column: 1 / -1;
+  font-size: 15rem; line-height: 1.5; color: var(--muted); margin-top: 16rem;
+}
+@media (min-width: 768px) { .journal__intro p { grid-column: 8 / -1; margin-top: 0; } }
+
+/* grid-column is a no-op inside .journal (plain block flow, not a
+   grid) — added so this same class is also safe to reuse inside .index
+   (a real 12-col grid, since the .index fix), which
+   mcmarden-journal-entries.liquid does. Without it the stack would
+   auto-place into a single narrow track there. */
+.journal__stack {
+  grid-column: 1 / -1;
+  display: grid; grid-template-columns: 1fr; gap: 48rem;
+  padding-top: 56rem;
+}
+@media (min-width: 768px) {
+  .journal__stack { grid-template-columns: 1fr 1fr; gap: 80rem 40rem; padding-top: 96rem; }
+}
+
+/* ── A page torn out of the diary ─────────────────────────────────────
+   Three things stack to make it read as old paper:
+
+     1. a turbulence mask that eats the edges into a ragged tear
+     2. tea-stain blooms in the paper itself
+     3. scorch along the edges, multiplied over the lot
+
+   The lift is a `drop-shadow` filter, NOT a box-shadow: the mask clips
+   box-shadow away entirely, whereas drop-shadow is computed from the
+   masked alpha, so the shadow follows the rip instead of a rectangle. */
+
+.diary {
+  position: relative;
+  color: var(--ink);
+  padding: 34rem 28rem 40rem;
+  border-radius: 0;
+
+  /* Paper, plus two faint tea stains at different corners. */
+  background:
+    radial-gradient(38% 30% at 78% 16%, rgba(122, 86, 40, .085), transparent 70%),
+    radial-gradient(32% 26% at 12% 74%, rgba(122, 86, 40, .065), transparent 72%),
+    var(--paper);
+
+  transform: rotate(-1.2deg) translateY(-3rem);
+  filter:
+    drop-shadow(0 2rem 2rem rgba(13, 13, 13, .10))
+    drop-shadow(0 14rem 20rem rgba(13, 13, 13, .14));
+  transition: transform var(--dur-slow) var(--ease-paper),
+              filter    var(--dur-slow) var(--ease-paper);
+
+  -webkit-mask-size: 100% 100%;
+          mask-size: 100% 100%;
+}
+
+/* Three tear patterns, cycled, so no two pages rip the same way. */
+.diary,
+.diary:nth-child(3n + 1) {
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='560' preserveAspectRatio='none'><defs><filter id='r' x='-3%25' y='-3%25' width='106%25' height='106%25'><feTurbulence type='fractalNoise' baseFrequency='.022 .05' numOctaves='3' seed='4'/><feDisplacementMap in='SourceGraphic' scale='9'/></filter></defs><rect x='7' y='5' width='386' height='550' fill='black' filter='url(%23r)'/></svg>");
+          mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='560' preserveAspectRatio='none'><defs><filter id='r' x='-3%25' y='-3%25' width='106%25' height='106%25'><feTurbulence type='fractalNoise' baseFrequency='.022 .05' numOctaves='3' seed='4'/><feDisplacementMap in='SourceGraphic' scale='9'/></filter></defs><rect x='7' y='5' width='386' height='550' fill='black' filter='url(%23r)'/></svg>");
+}
+.diary:nth-child(3n + 2) {
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='560' preserveAspectRatio='none'><defs><filter id='r' x='-3%25' y='-3%25' width='106%25' height='106%25'><feTurbulence type='fractalNoise' baseFrequency='.03 .042' numOctaves='3' seed='17'/><feDisplacementMap in='SourceGraphic' scale='11'/></filter></defs><rect x='7' y='5' width='386' height='550' fill='black' filter='url(%23r)'/></svg>");
+          mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='560' preserveAspectRatio='none'><defs><filter id='r' x='-3%25' y='-3%25' width='106%25' height='106%25'><feTurbulence type='fractalNoise' baseFrequency='.03 .042' numOctaves='3' seed='17'/><feDisplacementMap in='SourceGraphic' scale='11'/></filter></defs><rect x='7' y='5' width='386' height='550' fill='black' filter='url(%23r)'/></svg>");
+}
+.diary:nth-child(3n + 3) {
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='560' preserveAspectRatio='none'><defs><filter id='r' x='-3%25' y='-3%25' width='106%25' height='106%25'><feTurbulence type='fractalNoise' baseFrequency='.026 .058' numOctaves='3' seed='31'/><feDisplacementMap in='SourceGraphic' scale='8'/></filter></defs><rect x='7' y='5' width='386' height='550' fill='black' filter='url(%23r)'/></svg>");
+          mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='560' preserveAspectRatio='none'><defs><filter id='r' x='-3%25' y='-3%25' width='106%25' height='106%25'><feTurbulence type='fractalNoise' baseFrequency='.026 .058' numOctaves='3' seed='31'/><feDisplacementMap in='SourceGraphic' scale='8'/></filter></defs><rect x='7' y='5' width='386' height='550' fill='black' filter='url(%23r)'/></svg>");
+}
+
+.diary:nth-child(2n) { transform: rotate(1.4deg) translateY(-3rem); }
+.diary:nth-child(3n) { transform: rotate(-.6deg) translateY(-3rem); }
+.diary:nth-child(4n) { transform: rotate(.8deg)  translateY(-3rem); }
+
+.diary:hover {
+  transform: rotate(0) translateY(-10rem);
+  filter:
+    drop-shadow(0 3rem 3rem rgba(13, 13, 13, .12))
+    drop-shadow(0 26rem 34rem rgba(13, 13, 13, .18));
+}
+
+/* Ruled lines. */
+.diary::before {
+  content: "";
+  position: absolute; inset: 6rem;
+  background:
+    repeating-linear-gradient(
+      transparent 0, transparent 28rem,
+      rgba(13,13,13,.045) 28rem, rgba(13,13,13,.045) 29rem);
+  pointer-events: none;
+}
+
+/* ── Weathering ───────────────────────────────────────────────────────
+   Age is carried by turbulence, not by gradients. Smooth linear/radial
+   scorch reads as a brown vignette — the giveaway that it's CSS. This
+   builds patchy foxing instead: fractal noise pushed through a hard
+   alpha curve (`-1.1 .62`) so it breaks into irregular blotches rather
+   than an even dirty film, then multiplied over the paper.
+
+   TO SWAP IN A REAL TEXTURE: point --diary-stain at the file and, if it
+   has its own burnt edges, drop the --diary-edge layer to nothing.
+     .diary { --diary-stain: url("assets/paper-stain.png"); }
+   It wants to be a seamless, mostly-transparent PNG — stains and char
+   on alpha, no white ground, ~1200px on the long edge. */
+
+.diary {
+  --diary-stain:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='420' height='580'><filter id='s'><feTurbulence type='fractalNoise' baseFrequency='.011' numOctaves='4' seed='9'/><feColorMatrix values='0 0 0 0 .36  0 0 0 0 .23  0 0 0 0 .09  0 0 0 -1.1 .60'/></filter><rect width='100%25' height='100%25' filter='url(%23s)'/></svg>");
+  --diary-edge:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='420' height='580'><filter id='e'><feTurbulence type='fractalNoise' baseFrequency='.02 .04' numOctaves='3' seed='23'/><feColorMatrix values='0 0 0 0 .28  0 0 0 0 .16  0 0 0 0 .05  0 0 0 -1.4 .84'/></filter><rect width='100%25' height='100%25' filter='url(%23e)'/><rect width='100%25' height='100%25' fill='white' x='16' y='16' width='388' height='548'/></svg>");
+}
+
+.diary::after {
+  content: "";
+  position: absolute; inset: 0;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  opacity: .38;
+  background-image: var(--diary-stain);
+  background-size: cover;
+}
+
+/* A whisper of edge darkening — enough to seat the tear, far short of
+   the vignette this used to be. */
+.diary__margin::after {
+  content: "";
+  position: absolute; inset: -22rem -6rem -6rem -22rem;
+  width: auto; height: auto;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  background:
+    linear-gradient(to bottom, rgba(96, 64, 28, .13), transparent 5%),
+    linear-gradient(to top,    rgba(96, 64, 28, .11), transparent 4%);
+}
+.diary__margin {
+  position: absolute; left: 22rem; top: 6rem; bottom: 6rem;
+  width: 1px; background: rgba(160, 20, 20, .28);
+}
+
+.diary__hd { display: flex; justify-content: space-between; align-items: baseline;
+  border-bottom: 1px dashed var(--rule); padding-bottom: 10rem; margin-bottom: 16rem;
+  font-family: var(--font-label); font-size: 10rem;
+  text-transform: uppercase; letter-spacing: var(--track-label); color: var(--muted);
+}
+.diary__num { font-family: var(--font-label); font-size: 11rem; letter-spacing: var(--track-label); }
+.diary__title {
+  font-family: var(--font-text); font-style: italic; font-size: 24rem; line-height: 1.1;
+  margin-bottom: 14rem;
+}
+.diary__body { font-family: var(--font-text); font-size: 15rem; line-height: 1.55; }
+.diary__body p + p { margin-top: 12rem; text-indent: 20rem; }
+.diary__body em { font-style: italic; }
+/* ── Playlist control on a diary page ─────────────────────────────────
+   Links out to the playlist's own page on mcmarden.com. It is a link,
+   not a player: the site publishes no audio files or streaming embeds,
+   so there is nothing here that could actually play. Swap the href for
+   a Spotify/Apple embed (or drop in audio and wire an <audio> element)
+   and this becomes real playback without changing the markup around it. */
+.diary__play {
+  position: relative;
+  display: grid;
+  grid-template-columns: 26rem 1fr;
+  align-items: center;
+  gap: 2rem 11rem;
+  margin-top: 18rem;
+  padding: 11rem 12rem;
+  border: 1px solid var(--rule);
+  background: color-mix(in oklab, var(--paper-2) 60%, transparent);
+  transition: color var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out);
+}
+.diary__play__icon {
+  grid-row: 1 / 3;
+  width: 26rem; height: 26rem;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  position: relative;
+}
+/* Play triangle, drawn from a border — nudged right of centre so it
+   sits optically centred inside the ring. */
+.diary__play__icon::after {
+  content: "";
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-38%, -50%);
+  border-left: 7rem solid currentColor;
+  border-block: 4.5rem solid transparent;
+}
+.diary__play__meta {
+  font-family: var(--font-label); font-size: 9rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted);
+}
+.diary__play__name {
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  line-height: 1.2;
+}
+.diary__play__name::before { content: "("; }
+.diary__play__name::after  { content: ")"; }
+.diary__play:hover { color: var(--navy); border-color: var(--navy); }
+
+/* Self-hosted audio variant. The link version is a 2-column grid with a
+   play glyph in column 1; with a real <audio> there is no glyph to draw
+   (the browser paints its own transport), so this variant collapses to a
+   single column and lets the control span the full width — otherwise the
+   native player would be squeezed into the 1fr text column and clipped
+   its own scrub bar. Not a hover target either, so the link's hover and
+   pointer affordances are deliberately not inherited. */
+.diary__play--audio {
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  cursor: default;
+}
+.diary__play--audio .diary__play__name { margin-bottom: 8rem; }
+.diary__audio {
+  display: block;
+  width: 100%;
+  height: 34rem;
+  /* The native control is the one piece of chrome on the page the site
+     cannot restyle — it is a closed shadow tree — so it is toned down to
+     sit against the paper rather than fought with. */
+  filter: grayscale(1) contrast(.92);
+  opacity: .85;
+}
+.diary__audio:hover, .diary__audio:focus-within { opacity: 1; }
+
+.diary__foot {
+  margin-top: 20rem; padding-top: 12rem; border-top: 1px dashed var(--rule);
+  display: flex; justify-content: space-between;
+  font-family: var(--font-label); font-size: 10rem;
+  text-transform: uppercase; letter-spacing: var(--track-label); color: var(--muted);
+}
+.diary__tape {
+  position: absolute; top: -14rem; left: 40rem;
+  width: 80rem; height: 22rem;
+  background: color-mix(in oklab, var(--paper-2) 80%, var(--paper));
+  opacity: .82;
+  transform: rotate(-4deg);
+  box-shadow: 0 2rem 6rem rgba(13,13,13,.08);
+}
+.diary:nth-child(2n) .diary__tape { left: auto; right: 40rem; transform: rotate(6deg); }
+
+/* ── Polaroid ─────────────────────────────────────────────────────────
+   Floated into the text, NOT absolutely positioned over it. Previously
+   it hung off the corner at `bottom: -30rem`, which did two things
+   wrong: it sat on top of the play control and the footer, and the part
+   that overhung the card was silently eaten by the torn-paper mask
+   (a mask clips its children). Floating reserves real space, so the
+   text wraps round it and nothing is clipped. */
+.diary__polaroid {
+  float: right;
+  width: 132rem;
+  margin: 2rem 0 14rem 20rem;
+  padding: 8rem 8rem 22rem;
+  background: var(--paper);
+  box-shadow: 0 6rem 18rem rgba(13, 13, 13, .16);
+  transform: rotate(2.4deg);
+  position: relative;
+  z-index: 2;
+}
+.diary__polaroid img {
+  width: 100%; aspect-ratio: 1/1.15; object-fit: cover;
+  background: var(--paper-2);
+}
+/* Alternating pages tuck it to the other side. */
+.diary:nth-child(2n) .diary__polaroid {
+  float: left;
+  margin: 2rem 20rem 14rem 0;
+  transform: rotate(-3deg);
+}
+@media (max-width: 767px) {
+  .diary__polaroid { width: 104rem; margin-left: 14rem; }
+  .diary:nth-child(2n) .diary__polaroid { margin-right: 14rem; }
+}
+
+/* The footer must clear the float, or a short entry lets the polaroid
+   hang past it and back out through the torn edge. */
+.diary__foot { clear: both; }
+
+/* ═══ 22. ABOUT PAGE ════════════════════════════════════════════════ */
+
+.about {
+  padding-top: calc(var(--hh) + 32rem);
+  padding-inline: var(--grid-margin);
+  padding-bottom: 96rem;
+}
+.about__hero {
+  display: grid; grid-template-columns: repeat(var(--grid-columns), 1fr);
+  column-gap: var(--grid-gutter);
+  padding-block: 32rem 64rem; border-bottom: 1px solid var(--rule);
+}
+.about__meta {
+  grid-column: 1 / -1;
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted);
+  border-top: 1px solid var(--rule); padding-top: 12rem;
+}
+/* space-between across four brackets needs a wide page. On a phone it
+   crushed each one into an ~80px column and wrapped it over four lines,
+   so they flow instead. */
+@media (max-width: 767px) {
+  .about__meta {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 4rem 14rem;
+  }
+}
+.about__mission {
+  grid-column: 1 / -1; margin-top: 32rem;
+  font-family: var(--font-text); font-weight: 400;
+  font-size: 32rem; line-height: 1.06; font-style: italic;
+}
+@media (min-width: 768px) { .about__mission { grid-column: 1 / 10; font-size: 44rem; } }
+
+/* Heading style variants — mcmarden-page.liquid and
+   mcmarden-studio-hero.liquid both render this same <h1
+   class="about__mission">, so one shared modifier set covers the
+   heading-style picker on either section. All four stay inside the
+   two typefaces already loaded (EB Garamond / Bodoni Moda) — no new
+   font weights fetched for a heading style. */
+.about__mission--serif { font-style: normal; }
+
+.about__mission--display {
+  font-family: var(--font-label); font-style: normal; font-weight: 500;
+  letter-spacing: -.01em;
+}
+
+/* All-caps display type reads visibly larger than the same px size in
+   lowercase, so this variant runs a size step down from the other
+   three rather than sharing their font-size exactly. */
+.about__mission--display-upper {
+  font-family: var(--font-label); font-style: normal; font-weight: 500;
+  text-transform: uppercase; letter-spacing: .02em;
+  font-size: 26rem;
+}
+@media (min-width: 768px) { .about__mission--display-upper { font-size: 36rem; } }
+
+/* grid-column is a no-op where .about__body's parent (.about) isn't
+   itself a grid — its only use until now. Added so this same class is
+   also safe to reuse inside .index (a real 12-col grid), which
+   mcmarden-legal-section.liquid does — without it, .about__body would
+   auto-place into a single narrow track there, the same collapse bug
+   fixed elsewhere this session for .journal__stack/.playlists/.index__list. */
+.about__body {
+  grid-column: 1 / -1;
+  display: grid; grid-template-columns: repeat(var(--grid-columns), 1fr);
+  column-gap: var(--grid-gutter);
+  padding-top: 56rem;
+}
+.about__body p,
+.about__body > .rise {
+  grid-column: 1 / -1;
+  font-size: 15rem; line-height: 1.55; margin-bottom: 20rem;
+}
+@media (min-width: 768px) {
+  .about__body p,
+  .about__body > .rise { grid-column: 3 / 10; font-size: 17rem; }
+  .about__body p:first-of-type::first-letter {
+    font-family: var(--font-text); font-style: italic;
+    font-size: 4em; line-height: .8; float: left;
+    padding: 8rem 12rem 0 0; color: var(--navy);
+  }
+  /* :first-of-type above is TAG-scoped, so it already skips past any
+     .about__quote (a <blockquote>) sitting before the first real <p> —
+     but block-rendered pages (mcmarden-studio-hero.liquid) put that
+     first paragraph a level deeper, inside its own .rise wrapper, where
+     it IS its parent's only <p> and would ALSO match :first-of-type —
+     giving every wrapped paragraph its own drop cap instead of just the
+     first. ::first-letter works directly on a block container, so
+     applying it to the wrapper itself (scoped to :first-of-type among
+     DIV siblings, which skips the .about__quote <blockquote> the same
+     way) reaches only the actual first paragraph, however deep its own
+     markup nests. */
+  .about__body > div.rise:first-of-type::first-letter {
+    font-family: var(--font-text); font-style: italic;
+    font-size: 4em; line-height: .8; float: left;
+    padding: 8rem 12rem 0 0; color: var(--navy);
+  }
+}
+/* The drop cap is a one-time flourish for a page's opening line — it
+   was never meant to repeat once per subsection. A legal page like
+   Privacy reuses .about__body under every numbered heading (same grid,
+   same type scale), so this modifier opts those back out. */
+.about__body--plain p:first-of-type::first-letter { all: unset; }
+
+/* Lives inside .about__body, which is a 12-column grid — without an
+   explicit column it collapsed into a single 1fr track. */
+.about__quote {
+  grid-column: 1 / -1;
+  margin: 40rem 0 48rem;
+  padding-block: 36rem; border-block: 1px solid var(--rule);
+  font-family: var(--font-text); font-style: italic;
+  font-size: 21rem; line-height: 1.25; text-align: center;
+  color: var(--ink);
+  text-wrap: balance;
+}
+@media (min-width: 768px) {
+  .about__quote { grid-column: 2 / 12; font-size: 24rem; }
+}
+.about__quote::before { content: "❝ "; color: var(--navy); }
+.about__quote::after  { content: " ❞"; color: var(--navy); }
+
+/* Retrospective index — each row expands into a small photo strip.
+   The row is a real <button>, so click, Enter/Space and focus all work
+   without extra JS beyond toggling aria-expanded.
+
+   Each entry gets its OWN row-grid rather than one grid shared across
+   all 18 rows. That costs nothing visually — every row-grid uses the
+   same fixed column template, so they still line up pixel for pixel —
+   but it matters for the animated panel: a grid item sized by an
+   `auto` row track does not reliably re-measure while its own
+   max-height is transitioning (confirmed in-browser: the track froze
+   at the pre-transition height and the panel never opened). Keeping
+   .index__panel OUT of any grid — a plain block sibling of the
+   row-grid, both inside .index__entry — makes the max-height animation
+   the ordinary, well-supported block-level case. */
+/* .index was missing its own grid/inset system entirely — the mockup's
+   own stylesheet never gave it one, unlike .section (paired with a
+   nested .wrapper everywhere it's used) or .about (self-contained). Every
+   .index child below assumes a 12-col grid ancestor with the standard
+   side margin; without this the whole section rendered edge-to-edge
+   with zero horizontal inset and children collapsed to a single
+   auto-placed grid track. */
+.index {
+  padding-top: 56rem;
+  padding-inline: var(--grid-margin);
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  column-gap: var(--grid-gutter);
+}
+.index__title { font-family: var(--font-label); font-size: 11rem; text-transform: uppercase;
+  letter-spacing: var(--track-label); color: var(--muted); }
+.index__list {
+  grid-column: 1 / -1;
+  margin-top: 20rem;
+}
+.index__row-grid {
+  display: grid; grid-template-columns: 40rem 60rem 1fr 88rem 16rem;
+  column-gap: 12rem;
+}
+@media (min-width: 768px) { .index__row-grid { grid-template-columns: 60rem 80rem 1fr 160rem 20rem; } }
+
+/* A <button> with display: contents contributes no box of its own —
+   its children become the grid items directly, exactly as the old
+   <div class="index__row"> did — but it is still a real, focusable,
+   keyboard-operable control. Reset the UA button styling first, then
+   restore contents, since a later declaration for the same property
+   in one rule wins over an earlier one — including one folded into
+   the `all` shorthand. */
+.index__row {
+  all: unset;
+  display: contents;
+  cursor: pointer;
+}
+.index__row > * {
+  padding-block: 10rem;
+  border-top: 1px solid var(--rule);
+  cursor: pointer;
+}
+/* :hover and :focus-visible still track a boxless element correctly —
+   both are about DOM state, not paint — so the row's own children can
+   react to hovering or focusing the row. */
+@media (hover: hover) {
+  .index__row:hover > * { color: var(--navy); }
+}
+.index__row:focus-visible > * { color: var(--navy); outline: none; }
+.index__row:focus-visible .index__num { outline: 1px solid var(--navy); outline-offset: 2rem; }
+
+.index__num { font-family: var(--font-label); font-size: 10rem; color: var(--muted); text-transform: uppercase; letter-spacing: var(--track-label); }
+.index__year { font-family: var(--font-label); font-size: 10rem; color: var(--muted); text-transform: uppercase; letter-spacing: var(--track-label); }
+.index__name { font-family: var(--font-text); font-size: 15rem; }
+.index__ref { font-family: var(--font-label); font-size: 10rem; text-transform: uppercase; letter-spacing: var(--track-label); text-align: right; color: var(--muted); }
+
+.index__mark {
+  font-family: var(--font-label); font-size: 12rem; text-align: right;
+  color: var(--muted);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.index__mark::before { content: "+"; }
+.index__row[aria-expanded="true"] .index__mark { color: var(--navy); }
+.index__row[aria-expanded="true"] .index__mark::before { content: "\2212"; } /* minus sign, not a hyphen — reads correctly at this size */
+/* Link rows (mcmarden-collection.liquid's collection selector) navigate
+   rather than expand, so the "+" toggle glyph is wrong — an arrow signals
+   "go to" instead. .index__row here is a real <a>, never gets
+   aria-expanded="true", so this never fights the rule above. */
+.index__mark--link::before { content: "\2192"; } /* → */
+@media (hover: hover) {
+  .index__row:hover .index__mark--link { color: var(--navy); }
+}
+
+/* A plain block, sibling of .index__row-grid — not a grid item itself,
+   for the reason above. Opens via a class JS toggles directly on this
+   element, not via a selector chained off the row three hops away
+   (:has(.index__row[aria-expanded]) + .index__panel matched correctly
+   under .matches() but never actually repainted in-browser — a real
+   style-invalidation gap for :has() effects that land on a sibling of
+   the :has() subject rather than the subject itself). A class set on
+   the element being styled has no such dependency chain to invalidate.
+   Height is capped generously rather than measured, which avoids a JS
+   resize observer for something four thumbnails never get close to. */
+.index__panel {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height var(--dur-slow) var(--ease-out),
+              opacity var(--dur-base) var(--ease-out);
+}
+.index__panel.is-open {
+  max-height: 640rem;
+  opacity: 1;
+}
+.index__gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10rem;
+  padding: 14rem 0 22rem;
+}
+@media (min-width: 640px) { .index__gallery { grid-template-columns: repeat(4, 1fr); } }
+.index__gallery img {
+  width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
+  background: var(--paper-2);
+}
+
+/* ── Playlists (et cetera) ────────────────────────────────────────────
+   Links out to each playlist's own page on mcmarden.com. As with the
+   journal controls these are links, not players — the source site
+   publishes no audio or streaming embeds to wire up. */
+.playlists {
+  grid-column: 1 / -1;
+  margin-top: 26rem;
+  display: grid; grid-template-columns: 1fr; gap: 0;
+}
+@media (min-width: 768px) { .playlists { grid-template-columns: 1fr 1fr; column-gap: var(--grid-gutter); } }
+
+.playlist {
+  display: flex; align-items: center; gap: 12rem;
+  padding-block: 13rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.playlist__icon {
+  flex: 0 0 auto;
+  width: 19rem; height: 19rem;
+  border: 1px solid currentColor; border-radius: 50%;
+  position: relative;
+  color: var(--muted);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.playlist__icon::after {
+  content: "";
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-36%, -50%);
+  border-left: 5rem solid currentColor;
+  border-block: 3.2rem solid transparent;
+}
+.playlist__name::before { content: "("; }
+.playlist__name::after  { content: ")"; }
+.playlist:hover { color: var(--navy); }
+.playlist:hover .playlist__icon { color: var(--navy); }
+
+@media (hover: hover) {
+  .playlists:has(.playlist:hover, .playlist__toggle:hover) li:not(:hover) .playlist,
+  .playlists:has(.playlist:hover, .playlist__toggle:hover) li:not(:hover) .playlist__toggle {
+    opacity: .4;
+  }
+  .playlist,
+  .playlist__toggle { transition: color var(--dur-fast) var(--ease-out), opacity var(--dur-fast) var(--ease-out); }
+}
+
+/* ── Playlist player — expandable row ─────────────────────────────────
+   Same row as .playlist (icon, parenthesised name), but a <button>
+   that opens a track list in place instead of linking out. Reset first
+   since buttons carry none of .playlist's inherited type/color the way
+   an <a> does — everything below just restates .playlist's own rules
+   plus the expand indicator. */
+.playlist__toggle {
+  display: flex; align-items: center; gap: 12rem;
+  width: 100%;
+  padding-block: 13rem;
+  border: 0; border-top: 1px solid var(--rule); border-radius: 0;
+  background: none;
+  font-family: var(--font-label); font-size: 11rem;
+  text-align: left; text-transform: uppercase; letter-spacing: var(--track-label);
+  color: inherit;
+  cursor: pointer;
+}
+.playlist__toggle:hover,
+.playlist__toggle:focus-visible { color: var(--navy); }
+.playlist__toggle:focus-visible { outline: 1px solid var(--navy); outline-offset: 2rem; }
+.playlist__toggle:hover .playlist__icon,
+.playlist__toggle:focus-visible .playlist__icon { color: var(--navy); }
+
+.playlist__mark {
+  margin-left: auto; flex: 0 0 auto;
+  font-family: var(--font-label); font-size: 12rem;
+  color: var(--muted);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.playlist__mark::before { content: "+"; }
+.playlist__toggle[aria-expanded="true"] .playlist__mark { color: var(--navy); }
+.playlist__toggle[aria-expanded="true"] .playlist__mark::before { content: "\2212"; } /* minus sign, not a hyphen */
+
+/* Same technique as .index__panel: height capped generously rather
+   than measured, so no resize observer is needed for something a
+   twenty-track list never gets close to. */
+.playlist__panel {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height var(--dur-slow) var(--ease-out),
+              opacity var(--dur-base) var(--ease-out);
+}
+.playlist__panel.is-open {
+  max-height: 1600rem;
+  opacity: 1;
+}
+
+.playlist-panel__head {
+  /* 31rem ≈ .playlist__icon's width (19rem) + its gap (12rem), so the
+     panel's own copy lines up under the playlist name above it rather
+     than under the icon. */
+  padding: 16rem 0 14rem 31rem;
+}
+.playlist-panel__subtitle {
+  display: block;
+  font-family: var(--font-label); font-size: 10rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted);
+}
+.playlist-panel__tagline {
+  display: block; margin-top: 4rem;
+  font-family: var(--font-text); font-style: italic;
+  font-size: 15rem; color: var(--ink);
+}
+
+.playlist-tracks { padding-left: 31rem; padding-bottom: 10rem; }
+
+.playlist-track {
+  display: flex; align-items: center; gap: 12rem;
+  padding-block: 10rem;
+  border-top: 1px solid var(--rule);
+}
+.playlist-track__play {
+  flex: 0 0 auto;
+  display: flex; align-items: center; justify-content: center;
+  width: 22rem; height: 22rem;
+  border: 1px solid var(--rule); border-radius: 50%;
+  background: none; padding: 0;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+.playlist-track__play-icon {
+  display: block;
+  border-left: 5rem solid currentColor;
+  border-block: 3.2rem solid transparent;
+  margin-left: 1.5rem; /* optical centring — a triangle's visual weight sits left of its box */
+}
+/* Pause: two bars, drawn from one element via box-shadow rather than a
+   second pseudo-element — one is a real background, the other a
+   shadow, no width doubling to account for. */
+.playlist-track.is-playing .playlist-track__play-icon {
+  width: 3rem; height: 9rem; margin-left: 0;
+  border: 0;
+  background: currentColor;
+  box-shadow: 5rem 0 0 currentColor;
+}
+.playlist-track:hover .playlist-track__play,
+.playlist-track.is-playing .playlist-track__play {
+  color: var(--navy); border-color: var(--navy);
+}
+.playlist-track__meta {
+  flex: 1 1 auto; min-width: 0;
+  display: flex; flex-direction: column; gap: 2rem;
+}
+.playlist-track__title {
+  font-family: var(--font-text); font-size: 14rem;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.playlist-track.is-playing .playlist-track__title { color: var(--navy); }
+.playlist-track__artist {
+  font-family: var(--font-label); font-size: 10rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted);
+}
+.playlist-track__duration {
+  flex: 0 0 auto;
+  font-family: var(--font-label); font-size: 10rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.press {
+  margin-top: 56rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24rem;
+  padding-top: 32rem; border-top: 1px solid var(--rule);
+}
+@media (min-width: 768px) { .press { grid-template-columns: repeat(4, 1fr); } }
+.press__item {
+  padding: 20rem 16rem;
+  border: 1px solid var(--rule);
+  font-family: var(--font-label); font-size: 12rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+}
+.press__item span { display: block; color: var(--muted); font-size: 10rem; margin-top: 4rem; }
+
+/* ═══ 22a. COLLECTIONS PAGE ═══════════════════════════════════════════
+   Four collections, each with a cascade. The page was originally shipped
+   with none of these rules, so every element fell back to browser
+   defaults — a 2em <h1>, no header clearance, no grid. */
+
+.collections-page {
+  /* Clears the fixed header; without this the first heading sits under it. */
+  padding-top: calc(var(--hh) + 26rem);
+  padding-inline: var(--grid-margin);
+  padding-bottom: 80rem;
+}
+
+.collections-page__intro {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  column-gap: var(--grid-gutter);
+  padding-bottom: 30rem;
+  border-bottom: 1px solid var(--rule);
+}
+/* Headings need explicit sizing — the reset only zeroes margins, so an
+   unstyled h1/h2 renders at the browser's 2em and blows the scale apart. */
+.collections-page__intro h1 {
+  grid-column: 1 / -1;
+  font-family: var(--font-text); font-weight: 400; font-style: italic;
+  font-size: 24rem; line-height: 1.05;
+}
+@media (min-width: 768px) { .collections-page__intro h1 { grid-column: 1 / 7; } }
+.collections-page__intro p {
+  grid-column: 1 / -1;
+  margin-top: 14rem;
+  font-size: 15rem; line-height: 1.5; color: var(--muted);
+  max-width: 520rem;
+}
+@media (min-width: 768px) {
+  .collections-page__intro p { grid-column: 8 / -1; margin-top: 0; }
+}
+/* mcmarden-collection-list.liquid (the native /collections page) wraps
+   its intro body in <div class="rise"> — required for the scroll-reveal
+   this theme uses everywhere else — and richtext auto-emits its own <p>
+   inside that div. The rule above was written for
+   mcmarden-collections-intro.liquid's plain <p>, a direct grid child;
+   here the div is the direct child and the p one level further in, and
+   grid-column only ever does anything on a direct child of the grid
+   container. Without this the div fell back to a single auto-placed
+   track — the ~130px column the copy was wrapping into. */
+.collections-page__intro > .rise {
+  grid-column: 1 / -1;
+  margin-top: 14rem;
+  font-size: 15rem; line-height: 1.5; color: var(--muted);
+  max-width: 520rem;
+}
+@media (min-width: 768px) {
+  .collections-page__intro > .rise { grid-column: 8 / -1; margin-top: 0; }
+}
+.collections-page__intro > .rise p { margin: 0; }
+
+/* ═══ COLLECTION INDEX GRID ═════════════════════════════════════════
+   One card per body of work — cover, name, count, note, CTA. Used by
+   both sections/mcmarden-collection-list.liquid (the native /collections
+   page, one card per real Shopify collection) and
+   sections/mcmarden-collection-grid.liquid (the "Collections" Page's
+   hand-curated three cards) — same markup, same card, two different
+   data sources. */
+
+.colgrid {
+  margin-top: 46rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+}
+@media (min-width: 768px) {
+  .colgrid { grid-template-columns: repeat(3, 1fr); margin-top: 64rem; }
+}
+
+.colcard {
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+}
+
+.colcard__media {
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--paper-2);
+}
+.colcard__media img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform var(--dur-vslow) var(--ease-out);
+}
+@media (hover: hover) {
+  .colcard:hover .colcard__media img { transform: scale(1.04); }
+}
+/* A sold-out / not-yet-catalogued collection shows its mark rather than
+   a product photo, so it's let breathe on its own ground instead of
+   cropping to fill the frame. */
+.colcard--pending .colcard__media {
+  display: flex; align-items: center; justify-content: center;
+  padding: 40rem;
+}
+.colcard--pending .colcard__media img {
+  width: 100%; height: 100%; object-fit: contain; opacity: .6;
+}
+
+.colcard__body {
+  padding: 22rem;
+  flex: 1 1 auto;
+  display: flex; flex-direction: column; gap: 10rem;
+}
+.colcard__head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 12rem;
+  font-family: var(--font-label); font-size: 10rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted);
+}
+.colcard__name {
+  font-family: var(--font-text); font-weight: 400; font-style: italic;
+  font-size: 21rem; line-height: 1.1;
+}
+.colcard__name a { color: inherit; }
+.colcard__name a:hover { color: var(--navy); }
+.colcard__note {
+  font-size: 13rem; line-height: 1.5; color: var(--muted);
+  flex: 1 1 auto;
+}
+.colcard__cta { margin-top: 6rem; align-self: flex-start; }
+
+.collection { padding-block: 46rem; border-bottom: 1px solid var(--rule); }
+.collection:last-child { border-bottom: 0; }
+@media (min-width: 768px) { .collection { padding-block: 64rem; } }
+/* mcmarden-collection-band.liquid and mcmarden-archive-grid.liquid each
+   render one .collection as the ONLY child of their own Shopify section
+   wrapper — so :last-child above now matches every instance, not just
+   the true final one, silently dropping the divider between all of
+   them instead of just after the last. Restored unconditionally with a
+   selector specific enough to always win regardless of source order:
+   ending the page on a plain hairline (no true "last" to special-case)
+   reads fine, so nothing here needs to know which instance is final. */
+.collection.collection.collection { border-bottom: 1px solid var(--rule); }
+/* (Three repeated classes, not a typo — each repetition counts toward
+   specificity same as a distinct class would, giving (0,0,3,0) against
+   .collection:last-child's (0,0,2,0) above. Guaranteed to win regardless
+   of source order, without !important.) */
+
+.collection__head {
+  display: grid;
+  grid-template-columns: 42rem 1fr;
+  align-items: baseline;
+  column-gap: 14rem; row-gap: 4rem;
+}
+@media (min-width: 768px) {
+  .collection__head { grid-template-columns: 60rem 1fr auto; }
+}
+.collection__num,
+.collection__meta {
+  font-family: var(--font-label); font-size: 10rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted);
+}
+@media (min-width: 768px) { .collection__meta { text-align: right; } }
+.collection__name {
+  font-family: var(--font-text); font-weight: 400; font-style: italic;
+  font-size: 24rem; line-height: 1.05;
+}
+.collection__meta { grid-column: 2; }
+@media (min-width: 768px) { .collection__meta { grid-column: 3; } }
+
+.collection__note {
+  margin-top: 14rem;
+  font-size: 15rem; line-height: 1.5;
+  max-width: 560rem;
+}
+@media (min-width: 768px) {
+  .collection__note { margin-left: 74rem; font-size: 16rem; }
+}
+
+.collection__gallery { margin-top: 26rem; }
+.collection__cta { margin-top: 22rem; }
+@media (min-width: 768px) { .collection__cta { margin-left: 74rem; } }
+
+/* ═══ 22a-ii. RETROSPECTIVE ARCHIVE GRID ══════════════════════════════
+   Past collections: caption ABOVE the plate, flush left, the way a
+   catalogue lists a work before showing it. Photography pulled from the
+   retrospective pages on mcmarden.com. */
+
+.archive {
+  margin-top: 30rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 34rem 18rem;
+}
+@media (min-width: 640px)  { .archive { grid-template-columns: repeat(3, 1fr); gap: 40rem 22rem; } }
+@media (min-width: 1024px) { .archive { grid-template-columns: repeat(4, 1fr); } }
+
+.archive__item { margin: 0; }
+
+.archive__cap {
+  display: flex; align-items: baseline; gap: 8rem;
+  text-align: left;
+  padding-bottom: 8rem;
+  margin-bottom: 10rem;
+  border-bottom: 1px solid var(--rule);
+}
+.archive__year {
+  font-family: var(--font-label); font-size: 10rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted);
+  font-variant-numeric: lining-nums tabular-nums;
+  flex: 0 0 auto;
+}
+.archive__name {
+  font-family: var(--font-text); font-style: italic;
+  font-size: 15rem; line-height: 1.15;
+}
+@media (min-width: 768px) { .archive__name { font-size: 16rem; } }
+
+.archive__media {
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--paper-2);
+}
+.archive__media img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+@media (hover: hover) {
+  .archive:has(.archive__item:hover) .archive__item:not(:hover) { opacity: .42; }
+  .archive__item { transition: opacity var(--dur-fast) var(--ease-out); }
+  .archive__media:hover img { transform: scale(1.04); }
+  .archive__item:hover .archive__name { color: var(--navy); }
+  .archive__name { transition: color var(--dur-fast) var(--ease-out); }
+}
+
+/* ═══ 22b. PRESS FEATURES + SOCIALS ═══════════════════════════════ */
+
+.features { grid-column: 1 / -1; padding-top: 26rem; }
+
+.feature-row { border-top: 1px solid var(--rule); }
+.feature-row:last-child { border-bottom: 1px solid var(--rule); }
+
+.feature-row__link {
+  display: grid;
+  grid-template-columns: 54rem 1fr;
+  gap: 4rem 14rem;
+  align-items: baseline;
+  padding-block: 18rem;
+  transition: color var(--dur-fast) var(--ease-out),
+              opacity var(--dur-fast) var(--ease-out);
+}
+@media (min-width: 768px) {
+  .feature-row__link { grid-template-columns: 70rem 150rem 1fr 60rem; padding-block: 20rem; }
+}
+
+.feature-row__year,
+.feature-row__pub,
+.feature-row__go {
+  font-family: var(--font-label); font-size: 10rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted);
+}
+.feature-row__pub { color: var(--ink); }
+.feature-row__title {
+  grid-column: 2 / -1;
+  font-family: var(--font-text); font-size: 15rem; line-height: 1.35;
+}
+@media (min-width: 768px) {
+  .feature-row__title { grid-column: 3; font-size: 17rem; }
+  .feature-row__go { text-align: right; }
+}
+.feature-row__go::before { content: "["; }
+.feature-row__go::after  { content: " ↗]"; white-space: pre; }
+
+@media (hover: hover) {
+  .features:has(.feature-row__link:hover) .feature-row:not(:hover) { opacity: .38; }
+  .feature-row__link:hover { color: var(--navy); }
+  .feature-row__link:hover .feature-row__go,
+  .feature-row__link:hover .feature-row__pub { color: var(--navy); }
+  .feature-row { transition: opacity var(--dur-fast) var(--ease-out); }
+}
+
+.socials {
+  grid-column: 1 / -1;
+  margin-top: 30rem;
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 10rem 22rem;
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+}
+.socials__label { color: var(--muted); }
+.socials__link { position: relative; padding-bottom: 2rem; }
+.socials__link::after {
+  content: ""; position: absolute; left: 0; right: 100%; bottom: 0;
+  height: 1px; background: var(--navy);
+  transition: right var(--dur-base) var(--ease-out);
+}
+.socials__link:hover { color: var(--navy); }
+.socials__link:hover::after { right: 0; }
+
+/* ═══ 23. NEWSLETTER ROW ══════════════════════════════════════════ */
+
+/* Contact: an email field and the socials. Nothing else — no promised
+   send cadence, no editorial line. */
+.signup {
+  padding: 24rem var(--grid-margin) 26rem;
+  border-top: 1px solid var(--rule);
+  background: var(--paper-2);
+}
+.signup__grid {
+  display: grid; grid-template-columns: 1fr;
+  gap: 14rem; align-items: baseline;
+}
+@media (min-width: 768px) {
+  /* One line: the pitch, the field, the links. The title takes only the
+     width it needs so the field gets the room, and the whole row is
+     centred on the field's rule rather than on three different
+     baselines — which is what had the socials floating out of line. */
+  .signup__grid {
+    grid-template-columns: max-content minmax(280rem, 1fr) max-content;
+    gap: 40rem;
+    align-items: center;
+  }
+}
+.signup__title {
+  font-family: var(--font-text); font-style: italic;
+  font-size: 20rem; line-height: 1.05;
+  white-space: nowrap;
+}
+@media (min-width: 1100px) { .signup__title { font-size: 24rem; } }
+@media (max-width: 767px) { .signup__title { white-space: normal; } }
+
+.signup__form {
+  display: flex; gap: 8rem; align-items: baseline;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 8rem;
+}
+.signup__form input {
+  flex: 1; min-width: 0;
+  font-family: var(--font-label); font-size: 13rem; padding-block: 4rem;
+}
+.signup__form input::placeholder {
+  color: var(--muted); text-transform: uppercase;
+  letter-spacing: var(--track-label); font-size: 11rem;
+}
+.signup__form input[aria-invalid="true"] { color: var(--navy); }
+.signup__form button {
+  flex: 0 0 auto;
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+}
+.signup__form button::before { content: "["; padding-right: 3rem; }
+.signup__form button::after  { content: "]"; padding-left: 3rem; }
+.signup__form button:hover { color: var(--navy); }
+
+/* The field and its status share one cell, so the message can appear
+   under the rule without the negative-margin nudge that used to knock
+   the row out of alignment. */
+.signup__field { position: relative; }
+.signup__status {
+  position: absolute; top: 100%; left: 0; margin-top: 6rem;
+  font-family: var(--font-label); font-size: 10rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--navy);
+}
+@media (max-width: 767px) {
+  /* No room to overhang on a phone — keep it in flow. */
+  .signup__status { position: static; margin-top: 8rem; min-height: 1.3em; }
+}
+
+.signup__socials {
+  display: flex; flex-wrap: wrap; gap: 8rem 20rem;
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+}
+@media (min-width: 768px) { .signup__socials { justify-content: flex-end; } }
+.signup__socials a { position: relative; padding-bottom: 2rem; }
+.signup__socials a::after {
+  content: ""; position: absolute; left: 0; right: 100%; bottom: 0;
+  height: 1px; background: var(--navy);
+  transition: right var(--dur-base) var(--ease-out);
+}
+.signup__socials a:hover { color: var(--navy); }
+.signup__socials a:hover::after { right: 0; }
+
+/* ═══ 24. THE CASCADE — interactive plate gallery ═════════════════════
+   Recreates the unveil.fr overview gallery: a diagonal fan of translucent
+   image plates receding into depth, travelled by scroll or drag.
+
+   Built in CSS 3D with real <img> in the DOM — NOT WebGL. The reference
+   renders to a single WebGL2 canvas, which puts every image outside the
+   DOM (invisible to crawlers, screen readers and text selection) at
+   ~600KB. This is a shop with a conversion path, so the imagery has to
+   stay real. Cost here is ~2KB and one transform per plate.
+
+   Geometry: each plate sits at index i. `--t` is the travel head (the
+   plate currently at the front). offset = i - t drives all three axes,
+   so raising --t walks the whole cascade toward the viewer.            */
+
+.cascade {
+  /* display/gap reset because .cascade is applied over containers that
+     may already be flex (e.g. .product__gallery's no-JS stack). */
+  display: block;
+  gap: 0;
+  position: relative;
+  height: 74svh;
+  min-height: 420rem;
+  overflow: hidden;
+  background: var(--paper-2);
+  touch-action: pan-y;
+  cursor: grab;
+}
+.cascade:active { cursor: grabbing; }
+.cascade__stage { position: absolute; inset: 0; }
+
+/* Depth is faked with scale rather than translateZ + perspective.
+   A real 3D stage (preserve-3d + perspective) rasterises each plate on
+   its own compositing path here and the un-blurred head plate can paint
+   as an empty rectangle on first load. 2D offset + scale is visually
+   identical for flat plates, and paints reliably. */
+.cascade[data-moving="true"] .cascade__plate { will-change: transform, opacity; }
+
+/* Position, scale and opacity are written as inline values by paint() —
+   one transform string per plate per frame. Keeping them in JS (rather
+   than calc() over custom properties) means the travel distance can be
+   clamped and tied to the measured plate box. */
+.cascade__plate {
+  position: absolute;
+  top: 50%; left: 50%;
+  /* Sized from the container HEIGHT so the cascade keeps its proportions
+     in both a tall column (product page) and a wide band (quick view).
+     Centring is done by the leading translate(-50%,-50%) in paint(). */
+  height: 76%;
+  width: auto;
+  aspect-ratio: 4 / 5;
+  transition: transform var(--dur-base) var(--ease-out),
+              opacity   var(--dur-base) var(--ease-out),
+              filter    var(--dur-base) var(--ease-out);
+  border: 1px solid rgba(242, 236, 223, .22);
+  background: var(--paper-2);
+  box-shadow: 0 24rem 60rem rgba(13, 13, 13, .22);
+}
+.cascade__plate img {
+  width: 100%; height: 100%; object-fit: cover;
+  /* Translucency is what makes them read as glass slides rather than
+     stacked cards — the plate behind shows through the plate in front. */
+  opacity: .88;
+}
+/* Any plate travels the cascade on click; the plate already at the head
+   opens fullscreen instead, so it gets its own cursor to say so. */
+.cascade__plate { cursor: pointer; }
+.cascade__plate[data-head="true"] { cursor: zoom-in; }
+/* Plates behind the head go slightly milky and soft. */
+.cascade__plate[data-behind="true"] { filter: blur(2px) saturate(.86); }
+.cascade__plate[data-behind="true"] img { opacity: .62; }
+/* The plate at the head is fully solid and sharp. */
+.cascade__plate[data-head="true"] img { opacity: 1; }
+.cascade__plate[data-past="true"] { pointer-events: none; }
+
+.cascade__cap {
+  position: absolute; left: 0; bottom: 0;
+  padding: 8rem 10rem;
+  background: var(--ink); color: var(--paper);
+  font-family: var(--font-label); font-size: 10rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+.cascade__plate[data-head="true"] .cascade__cap { opacity: 1; }
+
+/* ── Controls / readout ─────────────────────────────────────────── */
+
+.cascade__hud {
+  position: absolute; z-index: 8;
+  right: 14rem; bottom: 14rem;
+  display: flex; align-items: center; gap: 10rem;
+  font-family: var(--font-label); font-size: 10rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--ink);
+  background: color-mix(in oklab, var(--paper) 88%, transparent);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--rule);
+  padding: 7rem 10rem;
+}
+.cascade__hud button { padding: 2rem 5rem; line-height: 1; }
+.cascade__hud button:hover { color: var(--navy); }
+.cascade__hud button[disabled] { opacity: .3; pointer-events: none; }
+.cascade__count { min-width: 46rem; text-align: center; }
+
+.cascade__rail {
+  position: absolute; z-index: 8;
+  left: 14rem; right: 120rem; bottom: 20rem;
+  height: 1px; background: var(--rule);
+}
+.cascade__rail span {
+  position: absolute; inset: 0 auto 0 0;
+  background: var(--navy);
+  transition: width var(--dur-base) var(--ease-out);
+}
+.cascade__hint {
+  position: absolute; z-index: 8; left: 14rem; top: 14rem;
+  font-family: var(--font-label); font-size: 10rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted);
+  transition: opacity var(--dur-base);
+}
+.cascade[data-touched="true"] .cascade__hint { opacity: 0; }
+
+@media (max-width: 767px) {
+  .cascade { height: 58svh; min-height: 340rem; }
+  .cascade__plate { height: 68%; }
+  .cascade__rail { right: 110rem; }
+}
+
+/* ── Lightbox — fullscreen photo viewer ────────────────────────────
+   Opened from the cascade's head plate. Near-black regardless of page
+   theme — the photograph is the content here, not the parchment system. */
+.lightbox {
+  /* Above every cascade plate: the head plate's inline z-index can reach
+     100 (paint()'s `100 - |offset|*10`), so anything lower gets sat on. */
+  position: fixed; inset: 0; z-index: 150;
+  background: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+.lightbox[data-open="true"] { opacity: 1; pointer-events: all; }
+.lightbox__img {
+  max-width: min(90vw, 1400rem);
+  max-height: 82vh;
+  object-fit: contain;
+}
+.lightbox__close {
+  position: absolute; top: 20rem; right: var(--grid-margin); z-index: 1;
+  color: var(--paper);
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  padding: 10rem;
+}
+.lightbox__close::before { content: "[×] Close"; }
+.lightbox__close:hover { color: var(--navy-2); }
+.lightbox__nav {
+  position: absolute; top: 50%; z-index: 1;
+  transform: translateY(-50%);
+  color: var(--paper);
+  font-family: var(--font-text); font-size: 22rem;
+  padding: 14rem 18rem;
+}
+.lightbox__nav--prev { left: var(--grid-margin); }
+.lightbox__nav--next { right: var(--grid-margin); }
+.lightbox__nav:hover { color: var(--navy-2); }
+.lightbox__cap {
+  position: absolute; bottom: 22rem; left: 0; right: 0;
+  text-align: center;
+  color: var(--paper);
+  font-family: var(--font-label); font-size: 10rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  opacity: .7;
+}
+@media (max-width: 767px) {
+  .lightbox__close { top: 12rem; right: 12rem; }
+  .lightbox__nav { padding: 10rem 12rem; font-size: 18rem; }
+  .lightbox__nav--prev { left: 4rem; }
+  .lightbox__nav--next { right: 4rem; }
+}
+
+/* Made-to-order note — the same three facts wherever a piece is being
+   considered for purchase (currently just the product page). */
+.product__make {
+  margin-top: 20rem;
+  padding: 14rem 16rem;
+  border: 1px solid var(--rule);
+  border-left: 2px solid var(--navy);
+  background: var(--paper-2);
+}
+.product__make__tag {
+  display: block;
+  font-family: var(--font-label); font-size: 10rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--navy);
+  margin-bottom: 6rem;
+}
+.product__make p {
+  font-size: 14rem; line-height: 1.5; color: var(--graphite);
+}
+.product__make strong { color: var(--ink); font-weight: 400; }
+
+/* ═══ 24b. PRODUCT GRID — the shop page ════════════════════════════════
+   One plate, name and price per piece — the standard fashion PLP card.
+   Clicking anything in the tile goes straight to the product page for
+   colour/size selection and add-to-bag. */
+
+.pgrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28rem 16rem;
+}
+@media (min-width: 768px) {
+  .pgrid { grid-template-columns: repeat(3, 1fr); gap: 48rem 24rem; }
+}
+@media (min-width: 1200px) {
+  .pgrid { grid-template-columns: repeat(4, 1fr); }
+}
+.ptile[hidden] { display: none !important; }
+
+/* The plate is the link, so the whole image is the hit target and it
+   is keyboard-reachable without a separate control. */
+.ptile__media {
+  position: relative; display: block;
+  width: 100%; aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--paper-2);
+  border: 0; padding: 0; margin: 0;
+  cursor: pointer;
+}
+.ptile__img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  transition: opacity var(--dur-base) var(--ease-out),
+              transform var(--dur-vslow) var(--ease-out);
+}
+/* Second frame sits on top at zero opacity and fades in — no layout
+   change, no flash, and it degrades to "no swap" when a piece only has
+   the one photograph. */
+.ptile__img--alt { opacity: 0; }
+
+@media (hover: hover) {
+  .ptile__media:hover .ptile__img--alt,
+  .ptile__media:focus-visible .ptile__img--alt { opacity: 1; }
+  .ptile__media:hover .ptile__img { transform: scale(1.03); }
+}
+.ptile__media:focus-visible { outline: 1px solid var(--navy); outline-offset: 3rem; }
+.ptile__media:focus-visible .ptile__img--alt { opacity: 1; }
+
+.ptile__view {
+  position: absolute; left: 10rem; bottom: 10rem; z-index: 2;
+  font-family: var(--font-label); font-size: 10rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--ink);
+  background: color-mix(in oklab, var(--paper) 88%, transparent);
+  border: 1px solid var(--rule);
+  padding: 5rem 8rem;
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+.ptile__view::before { content: "["; padding-right: 3rem; }
+.ptile__view::after  { content: "]"; padding-left: 3rem; }
+@media (hover: hover) {
+  .ptile__media:hover .ptile__view { opacity: 1; }
+}
+/* No hover on touch — show it permanently so the tile still reads as
+   something you can open. */
+@media (hover: none) { .ptile__view { opacity: 1; } }
+.ptile__media:focus-visible .ptile__view { opacity: 1; }
+
+.ptile { display: flex; flex-direction: column; }
+.ptile__meta { padding-top: 12rem; }
+.ptile__name {
+  font-family: var(--font-text); font-weight: 400; font-size: 17rem;
+  line-height: 1.15;
+}
+.ptile__name a { color: inherit; }
+.ptile__name a:hover { color: var(--navy); }
+.ptile__colour { color: var(--muted); font-style: italic; }
+.ptile__price {
+  margin-top: 8rem;
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+}
+
+/* Uniform set — price, saving and the one-click add. */
+.uniform__buy { margin-top: 20rem; }
+.ubuy {
+  border-top: 1px solid var(--rule);
+  padding-top: 18rem;
+  display: grid; gap: 16rem;
+}
+@media (min-width: 768px) {
+  .ubuy {
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    column-gap: 40rem;
+  }
+  .ubuy__note { grid-column: 1 / -1; }
+}
+.ubuy__opts { display: flex; flex-wrap: wrap; align-items: center; gap: 6rem 12rem; }
+.ubuy__label {
+  font-family: var(--font-label); font-size: 9rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted);
+}
+.ubuy__opts .sizes { margin-top: 0; gap: 4rem; }
+.ubuy__opts .swatch { min-width: 30rem; padding: 5rem 7rem; font-size: 10rem; }
+
+.ubuy__buy { display: flex; flex-direction: column; gap: 8rem; align-items: flex-start; }
+@media (min-width: 768px) { .ubuy__buy { align-items: flex-end; } }
+.ubuy__price {
+  display: flex; align-items: baseline; flex-wrap: wrap; gap: 8rem;
+  font-family: var(--font-label); font-size: 12rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+}
+.ubuy__price s { color: var(--muted); text-decoration-thickness: 1px; }
+.ubuy__price b { font-size: 15rem; color: var(--ink); }
+.ubuy__save {
+  color: var(--navy);
+  border: 1px solid var(--navy);
+  padding: 2rem 6rem;
+  font-size: 9rem;
+}
+.ubuy__note {
+  font-family: var(--font-label); font-size: 10rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted);
+}
+
+/* The saving, itemised in the bag. */
+.cart__row--save { color: var(--navy); }
+.cart__row--save span:first-child {
+  font-size: 10rem; letter-spacing: var(--track-label);
+}
+
+/* ═══ 24b. CONTACT FORM ════════════════════════════════════════════
+   Rebuilds Dawn's stock contact-form.liquid in house type — see the
+   comment at the top of sections/mcmarden-contact-form.liquid for why
+   the stock section had to go rather than just be recoloured.
+
+   Shares .about__body's measure (grid-column 3/11 desktop) so the page
+   reads as one column running from the "Contact" mission line straight
+   into the form, not two different page widths stacked on each other. */
+
+.contact-form { padding-block: 0 96rem; }
+.contact-form__col {
+  grid-column: 1 / -1;
+}
+@media (min-width: 768px) {
+  .contact-form__col { grid-column: 3 / 11; }
+}
+
+/* One banner class, coloured by modifier rather than duplicated — the
+   success and error copy differ but the shape (icon + one line) is the
+   same, and a shared border-bottom keeps it reading as part of the same
+   vertical list as the fields below it. */
+.contact-form__banner {
+  display: flex; align-items: flex-start; gap: 10rem;
+  padding-bottom: 20rem; margin-bottom: 20rem;
+  border-bottom: 1px solid var(--rule);
+  font-size: 15rem; line-height: 1.5;
+  color: var(--ink);
+}
+.contact-form__banner svg { flex: 0 0 auto; width: 18rem; height: 18rem; margin-top: 2rem; }
+.contact-form__banner a { color: var(--navy); text-decoration: underline; text-underline-offset: 2px; }
+.contact-form__banner--error { color: var(--navy); }
+
+.contact-form__field { margin-bottom: 26rem; }
+.contact-form__label {
+  display: block; margin-bottom: 8rem;
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted);
+}
+.contact-form__req { color: var(--navy); margin-left: 2rem; }
+
+/* Bottom-border fields, not Dawn's boxes — the same language as
+   .signup__form input, just full-width and roomier since this form
+   isn't sharing a row with anything else. Generous block padding keeps
+   the tap target comfortably past 44px without a separate coarse-
+   pointer override. */
+.contact-form__input {
+  display: block; width: 100%;
+  font-family: var(--font-text); font-size: 17rem; color: var(--ink);
+  padding-block: 12rem;
+  background: none; border: 0; border-bottom: 1px solid var(--rule);
+  border-radius: 0;
+  transition: border-color var(--dur-fast) var(--ease-out);
+}
+.contact-form__input:focus-visible { border-color: var(--ink); outline: none; }
+.contact-form__input[aria-invalid="true"] { border-color: var(--navy); }
+.contact-form__input--area { min-height: 140rem; resize: vertical; }
+
+.contact-form__error {
+  display: block; margin-top: 8rem;
+  font-family: var(--font-label); font-size: 10rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--navy);
+}
+
+.contact-form__submit { margin-top: 8rem; }
+
+/* ═══ 25. REDUCED MOTION ═══════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .rise { opacity: 1 !important; transform: none !important; filter: none !important; }
+  .reveal > span { transform: none !important; }
+  .hero__look img { transform: scale(1.02) !important; }
+  .hero__look { filter: none !important; }
+  /* Colour arrives immediately rather than as a 2.6s dissolve. */
+  .js img { transition: none !important; }
+  .marquee__track { animation: none !important; }
+  .grain { display: none; }
+
+  /* The cascade collapses to a plain scrolling strip of plates —
+     every image still reachable, no depth, no travel. */
+  .cascade {
+    height: auto; min-height: 0; perspective: none;
+    overflow-x: auto; overflow-y: hidden;
+    display: flex; gap: 12rem; padding: 12rem;
+    cursor: default;
+  }
+  .cascade__stage { position: static; display: contents; }
+  .cascade__plate {
+    position: relative; top: auto; left: auto; margin: 0;
+    flex: 0 0 46%; width: auto; height: auto;
+    transform: none !important; opacity: 1 !important; filter: none !important;
+    box-shadow: none;
+  }
+  .cascade__plate img { opacity: 1 !important; }
+  .cascade__plate[data-past="true"] { opacity: 1 !important; pointer-events: auto; }
+  .cascade__cap { opacity: 1; }
+  .cascade__hud, .cascade__rail, .cascade__hint { display: none; }
+}
+
+/* ═══ 26. TOUCH TARGETS ═══════════════════════════════════════════════
+   Last block in the file on purpose. This design runs on 10–11px labels
+   and hairline rules, so its controls are small by intent — on a finger
+   they measured 13–25px tall, well under the 44px a thumb needs. These
+   rules have to win over the component styles that set the small
+   padding in the first place, and same-specificity rules are decided by
+   source order, so they live at the end rather than carrying !important.
+
+   Padding, not overlays, for anything in a row: two adjacent 44px hit
+   overlays would fight, and the first link in the row would lose. The
+   only overlays are the two header icons, where the mark's position in
+   the grid is load-bearing — those are in the mobile header block.
+
+   Scoped to coarse pointers, so mouse hover targets are untouched. */
+@media (pointer: coarse) {
+  .brand { padding-block: 4rem; }
+
+  .btn,
+  .hero__next,
+  .hero__skip,
+  .filter,
+  .swatch { padding-block: 15rem; }
+
+  /* An input needs real height — an overlay would block the tap that
+     focuses it. */
+  .signup__form { padding-bottom: 10rem; }
+  .signup__form input { padding-block: 13rem; }
+  .signup__form button { padding-block: 15rem; }
+
+  .signup__socials { gap: 4rem 22rem; }
+  .signup__socials a { padding-block: 15rem; }
+
+  .footer__col a { padding-block: 13rem; display: inline-block; }
+  .mobile-nav a { padding-block: 10rem; display: inline-block; }
+
+  .playlist,
+  .playlist__toggle { padding-block: 10rem; }
+  .playlist-track { padding-block: 13rem; }
+  .playlist-track__play { width: 30rem; height: 30rem; }
+  /* Collection switcher: 22px of text on its own is well under a thumb.
+     Grow the box and push the current-marker rule down with it so it
+     still sits under the word. */
+  .colsel__opt { padding-block: 11rem; --colsel-rule: 11rem; }
+  .colsel { gap: 0 24rem; }
+  .cart__close, .lightbox__close, .dialog__close { padding: 14rem; margin: -14rem; }
+  /* The cascade's prev/next sit inside a small floating HUD, so they get
+     padding rather than an overlay — the two are 10rem apart and
+     overlapping hit areas would make ← unreachable. */
+  .cascade__hud { padding: 4rem 8rem; gap: 4rem; }
+  .cascade__hud button { padding: 15rem 12rem; }
+  .product__crumb a { padding-block: 14rem; display: inline-block; }
+  .collections__row { padding-block: 20rem; }
+}
+
+/* ═══ 27. POLICY DIALOG ════════════════════════════════════════════════
+   A shared modal for reading long-form policy text (Shipping + Returns,
+   and anything else that needs the same treatment later) without
+   leaving the page. Same open/close convention as .cart and .lightbox:
+   data-open toggled by script.js, a scrim underneath, Escape and a
+   backdrop click both close it, body scroll is locked while open. */
+
+.dialog__scrim {
+  position: fixed; inset: 0; z-index: 89;
+  background: rgba(13, 13, 13, .42);
+  backdrop-filter: blur(4px);
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+.dialog__scrim[data-open="true"] { opacity: 1; pointer-events: all; }
+
+.dialog {
+  position: fixed; inset: 0; z-index: 90;
+  display: flex; align-items: center; justify-content: center;
+  padding: 24rem;
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+.dialog[data-open="true"] { opacity: 1; pointer-events: all; }
+
+.dialog__panel {
+  width: min(560rem, 100%);
+  max-height: min(720rem, 88svh);
+  display: flex; flex-direction: column;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  box-shadow: 0 24rem 64rem rgba(13, 13, 13, .22);
+  transform: translateY(10rem) scale(.98);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.dialog[data-open="true"] .dialog__panel { transform: none; }
+
+.dialog__bar {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 16rem;
+  padding: 20rem 24rem 16rem;
+  border-bottom: 1px solid var(--rule);
+  flex: 0 0 auto;
+}
+.dialog__title {
+  font-family: var(--font-text); font-style: italic; font-size: 19rem;
+}
+.dialog__close {
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted); flex: 0 0 auto;
+}
+.dialog__close::before { content: "[×]"; }
+.dialog__close:hover { color: var(--navy); }
+
+.dialog__body {
+  padding: 22rem 24rem 28rem;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  /* A flex child's default min-height is auto, which lets it grow past
+     its parent instead of shrinking to fit — the parent grew to hold
+     everything and the last section never had room to scroll into
+     view. min-height: 0 lets it actually shrink, so overflow-y is the
+     thing that gives instead of the panel's own max-height. */
+  flex: 1 1 auto;
+  min-height: 0;
+}
+.dialog__body h3 {
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--ink);
+  padding-top: 22rem; margin-bottom: 10rem;
+  border-top: 1px solid var(--rule);
+}
+.dialog__body h3:first-child { padding-top: 0; border-top: 0; }
+.dialog__body p {
+  font-family: var(--font-text); font-size: 15rem; line-height: 1.55;
+  color: var(--graphite);
+  margin-bottom: 14rem;
+}
+.dialog__body p:last-child { margin-bottom: 0; }
+.dialog__body p.dialog__note {
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted);
+}
+.dialog__body a { text-decoration: underline; text-underline-offset: 2px; }
+.dialog__body a:hover { color: var(--navy); }
+
+@media (max-width: 767px) {
+  .dialog { padding: 0; align-items: flex-end; }
+  .dialog__panel { width: 100%; max-height: 86svh; border-inline: 0; border-bottom: 0; }
+}
+
+/* ═══ 28. 404 ═════════════════════════════════════════════════════════ */
+
+/* padding-top was a flat 64rem, with no --hh (header height) term —
+   the one page-level container in the whole theme missing it (compare
+   .about, .journal, .collections-page, all calc(var(--hh) + Xrem)).
+   --hh alone is 68-74rem, and the header is fixed + transparent until
+   scrolled, so the meta row, the "404" numeral and the top of the
+   heading all rendered under it — reading as the header's own nav
+   text clipping into and overlapping the page's heading. This bug
+   predates the Shopify port: the mockup's own styles.css has the same
+   flat 64rem. */
+.notfound {
+  min-height: 62svh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding-top: calc(var(--hh) + 24rem);
+  padding-bottom: 80rem;
+  /* Not wrapped in .wrapper — a single flowing column has no use for
+     the 12-col grid, so the page margin is applied directly instead. */
+  padding-inline: var(--grid-margin);
+  border-bottom: 1px solid var(--rule);
+}
+.notfound__meta {
+  display: flex; gap: 18rem;
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted);
+  margin-bottom: 28rem;
+}
+.notfound__num {
+  font-family: var(--font-label); font-size: 84rem;
+  line-height: 1; color: var(--rule);
+  margin-bottom: 4rem;
+}
+@media (min-width: 768px) { .notfound__num { font-size: 128rem; } }
+.notfound__title {
+  font-family: var(--font-text); font-style: italic; font-weight: 400;
+  font-size: 32rem; line-height: 1.08;
+  max-width: 14ch;
+}
+@media (min-width: 768px) { .notfound__title { font-size: 44rem; } }
+.notfound__body {
+  margin-top: 18rem;
+  font-size: 15rem; line-height: 1.55; color: var(--graphite);
+  max-width: 46ch;
+}
+@media (min-width: 768px) { .notfound__body { font-size: 16rem; } }
+
+.notfound__routes {
+  margin-top: 40rem;
+  max-width: 480rem;
+  border-top: 1px solid var(--rule);
+}
+.notfound__route {
+  display: grid; grid-template-columns: 32rem 1fr auto;
+  align-items: baseline; gap: 16rem;
+  padding-block: 16rem;
+  border-bottom: 1px solid var(--rule);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.notfound__route__num {
+  font-family: var(--font-label); font-size: 11rem;
+  color: var(--muted); letter-spacing: var(--track-label);
+}
+.notfound__route__name {
+  font-family: var(--font-text); font-style: italic; font-size: 18rem;
+}
+.notfound__route__go {
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted);
+}
+.notfound__route__go::before { content: "["; }
+.notfound__route__go::after  { content: "]"; }
+@media (hover: hover) {
+  .notfound__route:hover { color: var(--navy); }
+  .notfound__route:hover .notfound__route__go { color: var(--navy); }
+}
+
+.notfound__foot {
+  margin-top: 32rem;
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted);
+}
+.notfound__foot a { color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
+.notfound__foot a:hover { color: var(--navy); }
+
+@media (pointer: coarse) { .notfound__foot a { padding-block: 14rem; display: inline-block; } }
+
+/* ═══ 29. CART PAGE (Dawn main-cart-items / main-cart-footer) ═══════════
+   templates/cart.json still runs Dawn's own stock sections — table
+   markup, quantity rules, volume pricing, AJAX updates, line item
+   properties, all of it — none of that is reimplemented here, only
+   restyled with this theme's own type/colour tokens so it reads as
+   part of the house rather than an unstyled Dawn page dropped in.
+   Selectors are scoped under #main-cart-items / #main-cart-footer (the
+   two ids Dawn already puts on this page) specifically so nothing here
+   can leak onto card-product.liquid or quick-order-list-row.liquid —
+   orphaned Dawn files elsewhere in the theme that happen to share the
+   same .quantity__button / .quantity__input classes but are not
+   rendered on any page this theme actually links to. */
+
+cart-items.isolate {
+  font-family: var(--font-text);
+  color: var(--ink);
+  background: transparent;
+  /* Dawn's own top padding is a single class (.section-{id}-padding)
+     set later in the DOM, in a <style> tag this section itself emits —
+     a same-specificity tie this stylesheet would lose on source order
+     alone. cart-items.isolate (tag + class) is unambiguously more
+     specific, the same fix used for .about, .notfound and .journal
+     elsewhere in this file, so the fixed header always clears the
+     title instead of overlapping it. */
+  padding-top: calc(var(--hh) + 32rem);
+}
+#main-cart-footer { font-family: var(--font-text); color: var(--ink); }
+
+.title-wrapper-with-link {
+  display: flex; flex-wrap: wrap; align-items: baseline;
+  justify-content: space-between; gap: 16rem;
+  padding-bottom: 20rem; margin-bottom: 28rem;
+  border-bottom: 1px solid var(--rule);
+}
+.title-wrapper-with-link .title,
+.cart__empty-text {
+  font-family: var(--font-text); font-weight: 400; font-style: italic;
+  font-size: 32rem; line-height: 1.08;
+}
+@media (min-width: 768px) {
+  .title-wrapper-with-link .title, .cart__empty-text { font-size: 40rem; }
+}
+.underlined-link {
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted); text-decoration: none;
+  border-bottom: 1px solid var(--rule); padding-bottom: 2rem;
+  transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+.underlined-link:hover { color: var(--navy); border-color: var(--navy); }
+
+.cart__warnings { padding-block: 8rem 40rem; }
+.cart__warnings .cart__empty-text { margin-bottom: 24rem; }
+.cart__login-title {
+  margin-top: 32rem;
+  font-family: var(--font-label); font-size: 11rem; font-weight: 400;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted);
+}
+.cart__login-paragraph { margin-top: 8rem; font-size: 14rem; color: var(--muted); }
+.cart__login-paragraph a { color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
+.cart__login-paragraph a:hover { color: var(--navy); }
+
+/* Bracketed [ Continue shopping ] / [ Check out ] — the same button
+   language as .btn elsewhere (see §15), reproduced with an equivalent
+   specificity rather than adding .btn itself to Dawn's markup. */
+.cart__warnings .button,
+.cart__checkout-button {
+  all: unset;
+  box-sizing: border-box;
+  display: inline-flex; align-items: baseline; justify-content: center; gap: 8rem;
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  padding: 14rem 20rem;
+  border: 1px solid currentColor;
+  color: var(--ink);
+  cursor: pointer;
+  text-align: center;
+  transition: color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+}
+.cart__warnings .button::before, .cart__checkout-button::before { content: "[ "; }
+.cart__warnings .button::after,  .cart__checkout-button::after  { content: " ]"; margin-left: 4rem; }
+@media (hover: hover) { .cart__warnings .button:hover { background: var(--ink); color: var(--paper); } }
+.cart__checkout-button {
+  width: 100%;
+  background: var(--navy); color: var(--paper); border-color: var(--navy);
+}
+@media (hover: hover) { .cart__checkout-button:hover { background: var(--ink); border-color: var(--ink); } }
+.cart__checkout-button:disabled { opacity: .4; cursor: not-allowed; }
+
+/* — line item table — */
+#main-cart-items table.cart-items { width: 100%; border-collapse: collapse; }
+#main-cart-items .cart-items thead th {
+  font-family: var(--font-label); font-size: 10rem; font-weight: 400;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted); text-align: left;
+  padding-bottom: 12rem; border-bottom: 1px solid var(--rule);
+}
+#main-cart-items .cart-items thead th.right { text-align: right; }
+#main-cart-items .cart-item { border-bottom: 1px solid var(--rule); }
+#main-cart-items .cart-item td { padding-block: 20rem; vertical-align: top; }
+#main-cart-items .cart-item__image-container { background: var(--paper-2); }
+#main-cart-items .cart-item__image { width: 100%; height: auto; max-width: 100%; object-fit: cover; display: block; }
+/* Dawn's own component-cart-items.css caps every child of
+   .cart-item__details at max-width: 30rem, and separately fixes the
+   image column at 10rem and the details column at 35rem/50rem once the
+   table layout kicks in at 750px — all calibrated for Dawn's native
+   ~10px-per-rem convention. This theme's html font-size is instead a
+   viewport-scaled ~1px per rem (see --vr near the top of this file),
+   built for THIS theme's own type scale — so those exact same Dawn
+   numbers resolve roughly 10x too small here: a 10px image column, a
+   name/price column that can't fit a single word, "estimated total"
+   wrapping one letter per line. That's the actual cause, not a display
+   bug in the cart markup itself (which is untouched stock Dawn).
+   Percentages and auto/none below instead of corrected rem numbers, so
+   this holds at every viewport rather than swapping one hardcoded
+   breakpoint value for another. */
+#main-cart-items .cart-item__details > * { max-width: none; }
+#main-cart-items .cart-item__name {
+  font-family: var(--font-text); font-size: 16rem; color: var(--ink);
+  text-decoration: none;
+}
+@media (hover: hover) { #main-cart-items .cart-item__name:hover { color: var(--navy); } }
+#main-cart-items .product-option {
+  font-family: var(--font-label); font-size: 11rem; margin-top: 4rem;
+  color: var(--muted); text-transform: uppercase; letter-spacing: var(--track-label);
+}
+#main-cart-items .product-option dt, #main-cart-items .product-option dd { display: inline; font: inherit; margin: 0; }
+#main-cart-items .price,
+#main-cart-items .cart-item__old-price { font-family: var(--font-text); font-size: 15rem; color: var(--ink); }
+#main-cart-items .cart-item__old-price { color: var(--muted); }
+#main-cart-items .cart-item__name.h4 { font-weight: 400; }
+
+#main-cart-items .quantity__button {
+  border: 1px solid var(--rule); background: transparent; color: var(--ink);
+  width: 32rem; height: 32rem;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+@media (hover: hover) {
+  #main-cart-items .quantity__button:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+}
+#main-cart-items .quantity__input {
+  font-family: var(--font-text);
+  border: none; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  text-align: center; color: var(--ink); background: transparent;
+}
+#main-cart-items cart-remove-button .button {
+  all: unset; cursor: pointer; color: var(--muted);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+@media (hover: hover) { #main-cart-items cart-remove-button .button:hover { color: var(--navy); } }
+
+/* — note + totals — */
+#main-cart-footer cart-note { display: block; margin-bottom: 24rem; }
+#main-cart-footer cart-note label {
+  display: block; margin-bottom: 8rem;
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label); color: var(--muted);
+}
+#main-cart-footer cart-note textarea {
+  width: 100%; font-family: var(--font-text); font-size: 14rem;
+  border: 1px solid var(--rule); background: transparent; color: var(--ink);
+  padding: 12rem;
+}
+#main-cart-footer .totals {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding-top: 16rem; margin-top: 16rem; border-top: 1px solid var(--rule);
+}
+#main-cart-footer .totals__total {
+  font-family: var(--font-label); font-size: 12rem; font-weight: 400;
+  text-transform: uppercase; letter-spacing: var(--track-label); color: var(--muted);
+}
+#main-cart-footer .totals__total-value { font-family: var(--font-text); font-size: 20rem; color: var(--ink); }
+#main-cart-footer .tax-note { display: block; margin-top: 8rem; font-size: 12rem; color: var(--muted); }
+#main-cart-footer .cart__ctas { margin-top: 24rem; }
+
+@media (min-width: 750px) {
+  /* Same rem-scale mismatch as above, in Dawn's desktop-only table
+     layout and its two-column footer. .cart-item__media / __details go
+     from Dawn's fixed 10rem / 35rem-50rem columns to percentage +
+     auto, so they hold at any table width instead of one corrected
+     breakpoint number. .cart__footer > * { width: 35rem } assumed a
+     note field beside the totals/checkout block, side by side — this
+     theme's cart note (if the setting is on) is already a full-width
+     block stacked above the totals, so the two-column intent doesn't
+     apply here at all; overridden to a plain stacked block instead of
+     re-tuning the column split. */
+  #main-cart-items .cart-item__media { width: 14%; }
+  #main-cart-items .cart-item__details { width: auto; }
+  #main-cart-footer .cart__footer { display: block; }
+  #main-cart-footer .cart__footer > * { width: 100%; }
+}
+
+@media (pointer: coarse) {
+  #main-cart-items .quantity__button,
+  #main-cart-items cart-remove-button .button { min-width: 44rem; min-height: 44rem; }
+}
+
+/* ═══ 30. DAWN REM-SCALE BRIDGE ═══════════════════════════════════════
+   Dawn is authored against its own root font-size — `html { font-size:
+   calc(var(--font-body-scale) * 62.5%) }`, i.e. ~10px per rem — so every
+   rem in Dawn's own stylesheets means roughly ten pixels. This theme
+   overrides that root with `html { font-size: var(--vr) }` (§1), where
+   --vr is ~1px at desktop, because the whole McMarden layout is authored
+   in that 1rem≈1px scale.
+
+   Both are internally consistent; the collision is only where Dawn's
+   stock markup meets this root. Dawn's rem values then render at a tenth
+   of their intended size, which is invisible on anything we restyled by
+   hand and catastrophic on anything we didn't — the stock cart, search,
+   404 and customer-account templates.
+
+   Measured on the published store before this block existed:
+     · .page-width          max-width 120rem →  120px (intended 1200px)
+       — this alone crushed the entire cart into a 110px column, one
+         letter of the product title per line.
+     · .cart__checkout-button max-width 36rem →  36px
+     · .quantity              collapsed to     →  16px
+     · .quantity__button .svg-wrapper width 1rem → 1px — the − and +
+       controls were one-pixel slivers, effectively invisible.
+
+   Fixed here rather than by editing Dawn's files so a future Dawn
+   upgrade doesn't quietly undo it. Values are expressed in this theme's
+   scale (1rem ≈ 1px), not Dawn's. */
+
+/* Dawn's page container. Matched to .wrapper's own measure (§5) so stock
+   templates line up with the rest of the site instead of sitting in a
+   narrower or wider column of their own. */
+.page-width {
+  max-width: none;
+  width: calc(100% - var(--grid-margin) * 2);
+  padding-inline: 0;
+  margin-inline: auto;
+}
+.page-width--narrow { max-width: 720rem; }
+
+#main-cart-footer .cart__checkout-button { max-width: 360rem; }
+
+/* The stepper and its popover wrapper both carry Dawn rem widths that
+   collapse; without the width on .quantity the popover container drags
+   the whole control back down to ~16px. */
+.cart-item .quantity-popover-container { max-width: none; width: auto; }
+.cart-item .quantity { width: auto; min-width: 120rem; }
+
+/* Dawn sizes the <span class="svg-wrapper"> around each icon, not the
+   <svg> itself — sizing .icon here would miss entirely. */
+.quantity__button .svg-wrapper { width: 20rem; height: 20rem; }
+.cart-item__error .svg-wrapper { width: 15rem; height: 15rem; }
+
+/* ═══ 31. CART — ALIGNMENT, DENSITY, SIZE PICKER, PROMO CODE ══════════ */
+
+/* Photograph → text. Dawn leaves the two touching — a 1.5px gutter at
+   mobile width — so the name reads as though printed on the photograph.
+
+   The two breakpoints need different mechanisms, because Dawn swaps the
+   layout underneath: below 750px .cart-item is a CSS grid of four equal
+   columns; above it, real table-row / table-cell. On the grid, padding on
+   the media cell comes out of that fixed column track and shrinks the
+   photograph itself (measured: 70px → 61px), so the row's own column-gap
+   does the work and the image keeps its full width. The table layout has
+   no gap to use, so there it is cell padding. */
+@media (max-width: 749px) {
+  #main-cart-items .cart-item { column-gap: 16rem; }
+}
+@media (min-width: 750px) {
+  #main-cart-items .cart-item__media { padding-right: 28rem; }
+}
+
+/* Quantity stepper. Dawn's stock control is sized for a 10px-per-rem
+   root and a full-width mobile row; here it rendered 210px wide with
+   44px buttons — bigger than the product name beside it.
+
+   The width came down first, but the control stayed 44px TALL, because
+   Dawn also puts a min-height on .quantity itself; capping the width
+   alone just made it square-ish and still oversized. So the height is
+   released here too (min-height: 0 on the wrapper, an explicit height on
+   both the buttons and the input), which is what actually brings it back
+   to the weight of the type beside it: 100 x 32 rather than 128 x 44.
+
+   Deliberate trade-off: the touch target ends up ~30px rather than the
+   44px accessibility guideline. That is the client's explicit call on
+   sizing, twice asked for; the buttons remain comfortably tappable and
+   the input is directly editable, but it is below the usual minimum. */
+#main-cart-items .quantity {
+  width: auto;
+  min-width: 0;
+  max-width: 104rem;
+  min-height: 0;
+  height: auto;
+  align-items: stretch;
+}
+#main-cart-items .quantity__input {
+  width: 36rem;
+  height: 28rem;
+  min-width: 0;
+  min-height: 0;
+  font-size: 13rem;
+  padding-inline: 0;
+}
+#main-cart-items .quantity__button {
+  width: 28rem; height: 28rem; flex: 0 0 auto;
+  min-width: 0; min-height: 0;
+}
+#main-cart-items .quantity__button .svg-wrapper { width: 10rem; height: 10rem; }
+
+/* Touch gets a couple of pixels back, without letting it sprawl again. */
+@media (pointer: coarse) {
+  #main-cart-items .quantity__button { min-width: 30rem; min-height: 30rem; }
+  #main-cart-items .quantity__input { height: 30rem; }
+  #main-cart-items .quantity { max-width: 108rem; }
+}
+
+/* — size picker on the line item — */
+#main-cart-items .product-option--picker { display: flex; align-items: baseline; gap: 6rem; }
+#main-cart-items .cart-item__variant-select {
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--ink); background: transparent;
+  border: 0; border-bottom: 1px solid var(--rule);
+  padding: 2rem 18rem 2rem 2rem; margin: 0;
+  cursor: pointer;
+  /* Native select chrome is macOS/Windows grey and fights the type;
+     the caret is drawn instead so it matches the rest of the house. */
+  -webkit-appearance: none; appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+                    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: right 7rem top 55%, right 3rem top 55%;
+  background-size: 4rem 4rem, 4rem 4rem;
+  background-repeat: no-repeat;
+}
+#main-cart-items .cart-item__variant-select:focus-visible { outline: 1px solid var(--navy); outline-offset: 2px; }
+#main-cart-items .cart-item__variant-select:disabled { opacity: .45; cursor: wait; }
+@media (hover: hover) { #main-cart-items .cart-item__variant-select:hover { color: var(--navy); border-color: var(--navy); } }
+
+/* — promo code — */
+#main-cart-footer .cart__discount { margin-bottom: 20rem; }
+#main-cart-footer .cart__discount-label {
+  display: block; margin-bottom: 8rem;
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label); color: var(--muted);
+}
+#main-cart-footer .cart__discount-row { display: flex; gap: 8rem; align-items: stretch; }
+#main-cart-footer .cart__discount-input {
+  flex: 1 1 auto; min-width: 0;
+  font-family: var(--font-text); font-size: 14rem;
+  color: var(--ink); background: transparent;
+  border: 1px solid var(--rule); padding: 11rem 12rem;
+  text-transform: uppercase; letter-spacing: .04em;
+}
+#main-cart-footer .cart__discount-input::placeholder { color: var(--muted); text-transform: none; letter-spacing: 0; }
+#main-cart-footer .cart__discount-input:focus-visible { outline: none; border-color: var(--navy); }
+#main-cart-footer .cart__discount-btn {
+  all: unset; box-sizing: border-box; cursor: pointer;
+  flex: 0 0 auto;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  padding: 11rem 18rem; border: 1px solid currentColor; color: var(--ink);
+  transition: color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+}
+#main-cart-footer .cart__discount-btn::before { content: "[ "; }
+#main-cart-footer .cart__discount-btn::after { content: " ]"; }
+@media (hover: hover) {
+  #main-cart-footer .cart__discount-btn:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+}
+#main-cart-footer .discounts { margin-bottom: 12rem; }
+#main-cart-footer .discounts__discount {
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label); color: var(--navy);
+  display: flex; align-items: center; gap: 6rem;
+}
+#main-cart-footer .discounts__discount .svg-wrapper { width: 13rem; height: 13rem; }
+
+/* ═══ 32. DAWN FACETS / SEARCH — rem-scale bridge, part two ═══════════
+   Same root cause as §30 (Dawn's rems resolve ~10x small against this
+   theme's 1rem≈1px root), but it needed its own block for a cascade
+   reason worth recording:
+
+   component-facets.css is LAZY-LOADED — the search/collection section
+   injects it when facets render, so it lands in the cascade AFTER
+   mcmarden.css no matter how late mcmarden.css is linked in <head>.
+   Source order therefore cannot be relied on here, and every rule below
+   is deliberately given an extra `body ` to out-specify Dawn's own
+   single-class selectors. Written flat (not with :where) so the intent
+   survives anyone tidying it later.
+
+   Measured before this block, at 375px:
+     · .mobile-facets__inner   max-width 37.5rem →  37.5px, so the whole
+       filter drawer opened as a 38px ribbon down the left edge.
+     · "Filter and sort"       font-size 1.5rem →   1.5px — present, and
+       completely unreadable.
+     · headings/labels/checkbox text  1.0–1.4rem → 1.0–1.4px.
+   52 elements in that UI were affected; filtering and sorting were
+   effectively unusable on a phone. */
+
+body .facets__heading,
+body .facets__summary,
+body .facets__summary-label,
+body .facets__header,
+body .facets__selected,
+body .facets__label,
+body .facet-checkbox__text,
+body .facet-checkbox__text-label,
+body .facets__price,
+body .mobile-facets__heading,
+body .mobile-facets__summary,
+body .mobile-facets__open-label,
+body .mobile-facets__label,
+body .mobile-facets__footer,
+body .mobile-facets__close-button,
+body .active-facets__button-remove,
+body .facet-filters,
+body .facet-filters__label,
+body .facet-filters__field,
+body .product-count,
+body .product-count__text {
+  font-size: 13rem;
+  line-height: 1.5;
+}
+
+/* The drawer itself, and the desktop dropdown panel. */
+body .mobile-facets__inner { max-width: none; width: 100%; }
+body .facets__display,
+body .parent-display.facets__display { width: auto; min-width: 240rem; max-width: none; }
+
+/* Rows tall enough to hit, and a checkbox that isn't a speck. */
+body .facets__summary,
+body .mobile-facets__summary { min-height: 36rem; }
+body .facet-checkbox input[type="checkbox"] { width: 16rem; height: 16rem; }
+body .mobile-facets__footer .button { font-size: 13rem; }
+
+/* ═══ 33. CART — REMOVE CONTROL & FITTING NOTES ══════════════════════ */
+
+/* Remove. Dawn's is an icon-only control whose glyph resolved to 1x1px
+   against this theme's rem root (measured), so the only way to take a
+   line out was invisible. Worded and bracketed here to match every other
+   action on the storefront; the icon is dropped rather than resized,
+   because the word is doing the work and a trash can adds nothing beside
+   it. */
+#main-cart-items .cart-item__remove-link {
+  all: unset;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-flex; align-items: center;
+  font-family: var(--font-label); font-size: 10rem;
+  text-transform: uppercase; letter-spacing: var(--track-label);
+  color: var(--muted);
+  padding: 6rem 2rem;
+  white-space: nowrap;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+#main-cart-items .cart-item__remove-link .svg-wrapper { display: none; }
+#main-cart-items .cart-item__remove-label::before { content: "[ "; }
+#main-cart-items .cart-item__remove-label::after  { content: " ]"; }
+@media (hover: hover) {
+  #main-cart-items .cart-item__remove-link:hover { color: var(--navy); }
+}
+#main-cart-items .cart-item__remove-link:focus-visible { outline: 1px solid var(--navy); outline-offset: 2px; }
+/* Sits under the stepper rather than beside it — the quantity cell is
+   already the narrowest column on the row. */
+#main-cart-items .cart-item__quantity-wrapper { flex-wrap: wrap; row-gap: 4rem; }
+
+/* Fitting notes. Full-width block above the totals: on a cut-and-sew
+   house this is part of the order, not an afterthought tucked beside it. */
+#main-cart-footer .cart__fitting { display: block; margin-bottom: 28rem; }
+#main-cart-footer .cart__fitting-label {
+  display: block; margin-bottom: 6rem;
+  font-family: var(--font-label); font-size: 11rem;
+  text-transform: uppercase; letter-spacing: var(--track-label); color: var(--ink);
+}
+#main-cart-footer .cart__fitting-help {
+  margin: 0 0 10rem;
+  font-family: var(--font-text); font-size: 13rem; line-height: 1.5; color: var(--muted);
+}
+#main-cart-footer .cart__fitting-help p { margin: 0; }
+#main-cart-footer .cart__fitting-input {
+  width: 100%; display: block;
+  font-family: var(--font-text); font-size: 14rem; line-height: 1.6;
+  color: var(--ink); background: transparent;
+  border: 1px solid var(--rule); padding: 12rem;
+  resize: vertical; min-height: 88rem;
+}
+#main-cart-footer .cart__fitting-input::placeholder { color: var(--muted); }
+#main-cart-footer .cart__fitting-input:focus-visible { outline: none; border-color: var(--navy); }

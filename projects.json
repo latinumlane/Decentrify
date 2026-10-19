@@ -1,0 +1,1814 @@
+[
+  {
+    "slug": "mcmarden",
+    "name": "McMarden",
+    "line": "An atelier in digital form.",
+    "category": "Fashion",
+    "sector": "High fashion atelier",
+    "description": "A high fashion atelier storefront that puts the garments, editorial imagery, and collection narrative at the center of the experience.",
+    "scope": "Editorial fashion storytelling, collection presentation, product detail, and e-commerce.",
+    "color": "#303d53",
+    "panelColor": "#e9e3d7",
+    "status": "Live",
+    "url": "https://mcmarden.com",
+    "embed": false,
+    "assets": [
+      {
+        "slug": "mcmarden",
+        "src": "assets/projects/mcmarden/0.webp",
+        "width": 1080,
+        "height": 1350,
+        "source_url": "https://mcmarden.com/cdn/shop/files/21_95eeb8cc-0d5c-42ab-82b2-e05c9855c2c9.webp?v=1788278189",
+        "contain": false,
+        "alt": "McMarden — website imagery"
+      },
+      {
+        "slug": "mcmarden",
+        "src": "assets/projects/mcmarden/1.webp",
+        "width": 1084,
+        "height": 1451,
+        "source_url": "https://mcmarden.com/cdn/shop/files/studioblue1.webp?v=1788477215&width=1200",
+        "contain": false,
+        "alt": "McMarden — website imagery"
+      },
+      {
+        "slug": "mcmarden",
+        "src": "assets/projects/mcmarden/2.webp",
+        "width": 1000,
+        "height": 1249,
+        "source_url": "https://mcmarden.com/cdn/shop/files/2019tunic-3.webp?v=1788442213&width=1200",
+        "contain": false,
+        "alt": "McMarden — website imagery"
+      },
+      {
+        "slug": "mcmarden",
+        "src": "assets/projects/mcmarden/3.webp",
+        "width": 1200,
+        "height": 800,
+        "source_url": "https://mcmarden.com/cdn/shop/files/porsche3.webp?v=1788277837&width=1200",
+        "contain": false,
+        "alt": "McMarden — website imagery"
+      },
+      {
+        "slug": "mcmarden",
+        "src": "assets/projects/mcmarden/4.webp",
+        "width": 1122,
+        "height": 1402,
+        "source_url": "https://mcmarden.com/cdn/shop/files/mcm3.webp?v=1788277819&width=1200",
+        "contain": false,
+        "alt": "McMarden — website imagery"
+      }
+    ],
+    "results": "Live website available at mcmarden.com. Commercial performance metrics have not been supplied.",
+    "showcase": [
+      {
+        "type": "logo",
+        "src": "assets/projects/mcmarden/logohires.webp"
+      },
+      {
+        "type": "screenshot",
+        "src": "assets/showcase/mcmarden/hero.webp?v=20261018",
+        "role": "hero"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/mcmarden/0.webp",
+        "role": "imagery"
+      },
+      {
+        "type": "screenshot",
+        "src": "assets/showcase/mcmarden/feature.webp",
+        "role": "feature"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/mcmarden/4.webp",
+        "role": "detail",
+        "position": "70% center"
+      }
+    ],
+    "branding": {
+      "background": "#e9e3d7",
+      "foreground": "#121212",
+      "accent": "#242833",
+      "palette": [
+        "#e9e3d7",
+        "#121212",
+        "#242833"
+      ],
+      "font": "Georgia,serif",
+      "source": "https://mcmarden.com"
+    },
+    "experienceColor": "#e9e3d7",
+    "experienceInk": "#000000",
+    "previewPath": "previews/mcmarden/index.html",
+    "previewKind": "homepage"
+  },
+  {
+    "slug": "orelie",
+    "name": "ORÉLIE",
+    "line": "Fine jewellery, considered in every detail.",
+    "category": "E-commerce",
+    "sector": "Fine jewellery · Antwerp atelier concept",
+    "description": "A four-page fine-jewellery website concept with an editorial split-screen collection hero, curated product catalogue, atelier photography and a private-fitting enquiry journey.",
+    "scope": "Responsive art direction, shared design system and navigation, three-collection hero, product filtering, keyboard-accessible gallery lightbox, and validated demo forms.",
+    "color": "#42151F",
+    "status": "Concept",
+    "results": "Four connected concept pages with responsive desktop and mobile previews. Products, reviews and business details are sample content; commercial results have not been measured.",
+    "branding": {
+      "background": "#100F0D",
+      "foreground": "#F5F3EF",
+      "accent": "#C08A3E",
+      "palette": [
+        "#100F0D",
+        "#42151F",
+        "#C08A3E",
+        "#F5F3EF"
+      ],
+      "font": "Georgia,serif"
+    },
+    "showcase": [
+      {
+        "type": "logo",
+        "src": null
+      },
+      {
+        "type": "preview",
+        "role": "hero"
+      },
+      {
+        "type": "image",
+        "role": "imagery",
+        "src": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "type": "feature",
+        "role": "feature",
+        "title": "Fine jewellery. Refined online.",
+        "copy": "Collections, product filters and private-fitting enquiries."
+      },
+      {
+        "type": "image",
+        "role": "detail",
+        "src": "https://images.unsplash.com/photo-1616121341778-0dd435d03d23?auto=format&fit=crop&w=800&q=80"
+      }
+    ],
+    "experienceColor": "#42151F",
+    "experienceInk": "#ffffff"
+  },
+  {
+    "slug": "xpand-sports",
+    "name": "XPAND Sports",
+    "line": "Built around the next generation.",
+    "category": "PWA & Apps",
+    "sector": "Sports mentorship PWA",
+    "description": "A sports-focused progressive web app connecting athletes with mentorship and development opportunities.",
+    "scope": "Sports platform presentation, athlete discovery, mentorship journeys, and a progressive web app experience.",
+    "color": "#5338e9",
+    "status": "Live",
+    "url": "https://www.xpandsports.com/",
+    "embed": true,
+    "assets": [
+      {
+        "slug": "xpand-sports",
+        "src": "assets/projects/xpand-sports/0.webp",
+        "width": 1200,
+        "height": 900,
+        "source_url": "https://www.xpandsports.com/landing1.jpeg",
+        "contain": false,
+        "alt": "XPAND Sports — website imagery"
+      },
+      {
+        "slug": "xpand-sports",
+        "src": "assets/projects/xpand-sports/1.webp",
+        "width": 1600,
+        "height": 1200,
+        "source_url": "https://www.xpandsports.com/landing2.jpg",
+        "contain": false,
+        "alt": "XPAND Sports — website imagery"
+      },
+      {
+        "slug": "xpand-sports",
+        "src": "assets/projects/xpand-sports/2.webp",
+        "width": 1150,
+        "height": 773,
+        "source_url": "https://www.xpandsports.com/landing3.jpeg",
+        "contain": false,
+        "alt": "XPAND Sports — website imagery"
+      },
+      {
+        "slug": "xpand-sports",
+        "src": "assets/projects/xpand-sports/3.webp",
+        "width": 768,
+        "height": 599,
+        "source_url": "https://www.xpandsports.com/dj.webp",
+        "contain": false,
+        "alt": "XPAND Sports — website imagery"
+      }
+    ],
+    "results": "Live website available at xpandsports.com. Commercial performance metrics have not been supplied.",
+    "showcase": [
+      {
+        "type": "logo",
+        "src": "assets/projects/xpand-sports/xpandlogo.webp"
+      },
+      {
+        "type": "screenshot",
+        "src": "assets/showcase/xpand-sports/hero.webp",
+        "role": "hero"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/xpand-sports/0.webp",
+        "role": "imagery"
+      },
+      {
+        "type": "screenshot",
+        "src": "assets/showcase/xpand-sports/feature.webp",
+        "role": "feature"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/xpand-sports/3.webp",
+        "role": "detail",
+        "position": "70% center"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/xpand-sports/brand-assets.webp",
+        "role": "detail",
+        "label": "06 / Brand Assets"
+      }
+    ],
+    "branding": {
+      "background": "#0a0a0a",
+      "foreground": "#fefefe",
+      "accent": "#c11616",
+      "palette": [
+        "#0a0a0a",
+        "#fefefe",
+        "#c11616"
+      ],
+      "font": "Arial,Helvetica,sans-serif",
+      "source": "https://www.xpandsports.com/"
+    },
+    "experienceColor": "#c11616",
+    "experienceInk": "#ffffff"
+  },
+  {
+    "slug": "tapmore",
+    "name": "TapMore",
+    "line": "One tap. More of what matters.",
+    "category": "PWA & Apps",
+    "sector": "NFC customer-engagement platform",
+    "description": "An NFC and QR platform that helps local businesses turn real-world customer moments into reviews, discovery, and return visits.",
+    "scope": "Platform positioning, product storytelling, NFC touchpoint design, and responsive marketing site.",
+    "color": "#12092f",
+    "panelColor": "#b79af8",
+    "status": "Preview",
+    "url": "https://tapmore-no.netlify.app/",
+    "embed": false,
+    "assets": [
+      {"src": "assets/projects/tapmore/homepage.webp", "width": 1600, "height": 900, "alt": "TapMore homepage with mobile review experience"},
+      {"src": "assets/projects/tapmore/touchpoint.webp", "width": 1600, "height": 875, "alt": "TapMore NFC review placard in a café"},
+      {"src": "assets/projects/tapmore/pitch-deck.webp", "width": 1600, "height": 894, "alt": "TapMore business presentation cover"}
+    ],
+    "results": "Live website available at tapmore-no.netlify.app. Commercial performance metrics have not been supplied.",
+    "showcase": [
+      {"type": "logo", "src": "assets/projects/tapmore/logo.webp"},
+      {"type": "image", "src": "assets/projects/tapmore/homepage.webp", "role": "hero", "label": "02 / Homepage"},
+      {"type": "image", "src": "assets/projects/tapmore/touchpoint.webp", "role": "imagery", "label": "03 / Touchpoint"},
+      {"type": "feature", "title": "One tap. More of what matters.", "copy": "NFC and QR touchpoints that turn every visit into a useful next step."},
+      {"type": "image", "src": "assets/projects/tapmore/pitch-deck.webp", "role": "detail", "label": "05 / Assets"}
+    ],
+    "branding": {
+      "background": "#12092f",
+      "foreground": "#f7f3ff",
+      "accent": "#b79af8",
+      "palette": ["#12092f", "#b79af8", "#f7f3ff"],
+      "font": "Arial,Helvetica,sans-serif",
+      "source": "https://tapmore-no.netlify.app/"
+    }
+  },
+  {
+    "slug": "voss-photography",
+    "name": "VOSS",
+    "line": "Let the work do the talking.",
+    "category": "Portfolio",
+    "sector": "Photographer portfolio",
+    "description": "A photography portfolio preview that puts editorial imagery first, supported by a restrained layout and project-focused navigation.",
+    "scope": "Image-led portfolio presentation, editorial sequencing, project discovery, and responsive layouts.",
+    "color": "#5c5b51",
+    "status": "Preview",
+    "url": "https://modernportfolio-ex.netlify.app",
+    "embed": true,
+    "assets": [
+      {
+        "slug": "voss-photography",
+        "src": "assets/projects/voss-photography/0.webp",
+        "width": 1156,
+        "height": 1600,
+        "source_url": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1600&q=90",
+        "contain": false,
+        "alt": "VOSS — Photography — website imagery"
+      },
+      {
+        "slug": "voss-photography",
+        "src": "assets/projects/voss-photography/1.webp",
+        "width": 1067,
+        "height": 1600,
+        "source_url": "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1500&q=90",
+        "contain": false,
+        "alt": "VOSS — Photography — website imagery"
+      },
+      {
+        "slug": "voss-photography",
+        "src": "assets/projects/voss-photography/2.webp",
+        "width": 1500,
+        "height": 1000,
+        "source_url": "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1500&q=90",
+        "contain": false,
+        "alt": "VOSS — Photography — website imagery"
+      },
+      {
+        "slug": "voss-photography",
+        "src": "assets/projects/voss-photography/3.webp",
+        "width": 1600,
+        "height": 1064,
+        "source_url": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1800&q=90",
+        "contain": false,
+        "alt": "VOSS — Photography — website imagery"
+      },
+      {
+        "slug": "voss-photography",
+        "src": "assets/projects/voss-photography/4.webp",
+        "width": 1067,
+        "height": 1600,
+        "source_url": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1500&q=90",
+        "contain": false,
+        "alt": "VOSS — Photography — website imagery"
+      }
+    ],
+    "results": "Front-end preview available for exploration. This project is a demonstration; production performance metrics are not reported.",
+    "showcase": [
+      {
+        "type": "logo",
+        "src": null
+      },
+      {
+        "type": "screenshot",
+        "src": "assets/showcase/voss-photography/hero.webp",
+        "role": "hero"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/voss-photography/0.webp",
+        "role": "imagery"
+      },
+      {
+        "type": "screenshot",
+        "src": "assets/showcase/voss-photography/feature.webp",
+        "role": "feature"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/voss-photography/4.webp",
+        "role": "detail",
+        "position": "70% center"
+      }
+    ],
+    "branding": {
+      "background": "#0b0b0a",
+      "foreground": "#f1efe8",
+      "accent": "#d8ff2f",
+      "palette": [
+        "#0b0b0a",
+        "#f1efe8",
+        "#d8ff2f"
+      ],
+      "font": "Arial,Helvetica,sans-serif",
+      "source": "https://modernportfolio-ex.netlify.app"
+    },
+    "identityTitle": "VOSS",
+    "experienceColor": "#d8ff2f",
+    "experienceInk": "#000000"
+  },
+  {
+    "slug": "biostem-labs",
+    "name": "BioStem Labs",
+    "line": "Precision in every detail.",
+    "category": "PWA & Apps",
+    "sector": "Peptide e-commerce PWA",
+    "description": "A full-package research peptide e-commerce PWA, supported by a rewards and affiliate loyalty program, coordinated advertising creative, and custom branded product assets.",
+    "scope": "Responsive storefront and PWA, product discovery, rewards and affiliate loyalty experience, ad creative with copy and campaign treatment, and custom brand imagery.",
+    "color": "#c5d4de",
+    "panelColor": "#10627C",
+    "status": "Live",
+    "url": "https://www.biostemlabs.com/",
+    "embed": false,
+    "assets": [
+      {
+        "src": "assets/projects/biostem-labs/homepage-hero.webp",
+        "width": 2047,
+        "height": 1132,
+        "contain": true,
+        "alt": "BioStem Labs — Homepage hero"
+      },
+      {
+        "src": "assets/projects/biostem-labs/rewards-affiliate.webp",
+        "width": 2048,
+        "height": 1122,
+        "contain": true,
+        "alt": "BioStem Labs — Rewards & affiliate loyalty program"
+      },
+      {
+        "src": "assets/projects/biostem-labs/ad-set-treatment.webp",
+        "width": 1536,
+        "height": 1024,
+        "contain": true,
+        "alt": "BioStem Labs — Ad set · creative, copy & campaign treatment"
+      },
+      {
+        "src": "assets/projects/biostem-labs/custom-brand-asset.webp",
+        "width": 1080,
+        "height": 1350,
+        "contain": true,
+        "alt": "BioStem Labs — Custom brand asset"
+      }
+    ],
+    "results": "Live website available at biostemlabs.com. Commercial performance metrics have not been supplied.",
+    "showcase": [
+      {
+        "type": "logo",
+        "src": "assets/projects/biostem-labs/whitelogo.webp"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/biostem-labs/homepage-hero.webp",
+        "role": "hero",
+        "label": "02 / Homepage",
+        "contain": true
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/biostem-labs/rewards-affiliate.webp",
+        "role": "rewards",
+        "label": "03 / Rewards & affiliates",
+        "contain": true
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/biostem-labs/ad-set-treatment.webp",
+        "role": "ad-set",
+        "label": "04 / Ad set & treatment",
+        "contain": true
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/biostem-labs/custom-brand-asset.webp",
+        "role": "detail",
+        "label": "05 / Assets",
+        "contain": true
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/biostem-labs/order-confirmation.webp",
+        "role": "detail",
+        "label": "06 / Email",
+        "contain": true
+      }
+    ],
+    "branding": {
+      "background": "#10627C",
+      "foreground": "#FFFFFF",
+      "accent": "#FFFFFF",
+      "palette": [
+        "#10627C",
+        "#FFFFFF",
+        "#1C2128"
+      ],
+      "font": "Arial,Helvetica,sans-serif",
+      "source": "https://www.biostemlabs.com/"
+    },
+    "experienceColor": "#10627C",
+    "experienceInk": "#ffffff",
+    "previewPath": "previews/biostem-labs/index.html",
+    "previewKind": "homepage"
+  },
+  {
+    "slug": "payback",
+    "name": "Payback — The Card Game",
+    "line": "Play your cards. Get your payback.",
+    "category": "E-commerce",
+    "sector": "Card game e-commerce & PWA arcade",
+    "description": "An e-commerce experience for Payback that brings the game’s personality into product discovery, with a companion PWA arcade.",
+    "scope": "Card game storefront, product storytelling, purchase pathways, and a PWA arcade.",
+    "color": "#d72d32",
+    "status": "Live",
+    "url": "https://paybackcardgame.com",
+    "embed": false,
+    "assets": [
+      {
+        "slug": "payback",
+        "src": "assets/projects/payback/0.webp",
+        "width": 1600,
+        "height": 809,
+        "source_url": "https://paybackcardgame.com/cdn/shop/files/Screenshot_2025-10-07_at_19.43.27.png?v=1759891540",
+        "contain": false,
+        "alt": "Payback — The Card Game — website imagery"
+      },
+      {
+        "slug": "payback",
+        "src": "assets/projects/payback/1.webp",
+        "width": 1200,
+        "height": 543,
+        "source_url": "https://paybackcardgame.com/cdn/shop/files/Payback_Logo_v20.png?v=1777937903&width=1200",
+        "contain": true,
+        "alt": "Payback — The Card Game — brand identity"
+      },
+      {
+        "slug": "payback",
+        "src": "assets/projects/payback/2.webp",
+        "width": 746,
+        "height": 747,
+        "source_url": "https://paybackcardgame.com/cdn/shop/files/Paybackexplode1.png?v=1786113913&width=1200",
+        "contain": false,
+        "alt": "Payback — The Card Game — website imagery"
+      },
+      {
+        "slug": "payback",
+        "src": "assets/projects/payback/3.webp",
+        "width": 1200,
+        "height": 1204,
+        "source_url": "https://paybackcardgame.com/cdn/shop/files/PAYBACK_-_Box_Shot_-_Original_Grey_BG.png?v=1777739979&width=1200",
+        "contain": false,
+        "alt": "Payback — The Card Game — website imagery"
+      },
+      {
+        "slug": "payback",
+        "src": "assets/projects/payback/4.webp",
+        "width": 1200,
+        "height": 1200,
+        "source_url": "https://paybackcardgame.com/cdn/shop/files/hf_20261005_063428_6f401d5e-297e-4ac7-aa7c-1f68e277029b.png?v=1791183609&width=1200",
+        "contain": false,
+        "alt": "Payback — The Card Game — website imagery"
+      }
+    ],
+    "results": "Live website available at paybackcardgame.com. Commercial performance metrics have not been supplied.",
+    "showcase": [
+      {
+        "type": "logo",
+        "src": "assets/projects/payback/1.webp"
+      },
+      {
+        "type": "screenshot",
+        "src": "assets/showcase/payback/hero.webp",
+        "role": "hero"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/payback/0.webp",
+        "role": "imagery"
+      },
+      {
+        "type": "screenshot",
+        "src": "assets/showcase/payback/feature.webp",
+        "role": "feature"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/payback/4.webp",
+        "role": "detail",
+        "position": "70% center"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/payback/kickstarter.webp",
+        "role": "detail",
+        "label": "06 / Kickstarter"
+      }
+    ],
+    "branding": {
+      "background": "#000000",
+      "foreground": "#cb2b2b",
+      "accent": "#cb2b2b",
+      "palette": [
+        "#000000",
+        "#cb2b2b"
+      ],
+      "font": "Arial,Helvetica,sans-serif",
+      "source": "https://paybackcardgame.com"
+    },
+    "experienceColor": "#cb2b2b",
+    "experienceInk": "#ffffff"
+  },
+  {
+    "slug": "cleo-retreats",
+    "name": "Cleo Retreats",
+    "line": "Space to rediscover yourself.",
+    "category": "Hospitality",
+    "sector": "Men’s & women’s retreats · Tulum",
+    "description": "A retreat website introducing Tulum experiences for men and women through immersive imagery and clear pathways to explore each retreat.",
+    "scope": "Retreat storytelling, destination imagery, men’s and women’s retreat journeys, and booking pathways.",
+    "color": "#646c50",
+    "status": "Live",
+    "url": "https://cleoxo.com",
+    "embed": false,
+    "assets": [
+      {
+        "slug": "cleo-retreats",
+        "src": "assets/projects/cleo-retreats/0.webp",
+        "width": 1206,
+        "height": 1431,
+        "source_url": "https://cleoxo.com/assets/images/heronew.webp",
+        "contain": false,
+        "alt": "Cleo Retreats — website imagery"
+      },
+      {
+        "slug": "cleo-retreats",
+        "src": "assets/projects/cleo-retreats/1.webp",
+        "width": 1206,
+        "height": 1436,
+        "source_url": "https://cleoxo.com/assets/images/Hero1.webp",
+        "contain": false,
+        "alt": "Cleo Retreats — website imagery"
+      },
+      {
+        "slug": "cleo-retreats",
+        "src": "assets/projects/cleo-retreats/2.webp",
+        "width": 1186,
+        "height": 1436,
+        "source_url": "https://cleoxo.com/assets/images/dinner2.webp",
+        "contain": false,
+        "alt": "Cleo Retreats — website imagery"
+      },
+      {
+        "slug": "cleo-retreats",
+        "src": "assets/projects/cleo-retreats/3.webp",
+        "width": 1113,
+        "height": 1600,
+        "source_url": "https://cleoxo.com/the-retreat/men/assets/images/hero-retreat.webp",
+        "contain": false,
+        "alt": "Cleo Retreats — website imagery"
+      },
+      {
+        "slug": "cleo-retreats",
+        "src": "assets/projects/cleo-retreats/4.webp",
+        "width": 1206,
+        "height": 1388,
+        "source_url": "https://cleoxo.com/assets/images/womenshero1.webp",
+        "contain": false,
+        "alt": "Cleo Retreats — website imagery"
+      }
+    ],
+    "results": "Live website available at cleoxo.com. Commercial performance metrics have not been supplied.",
+    "showcase": [
+      {
+        "type": "logo",
+        "src": "assets/projects/cleo-retreats/LogoEmbossed.webp",
+        "title": "CLEO"
+      },
+      {
+        "type": "screenshot",
+        "src": "assets/showcase/cleo-retreats/hero.webp?v=20261018",
+        "role": "hero"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/cleo-retreats/0.webp",
+        "role": "imagery"
+      },
+      {
+        "type": "screenshot",
+        "src": "assets/showcase/cleo-retreats/feature.webp?v=20261018",
+        "role": "feature"
+      },
+      {
+        "type": "screenshot",
+        "src": "assets/showcase/cleo-retreats/booking.webp",
+        "role": "booking",
+        "label": "Booking"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/cleo-retreats/4.webp",
+        "role": "detail",
+        "position": "70% center"
+      }
+    ],
+    "branding": {
+      "background": "#EFE8DF",
+      "foreground": "#2A2320",
+      "accent": "#F5DB8C",
+      "palette": [
+        "#EFE8DF",
+        "#2A2320",
+        "#F5DB8C"
+      ],
+      "font": "Cinzel,Georgia,serif",
+      "source": "https://cleoxo.com"
+    },
+    "identityTitle": "CLEO",
+    "experienceColor": "#646c50",
+    "experienceInk": "#ffffff"
+  },
+  {
+    "slug": "vnms",
+    "name": "VNMS Collective",
+    "line": "Streetwear with its own signal.",
+    "category": "Fashion",
+    "sector": "Street fashion · Norway",
+    "description": "A Norwegian street fashion storefront using bold brand imagery, collection storytelling, and product-led browsing.",
+    "scope": "Fashion e-commerce, collection presentation, product imagery, and a mobile shopping experience.",
+    "color": "#243e25",
+    "status": "Live",
+    "url": "https://vnmscollective.com",
+    "embed": false,
+    "assets": [
+      {
+        "slug": "vnms",
+        "src": "assets/projects/vnms/0.webp",
+        "width": 1174,
+        "height": 1202,
+        "source_url": "https://vnmscollective.com/cdn/shop/files/IMG_5048_be2b9913-d7ad-42bb-a3d8-5e1eaeee24a7.jpg?v=1742924056",
+        "contain": false,
+        "alt": "VNMS Collective — website imagery"
+      },
+      {
+        "slug": "vnms",
+        "src": "assets/projects/vnms/1.webp",
+        "width": 1359,
+        "height": 347,
+        "source_url": "https://vnmscollective.com/cdn/shop/t/6/assets/vnms-logo.webp?v=59616765563997497681785524530",
+        "contain": true,
+        "alt": "VNMS Collective — brand identity"
+      },
+      {
+        "slug": "vnms",
+        "src": "assets/projects/vnms/2.webp",
+        "width": 360,
+        "height": 360,
+        "source_url": "https://vnmscollective.com/cdn/shop/files/preview_images/9e0e7d90049d4f0e8c3277315a53c73f.thumbnail.0000000000_1920x.jpg?v=1791932731",
+        "contain": false,
+        "alt": "VNMS Collective — website imagery"
+      },
+      {
+        "slug": "vnms",
+        "src": "assets/projects/vnms/3.webp",
+        "width": 1200,
+        "height": 1600,
+        "source_url": "https://vnmscollective.com/cdn/shop/files/IMG_0570_VSCO.jpg?v=1791922155&width=1200",
+        "contain": false,
+        "alt": "VNMS Collective — website imagery"
+      },
+      {
+        "slug": "vnms",
+        "src": "assets/projects/vnms/4.webp",
+        "width": 1200,
+        "height": 1600,
+        "source_url": "https://vnmscollective.com/cdn/shop/files/IMG_3503_6dcf2488-99be-4878-9c2e-2aca0decfa83.heic?v=1791921919&width=1200",
+        "contain": false,
+        "alt": "VNMS Collective — website imagery"
+      },
+      {
+        "slug": "vnms",
+        "src": "assets/projects/vnms/5.webp",
+        "width": 1122,
+        "height": 1402,
+        "contain": false,
+        "alt": "VNMS Collective — amber studio portrait"
+      }
+    ],
+    "galleryTitle": "Custom assets / VNMS October shoot",
+    "galleryDescription": "A campaign-ready image suite created to give the collection a distinct visual world across store, social, and launch creative.",
+    "customAssets": [
+      {"src": "assets/projects/vnms/custom-assets/01-neon-standing.webp", "alt": "VNMS custom asset — neon green standing portrait"},
+      {"src": "assets/projects/vnms/custom-assets/02-amber-shadow.webp", "alt": "VNMS custom asset — amber hooded shadow portrait"},
+      {"src": "assets/projects/vnms/custom-assets/03-neon-crouch.webp", "alt": "VNMS custom asset — neon green crouching portrait"},
+      {"src": "assets/projects/vnms/custom-assets/04-lavender-crouch.webp", "alt": "VNMS custom asset — lavender studio crouching portrait"},
+      {"src": "assets/projects/vnms/custom-assets/05-amber-portrait.webp", "alt": "VNMS custom asset — amber hooded portrait"},
+      {"src": "assets/projects/vnms/custom-assets/06-amber-step.webp", "alt": "VNMS custom asset — amber studio step portrait"},
+      {"src": "assets/projects/vnms/custom-assets/07-lavender-standing.webp", "alt": "VNMS custom asset — lavender studio standing portrait"},
+      {"src": "assets/projects/vnms/custom-assets/08-lavender-mirror.webp", "alt": "VNMS custom asset — lavender mirror portrait"},
+      {"src": "assets/projects/vnms/custom-assets/09-neon-closeup.webp", "alt": "VNMS custom asset — neon close-up portrait"},
+      {"src": "assets/projects/vnms/custom-assets/10-neon-seated.webp", "alt": "VNMS custom asset — neon seated portrait"},
+      {"src": "assets/projects/vnms/custom-assets/11-neon-low-angle.webp", "alt": "VNMS custom asset — neon low-angle portrait"}
+    ],
+    "results": "Live website available at vnmscollective.com. Commercial performance metrics have not been supplied.",
+    "showcase": [
+      {
+        "type": "logo",
+        "src": "assets/projects/vnms/1.webp"
+      },
+      {
+        "type": "screenshot",
+        "src": "assets/showcase/vnms/hero.webp?v=20261018",
+        "role": "hero"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/vnms/0.webp",
+        "role": "imagery"
+      },
+      {
+        "type": "screenshot",
+        "src": "assets/showcase/vnms/feature.webp?v=20261018",
+        "role": "feature"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/vnms/4.webp",
+        "role": "detail",
+        "position": "70% center"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/vnms/5.webp",
+        "role": "imagery",
+        "label": "06 / Studio portrait"
+      }
+    ],
+    "branding": {
+      "background": "#070707",
+      "foreground": "#f2f2f2",
+      "accent": "#9ed22a",
+      "palette": [
+        "#070707",
+        "#f2f2f2",
+        "#9ed22a"
+      ],
+      "font": "Arial,Helvetica,sans-serif",
+      "source": "https://vnmscollective.com"
+    },
+    "experienceColor": "#9ed22a",
+    "experienceInk": "#000000"
+  },
+  {
+    "slug": "bloodheaven",
+    "name": "Bloodheaven 2001",
+    "line": "An identity you can’t ignore.",
+    "category": "Fashion",
+    "sector": "Street fashion · Norway",
+    "description": "A Norwegian street fashion website with a distinctive visual identity and a collection-focused commerce experience.",
+    "scope": "Brand-led art direction, fashion imagery, product discovery, and online shopping.",
+    "color": "#51151c",
+    "status": "Live",
+    "url": "https://bloodheaven2001.com",
+    "embed": false,
+    "assets": [
+      {
+        "slug": "bloodheaven",
+        "src": "assets/projects/bloodheaven/0.webp",
+        "width": 600,
+        "height": 400,
+        "source_url": "https://bloodheaven2001.com/cdn/shop/t/5/assets/logo.webp?v=130668308165978562151790860846",
+        "contain": true,
+        "alt": "Bloodheaven 2001 — brand identity"
+      },
+      {
+        "slug": "bloodheaven",
+        "src": "assets/projects/bloodheaven/1.webp",
+        "width": 1600,
+        "height": 1065,
+        "source_url": "https://bloodheaven2001.com/cdn/shop/t/5/assets/herobkgrnd.webp?v=91481741128888605181790860846",
+        "contain": false,
+        "alt": "Bloodheaven 2001 — website imagery"
+      },
+      {
+        "slug": "bloodheaven",
+        "src": "assets/projects/bloodheaven/2.webp",
+        "width": 1122,
+        "height": 1402,
+        "source_url": "https://bloodheaven2001.com/cdn/shop/t/5/assets/osloshot.webp?v=162582299826326584981790860846",
+        "contain": false,
+        "alt": "Bloodheaven 2001 — website imagery"
+      },
+      {
+        "slug": "bloodheaven",
+        "src": "assets/projects/bloodheaven/3.webp",
+        "width": 1200,
+        "height": 1200,
+        "source_url": "https://bloodheaven2001.com/cdn/shop/files/shirtcloseup.png?v=1790349394&width=1200",
+        "contain": false,
+        "alt": "Bloodheaven 2001 — website imagery"
+      },
+      {
+        "slug": "bloodheaven",
+        "src": "assets/projects/bloodheaven/4.webp",
+        "width": 1254,
+        "height": 1254,
+        "source_url": "https://bloodheaven2001.com/cdn/shop/t/5/assets/subway2.webp?v=117867569268391930361790860846",
+        "contain": false,
+        "alt": "Bloodheaven 2001 — website imagery"
+      }
+    ],
+    "results": "Live website available at bloodheaven2001.com. Commercial performance metrics have not been supplied.",
+    "showcase": [
+      {
+        "type": "logo",
+        "src": "assets/projects/bloodheaven/0.webp"
+      },
+      {
+        "type": "screenshot",
+        "src": "assets/showcase/bloodheaven/hero.webp?v=20261018",
+        "role": "hero"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/bloodheaven/ink-logo.webp",
+        "role": "imagery",
+        "contain": true
+      },
+      {
+        "type": "screenshot",
+        "src": "assets/showcase/bloodheaven/feature.webp",
+        "role": "feature"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/bloodheaven/4.webp",
+        "role": "detail",
+        "position": "70% center"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/bloodheaven/culture.webp",
+        "role": "detail",
+        "label": "06 / Culture"
+      }
+    ],
+    "branding": {
+      "background": "#090909",
+      "foreground": "#eeeae3",
+      "accent": "#ab211f",
+      "palette": [
+        "#090909",
+        "#eeeae3",
+        "#ab211f"
+      ],
+      "font": "Arial,Helvetica,sans-serif",
+      "source": "https://bloodheaven2001.com"
+    },
+    "experienceColor": "#ab211f",
+    "experienceInk": "#ffffff"
+  },
+  {
+    "slug": "forma-beverly-hills",
+    "name": "FORMA Beverly Hills",
+    "line": "Still you. Just refreshed.",
+    "category": "Services",
+    "sector": "Luxury med spa · Concept",
+    "description": "A minimal luxury med spa concept featuring service-led hero panels and a Beverly Hills practice narrative.",
+    "scope": "Service discovery, practitioner presentation, offers, consultation pathways, and mobile design.",
+    "color": "#526866",
+    "panelColor": "#526866",
+    "status": "Concept",
+    "embed": true,
+    "assets": [
+      {
+        "src": "assets/projects/forma-beverly-hills/0.webp",
+        "width": 1279,
+        "height": 1600,
+        "contain": false,
+        "alt": "Minimal beauty portrait in soft blue light"
+      },
+      {
+        "src": "assets/projects/forma-beverly-hills/1.webp",
+        "width": 1100,
+        "height": 731,
+        "contain": false,
+        "alt": "Close-up of a professional skin renewal treatment"
+      },
+      {
+        "src": "assets/projects/forma-beverly-hills/2.webp",
+        "width": 1100,
+        "height": 733,
+        "contain": false,
+        "alt": "Restorative facial ritual in a calm treatment setting"
+      },
+      {
+        "src": "assets/projects/forma-beverly-hills/3.webp",
+        "width": 1600,
+        "height": 1067,
+        "contain": false,
+        "alt": "Minimal architectural interior illustrating the FORMA Beverly Hills studio concept"
+      },
+      {
+        "src": "assets/projects/forma-beverly-hills/4.webp",
+        "width": 1600,
+        "height": 1067,
+        "contain": false,
+        "alt": "Stock physician portrait illustrating the fictional medical director profile"
+      }
+    ],
+    "results": "Interactive website concept supplied for portfolio presentation. Production performance metrics are not reported.",
+    "showcase": [
+      {
+        "type": "logo",
+        "src": null
+      },
+      {
+        "type": "preview"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/forma-beverly-hills/0.webp",
+        "role": "imagery"
+      },
+      {
+        "type": "feature",
+        "copy": "Treatments, practitioner profiles and consultation booking."
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/forma-beverly-hills/skin-renewal.webp",
+        "role": "detail",
+        "label": "05 / Assets"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/forma-beverly-hills/doctor.webp",
+        "role": "detail",
+        "label": "06 / Practitioner"
+      }
+    ],
+    "branding": {
+      "background": "#f7f8f8",
+      "foreground": "#172d40",
+      "accent": "#e4edf3",
+      "palette": [
+        "#f7f8f8",
+        "#172d40",
+        "#e4edf3"
+      ],
+      "font": "Arial,Helvetica,sans-serif",
+      "source": "previews/forma-beverly-hills/index.html"
+    },
+    "experienceColor": "#526866",
+    "experiencePanelColor": "#e4edf3",
+    "experienceBorderColor": "#526866",
+    "experienceInk": "#172d40"
+  },
+  {
+    "slug": "flowerbomb",
+    "name": "FlowerBomb DC",
+    "line": "A brand with a little more spark.",
+    "category": "E-commerce",
+    "sector": "Cannabis retail",
+    "description": "A cannabis website combining a playful identity with product discovery and a clear local retail journey.",
+    "scope": "Brand presentation, product catalog, local customer information, and pickup pathways.",
+    "color": "#e8be15",
+    "status": "Live",
+    "url": "https://flowerbombdc.com",
+    "embed": false,
+    "assets": [
+      {
+        "slug": "flowerbomb",
+        "src": "assets/projects/flowerbomb/0.webp",
+        "width": 900,
+        "height": 1181,
+        "source_url": "https://flowerbombdc.com/media/brand/flowerbomb-stacked-900.webp",
+        "contain": false,
+        "alt": "FlowerBomb DC — website imagery"
+      },
+      {
+        "slug": "flowerbomb",
+        "src": "assets/projects/flowerbomb/1.webp",
+        "width": 1400,
+        "height": 788,
+        "source_url": "https://flowerbombdc.com/media/hero/yloash-1400.webp",
+        "contain": false,
+        "alt": "FlowerBomb DC — website imagery"
+      },
+      {
+        "slug": "flowerbomb",
+        "src": "assets/projects/flowerbomb/2.webp",
+        "width": 800,
+        "height": 800,
+        "source_url": "https://flowerbombdc.com/media/nugs/nug5.webp",
+        "contain": false,
+        "alt": "FlowerBomb DC — website imagery"
+      },
+      {
+        "slug": "flowerbomb",
+        "src": "assets/projects/flowerbomb/3.webp",
+        "width": 800,
+        "height": 800,
+        "source_url": "https://flowerbombdc.com/media/nugs/nug6.webp",
+        "contain": false,
+        "alt": "FlowerBomb DC — website imagery"
+      },
+      {
+        "slug": "flowerbomb",
+        "src": "assets/projects/flowerbomb/4.webp",
+        "width": 600,
+        "height": 900,
+        "source_url": "https://flowerbombdc.com/media/ambient/boring-battery.webp",
+        "contain": false,
+        "alt": "FlowerBomb DC — website imagery"
+      }
+    ],
+    "results": "Live website available at flowerbombdc.com. Commercial performance metrics have not been supplied.",
+    "showcase": [
+      {
+        "type": "logo",
+        "src": "assets/projects/flowerbomb/flowerbomb-stacked-900.webp"
+      },
+      {
+        "type": "preview",
+        "role": "hero"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/flowerbomb/flowersblank.webp",
+        "role": "imagery"
+      },
+      {
+        "type": "feature",
+        "copy": "Product discovery, local information and clear pickup pathways."
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/flowerbomb/4.webp",
+        "role": "detail",
+        "position": "70% center"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/flowerbomb/ylo2.webp",
+        "role": "detail",
+        "label": "06 / Assets"
+      }
+    ],
+    "branding": {
+      "background": "#0b0b0d",
+      "foreground": "#f4f2ee",
+      "accent": "#F8D840",
+      "palette": [
+        "#0b0b0d",
+        "#f4f2ee",
+        "#F8D840"
+      ],
+      "font": "Impact,Arial,sans-serif",
+      "source": "https://flowerbombdc.com"
+    },
+    "experienceColor": "#F8D840",
+    "experiencePanelColor": "#0b0b0d",
+    "experienceBorderColor": "#F8D840",
+    "experienceInk": "#ffffff",
+    "previewPath": "previews/flowerbomb/index.html",
+    "previewKind": "homepage"
+  },
+  {
+    "slug": "connekt",
+    "name": "Connekt",
+    "line": "An idea, ready to interact with.",
+    "category": "PWA & Apps",
+    "sector": "iOS application MVP · Front end",
+    "description": "An iOS-inspired application MVP demonstrating the front-end experience and interactions before a production build.",
+    "scope": "Mobile interface design, prototype navigation, sample content, and front-end interaction flows.",
+    "color": "#0a0a0a",
+    "panelColor": "#0a0a0a",
+    "status": "Preview",
+    "url": "https://ios-app-mvp.netlify.app",
+    "embed": true,
+    "assets": [
+      {
+        "src": "assets/projects/connekt/logo.svg",
+        "width": 200,
+        "height": 200,
+        "contain": true,
+        "alt": "Connekt — app emblem",
+        "source_url": "https://ios-app-mvp.netlify.app"
+      }
+    ],
+    "results": "Front-end preview available for exploration. This project is a demonstration; production performance metrics are not reported.",
+    "showcase": [
+      {
+        "type": "logo",
+        "src": "assets/projects/connekt/Logo_Inter_V1.webp"
+      },
+      {
+        "type": "screenshot",
+        "src": "assets/showcase/connekt/hero.webp",
+        "role": "hero"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/connekt/immersive-discovery.webp",
+        "role": "imagery",
+        "position": "left center"
+      },
+      {
+        "type": "screenshot",
+        "src": "assets/showcase/connekt/feature.webp",
+        "role": "feature"
+      },
+      {
+        "type": "image",
+        "src": "assets/showcase/connekt/feature.webp",
+        "role": "detail",
+        "position": "70% center"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/connekt/brand-kit.webp",
+        "role": "detail",
+        "label": "06 / Brand Kit"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/connekt/brand-story.webp",
+        "role": "detail",
+        "label": "07 / Brand Story"
+      }
+    ],
+    "branding": {
+      "background": "#ffffff",
+      "foreground": "#111111",
+      "accent": "#0a0a0a",
+      "palette": [
+        "#ffffff",
+        "#111111",
+        "#eeeeee"
+      ],
+      "font": "Arial,Helvetica,sans-serif",
+      "source": "https://ios-app-mvp.netlify.app"
+    },
+    "experienceColor": "#eeeeee",
+    "experienceBorderColor": "#0a0a0a",
+    "experienceInk": "#ffffff"
+  },
+  {
+    "slug": "lowerdeck",
+    "name": "LowerDeck Sessions",
+    "line": "Live music. A different setting.",
+    "category": "Hospitality",
+    "sector": "Event brand",
+    "description": "An event brand website preview built around intimate live music, the venue setting, and the experience of attending.",
+    "scope": "Event storytelling, venue imagery, session information, and audience discovery.",
+    "color": "#5c5036",
+    "status": "Preview",
+    "url": "https://lowerdeck.netlify.app",
+    "embed": true,
+    "assets": [
+      {
+        "slug": "lowerdeck",
+        "src": "assets/projects/lowerdeck/0.webp",
+        "width": 1600,
+        "height": 1067,
+        "source_url": "https://lowerdeck.netlify.app/assets/img/deck-band-wide.jpg",
+        "contain": false,
+        "alt": "LowerDeck Sessions — website imagery"
+      },
+      {
+        "slug": "lowerdeck",
+        "src": "assets/projects/lowerdeck/1.webp",
+        "width": 1067,
+        "height": 1600,
+        "source_url": "https://lowerdeck.netlify.app/assets/img/view-sunset.jpg",
+        "contain": false,
+        "alt": "LowerDeck Sessions — website imagery"
+      }
+    ],
+    "results": "Front-end preview available for exploration. This project is a demonstration; production performance metrics are not reported.",
+    "showcase": [
+      {
+        "type": "logo",
+        "src": "assets/projects/lowerdeck/lowerdeck-logo.webp"
+      },
+      {
+        "type": "screenshot",
+        "src": "assets/showcase/lowerdeck/hero.webp?v=20261018",
+        "role": "hero"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/lowerdeck/0.webp",
+        "role": "imagery"
+      },
+      {
+        "type": "screenshot",
+        "src": "assets/showcase/lowerdeck/feature.webp?v=20261018",
+        "role": "feature"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/lowerdeck/1.webp",
+        "role": "detail",
+        "position": "70% center"
+      }
+    ],
+    "branding": {
+      "background": "#060607",
+      "foreground": "#f3f1ea",
+      "accent": "#00f099",
+      "palette": [
+        "#060607",
+        "#f3f1ea",
+        "#00f099"
+      ],
+      "font": "Arial,Helvetica,sans-serif",
+      "source": "https://lowerdeck.netlify.app"
+    },
+    "experienceColor": "#00f099",
+    "experienceInk": "#000000"
+  },
+  {
+    "slug": "kapharnaum",
+    "name": "Kapharnaum",
+    "line": "An atelier without borders.",
+    "category": "E-commerce",
+    "sector": "French–Norwegian fashion",
+    "description": "A fashion storefront balancing a strong red identity, editorial imagery, and multilingual shopping.",
+    "scope": "Split-panel collection storytelling, responsive product browsing, and language and currency controls.",
+    "color": "#970000",
+    "panelColor": "#fff4e4",
+    "status": "Concept",
+    "embed": true,
+    "showcase": [
+      {
+        "type": "logo",
+        "src": "previews/kapharnaum/assets/logo.webp"
+      },
+      {
+        "type": "preview"
+      },
+      {
+        "type": "image",
+        "src": "previews/kapharnaum/assets/collection.webp",
+        "role": "imagery"
+      },
+      {
+        "type": "feature",
+        "copy": "Editorial collections, product discovery and multilingual browsing."
+      },
+      {
+        "type": "image",
+        "src": "previews/kapharnaum/assets/red.webp",
+        "role": "detail",
+        "position": "70% center"
+      }
+    ],
+    "branding": {
+      "background": "#fff4e4",
+      "foreground": "#970000",
+      "accent": "#fff4e4",
+      "palette": [
+        "#fff4e4",
+        "#970000",
+        "#25211e"
+      ],
+      "font": "Georgia,serif",
+      "source": "previews/kapharnaum/index.html"
+    },
+    "experienceColor": "#970000",
+    "experiencePanelColor": "#970000",
+    "experienceBorderColor": "#fff4e4",
+    "experienceInk": "#ffffff"
+  },
+  {
+    "slug": "soundwave-barbershop",
+    "name": "SoundWave Barbershop",
+    "line": "Your cut. Your frequency.",
+    "category": "Services",
+    "sector": "Barbershop · Concept",
+    "description": "A music-led barbershop concept pairing a crisp booking journey with a bold, wave-inspired identity.",
+    "scope": "Brand adaptation, service discovery, appointment pathways, and responsive local-business website.",
+    "color": "#121212",
+    "panelColor": "#f0eee8",
+    "status": "Concept",
+    "previewPath": "previews/soundwave-barbershop/index.html",
+    "embed": true,
+    "assets": [
+      {"src": "assets/projects/soundwave-barbershop/inline-2.webp", "width": 1080, "height": 720, "alt": "SoundWave Barbershop interior"}
+    ],
+    "results": "Interactive local-business concept supplied for portfolio presentation.",
+    "showcase": [
+      {"type": "logo", "src": null},
+      {"type": "preview", "role": "hero"},
+      {"type": "image", "src": "assets/projects/soundwave-barbershop/studio.webp", "role": "imagery", "label": "03 / Space"},
+      {"type": "feature", "copy": "A simple route from service discovery to booking."},
+      {"type": "image", "src": "assets/projects/soundwave-barbershop/assets.webp", "role": "detail", "label": "05 / Assets"}
+    ],
+    "branding": {
+      "background": "#121212",
+      "foreground": "#f0eee8",
+      "accent": "#dfd5c0",
+      "palette": ["#121212", "#f0eee8", "#dfd5c0"],
+      "font": "Arial,Helvetica,sans-serif",
+      "source": "previews/soundwave-barbershop/index.html"
+    }
+  },
+  {
+    "slug": "hells-pies",
+    "name": "Hell's Pies",
+    "line": "Good pizza. Bad intentions.",
+    "category": "Hospitality",
+    "sector": "Detroit-style pizza · Concept",
+    "description": "A late-night pizza concept with a loud visual system, a high-energy menu, and an unapologetically playful local experience.",
+    "scope": "Brand adaptation, menu architecture, location storytelling, and responsive ordering pathways.",
+    "color": "#fa4c16",
+    "panelColor": "#fa4c16",
+    "status": "Concept",
+    "previewPath": "previews/hells-pies/index.html",
+    "embed": true,
+    "assets": [
+      {"src": "assets/projects/hells-pies/hero.webp", "width": 1672, "height": 941, "alt": "Skeleton serving pizza in a dark alley"},
+      {"src": "assets/projects/hells-pies/inline-3.webp", "width": 612, "height": 612, "alt": "Hell's Pies graphic illustration"},
+      {"src": "assets/projects/hells-pies/inline-4.webp", "width": 612, "height": 612, "alt": "Hell's Pies graphic illustration"}
+    ],
+    "results": "Interactive restaurant concept supplied for portfolio presentation.",
+    "showcase": [
+      {"type": "logo", "src": "assets/projects/hells-pies/logo.webp"},
+      {"type": "preview", "role": "hero"},
+      {"type": "image", "src": "assets/projects/hells-pies/hero.webp", "role": "imagery", "label": "03 / Imagery"},
+      {"type": "feature", "copy": "An energetic pizza experience designed for late-night orders."},
+      {"type": "image", "src": "assets/projects/hells-pies/assets.webp", "role": "detail", "label": "05 / Assets"}
+    ],
+    "branding": {
+      "background": "#0b0b0b",
+      "foreground": "#f5f1e7",
+      "accent": "#fa4c16",
+      "palette": ["#0b0b0b", "#f5f1e7", "#fa4c16"],
+      "font": "Impact,Arial Black,sans-serif",
+      "source": "previews/hells-pies/index.html"
+    }
+  },
+  {
+    "slug": "sunny-cafe",
+    "name": "SUNNY CAFE",
+    "line": "A little brighter, every day.",
+    "category": "Hospitality",
+    "sector": "Neighbourhood café · Concept",
+    "description": "A bright local-café concept that gives coffee, breakfast, brunch, and local discovery a warm digital home.",
+    "scope": "Brand adaptation, menu presentation, rewards storytelling, local information, and responsive website design.",
+    "color": "#f7e447",
+    "panelColor": "#f7e447",
+    "status": "Concept",
+    "previewPath": "previews/sunny-cafe/index.html",
+    "embed": true,
+    "assets": [
+      {"src": "assets/projects/sunny-cafe/coffee.webp", "width": 1600, "height": 1067, "alt": "Coffee at Sunny Cafe"},
+      {"src": "assets/projects/sunny-cafe/storefront.webp", "width": 1669, "height": 942, "alt": "Sunny Cafe storefront"},
+      {"src": "assets/projects/sunny-cafe/brunch.webp", "width": 1600, "height": 1600, "alt": "Sunny Cafe brunch"}
+    ],
+    "results": "Interactive neighbourhood-café concept supplied for portfolio presentation.",
+    "showcase": [
+      {"type": "logo", "src": null},
+      {"type": "preview", "role": "hero"},
+      {"type": "image", "src": "assets/projects/sunny-cafe/storefront.webp", "role": "imagery", "label": "03 / Space"},
+      {"type": "feature", "copy": "A warm digital route from the menu to the neighbourhood table."},
+      {"type": "image", "src": "assets/projects/sunny-cafe/brunch.webp", "role": "detail", "label": "05 / Assets"}
+    ],
+    "branding": {
+      "background": "#f7e447",
+      "foreground": "#791d49",
+      "accent": "#791d49",
+      "palette": ["#f7e447", "#791d49", "#f5f0e4"],
+      "font": "Arial,Helvetica,sans-serif",
+      "source": "previews/sunny-cafe/index.html"
+    }
+  },
+  {
+    "slug": "al-bait-al-shami",
+    "name": "Al Bait Al Shami",
+    "line": "Middle Eastern soul. A Dublin home.",
+    "category": "Hospitality",
+    "sector": "Restaurant · Dublin",
+    "description": "A restaurant concept bringing warm Middle Eastern hospitality into an image-led digital experience.",
+    "scope": "Restaurant storytelling, menu discovery, location information, and a responsive visitor journey.",
+    "color": "#aa623f",
+    "status": "Concept",
+    "embed": true,
+    "assets": [
+      {
+        "src": "assets/projects/al-bait-al-shami/0.webp",
+        "width": 800,
+        "height": 600,
+        "contain": false,
+        "alt": "Warm wood ceilings and upholstered seating inside the Dame Street restaurant"
+      },
+      {
+        "src": "assets/projects/al-bait-al-shami/1.webp",
+        "width": 600,
+        "height": 800,
+        "contain": false,
+        "alt": "Al Bait Al Shami storefront at 13 Dame Street in Dublin"
+      },
+      {
+        "src": "assets/projects/al-bait-al-shami/2.webp",
+        "width": 600,
+        "height": 800,
+        "contain": false,
+        "alt": "Shawarma plate with rice, salad, pickles and sauce at the Dublin restaurant"
+      }
+    ],
+    "results": "Interactive website concept supplied for portfolio presentation. Production performance metrics are not reported.",
+    "showcase": [
+      {
+        "type": "logo",
+        "src": null
+      },
+      {
+        "type": "preview"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/al-bait-al-shami/0.webp",
+        "role": "imagery"
+      },
+      {
+        "type": "feature",
+        "copy": "Menu discovery, restaurant storytelling and practical visitor information."
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/al-bait-al-shami/2.webp",
+        "role": "detail",
+        "position": "70% center"
+      }
+    ],
+    "branding": {
+      "background": "#f8f5ef",
+      "foreground": "#30291f",
+      "accent": "#846330",
+      "palette": [
+        "#f8f5ef",
+        "#30291f",
+        "#846330"
+      ],
+      "font": "Georgia,serif",
+      "source": "previews/al-bait-al-shami/index.html"
+    },
+    "experienceColor": "#aa623f",
+    "experienceInk": "#ffffff"
+  },
+  {
+    "slug": "aurelle",
+    "name": "AURELLE",
+    "line": "A lasting kind of glow.",
+    "category": "Services",
+    "sector": "Skin & aesthetics · Concept",
+    "description": "A luxury skin and aesthetics concept balancing editorial imagery, a soft palette, and a calm service discovery experience.",
+    "scope": "Service presentation, treatment storytelling, consultation pathways, and responsive design.",
+    "color": "#9c8c70",
+    "status": "Concept",
+    "embed": true,
+    "assets": [
+      {
+        "src": "assets/projects/aurelle/0.webp",
+        "width": 1067,
+        "height": 1600,
+        "contain": false,
+        "alt": "Warm editorial beauty portrait with bold red lips"
+      },
+      {
+        "src": "assets/projects/aurelle/1.webp",
+        "width": 1100,
+        "height": 731,
+        "contain": false,
+        "alt": "Professional performing a precise skin treatment"
+      },
+      {
+        "src": "assets/projects/aurelle/2.webp",
+        "width": 1100,
+        "height": 733,
+        "contain": false,
+        "alt": "A woman enjoying a restorative facial treatment"
+      },
+      {
+        "src": "assets/projects/aurelle/3.webp",
+        "width": 1100,
+        "height": 825,
+        "contain": false,
+        "alt": "Warm neutral interiors with sculptural furnishings and natural light"
+      }
+    ],
+    "results": "Interactive website concept supplied for portfolio presentation. Production performance metrics are not reported.",
+    "showcase": [
+      {
+        "type": "logo",
+        "src": null
+      },
+      {
+        "type": "preview"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/aurelle/3.webp",
+        "role": "imagery"
+      },
+      {
+        "type": "feature",
+        "copy": "Treatment discovery and a clear path to consultation."
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/aurelle/0.webp",
+        "role": "detail",
+        "position": "70% center"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/aurelle/treatments.webp",
+        "role": "detail",
+        "label": "06 / Treatments"
+      }
+    ],
+    "branding": {
+      "background": "#f3f0e8",
+      "foreground": "#302b25",
+      "accent": "#666751",
+      "palette": [
+        "#f3f0e8",
+        "#302b25",
+        "#666751"
+      ],
+      "font": "Georgia,serif",
+      "source": "previews/aurelle/index.html"
+    },
+    "experienceColor": "#f3f0e8",
+    "experienceBorderColor": "#666751",
+    "experienceInk": "#000000"
+  },
+  {
+    "slug": "form-kunsthalle",
+    "name": "FORM Kunsthalle",
+    "line": "Art opens things.",
+    "category": "Portfolio",
+    "sector": "Art gallery · Concept",
+    "description": "An art gallery concept using expressive typography and exhibition imagery to create an editorial cultural experience.",
+    "scope": "Exhibition discovery, gallery storytelling, artist presentation, and responsive visitor information.",
+    "color": "#66575f",
+    "panelColor": "#111a97",
+    "status": "Concept",
+    "embed": true,
+    "assets": [
+      {
+        "src": "assets/projects/form-kunsthalle/0.webp",
+        "width": 1400,
+        "height": 1103,
+        "contain": false,
+        "alt": "Artworks and glass display cases in a softly lit museum gallery"
+      },
+      {
+        "src": "assets/projects/form-kunsthalle/1.webp",
+        "width": 1400,
+        "height": 938,
+        "contain": false,
+        "alt": "Abstract painting with bold blue, red, and yellow brushstrokes"
+      },
+      {
+        "src": "assets/projects/form-kunsthalle/2.webp",
+        "width": 1263,
+        "height": 1600,
+        "contain": false,
+        "alt": "Vibrant abstract painting with flowing fields of colour"
+      },
+      {
+        "src": "assets/projects/form-kunsthalle/3.webp",
+        "width": 1128,
+        "height": 1600,
+        "contain": false,
+        "alt": "Abstract artwork with flowing black, white, and golden-yellow forms"
+      }
+    ],
+    "results": "Interactive website concept supplied for portfolio presentation. Production performance metrics are not reported.",
+    "showcase": [
+      {
+        "type": "logo",
+        "src": null
+      },
+      {
+        "type": "preview"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/form-kunsthalle/0.webp",
+        "role": "imagery"
+      },
+      {
+        "type": "feature",
+        "copy": "Exhibitions, artists and a considered gallery experience."
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/form-kunsthalle/3.webp",
+        "role": "detail",
+        "position": "70% center"
+      }
+    ],
+    "branding": {
+      "background": "#111a97",
+      "foreground": "#f4f1e9",
+      "accent": "#e6bb42",
+      "palette": [
+        "#111a97",
+        "#f4f1e9",
+        "#e6bb42"
+      ],
+      "font": "Arial,Helvetica,sans-serif",
+      "source": "previews/form-kunsthalle/index.html"
+    },
+    "experienceColor": "#66575f",
+    "experienceInk": "#ffffff"
+  },
+  {
+    "slug": "maison-solenne",
+    "name": "Maison Solenne",
+    "line": "Stay a little longer.",
+    "category": "Hospitality",
+    "sector": "Boutique hotel · Concept",
+    "description": "A boutique hotel concept combining warm editorial imagery with a clear booking journey and a mobile-oriented experience.",
+    "scope": "Rooms and stay discovery, hotel storytelling, guest information, and prominent booking calls to action.",
+    "color": "#9b785b",
+    "status": "Concept",
+    "embed": true,
+    "assets": [
+      {
+        "src": "assets/projects/maison-solenne/0.webp",
+        "width": 1600,
+        "height": 1067,
+        "contain": false,
+        "alt": "Warmly lit boutique hotel room with layered textiles and generous windows"
+      },
+      {
+        "src": "assets/projects/maison-solenne/1.webp",
+        "width": 1000,
+        "height": 667,
+        "contain": false,
+        "alt": "Soft neutral guest room with a king bed and thoughtful bedside details"
+      },
+      {
+        "src": "assets/projects/maison-solenne/2.webp",
+        "width": 1000,
+        "height": 750,
+        "contain": false,
+        "alt": "Spacious hotel suite with warm furnishings and a relaxing sitting area"
+      },
+      {
+        "src": "assets/projects/maison-solenne/3.webp",
+        "width": 1000,
+        "height": 667,
+        "contain": false,
+        "alt": "Intimate restaurant dining room ready for an evening of considered food"
+      },
+      {
+        "src": "assets/projects/maison-solenne/4.webp",
+        "width": 1000,
+        "height": 1000,
+        "contain": false,
+        "alt": "Turquoise hotel swimming pool surrounded by loungers and sun umbrellas"
+      },
+      {
+        "src": "assets/projects/maison-solenne/5.webp",
+        "width": 1000,
+        "height": 667,
+        "contain": false,
+        "alt": "Coastal retreat overlooking blue water and a quiet shoreline"
+      }
+    ],
+    "results": "Interactive website concept supplied for portfolio presentation. Production performance metrics are not reported.",
+    "showcase": [
+      {
+        "type": "logo",
+        "src": null
+      },
+      {
+        "type": "preview"
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/maison-solenne/0.webp",
+        "role": "imagery"
+      },
+      {
+        "type": "feature",
+        "copy": "Rooms, guest information and a direct booking journey."
+      },
+      {
+        "type": "image",
+        "src": "assets/projects/maison-solenne/5.webp",
+        "role": "detail",
+        "position": "70% center"
+      }
+    ],
+    "branding": {
+      "background": "#eac9bc",
+      "foreground": "#422b28",
+      "accent": "#a53f35",
+      "palette": [
+        "#eac9bc",
+        "#422b28",
+        "#a53f35"
+      ],
+      "font": "Georgia,serif",
+      "source": "previews/maison-solenne/index.html"
+    },
+    "experienceColor": "#9b785b",
+    "experiencePanelColor": "#eac9bc",
+    "experienceBorderColor": "#a53f35",
+    "experienceInk": "#000000"
+  }
+]

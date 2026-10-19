@@ -1,0 +1,272 @@
+<!-- index.html — BioStem Labs v3 homepage -->
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="robots" content="noindex">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/webp" href="assets/faviconnew.webp">
+<title>BioStem Labs — Homepage Preview</title>
+<meta name="description" content="Research compounds with published lot documentation where available. For research use only.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Research-Grade Peptides | BioStem Labs">
+<meta property="og:description" content="Research-grade peptides with third-party testing, lot-specific certificates of analysis, and next-business-day priority shipping. For research use only.">
+<meta property="og:url" content="https://www.biostemlabs.com/">
+<meta property="og:image" content="https://www.biostemlabs.com/assets/RecoveryHero.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Research-Grade Peptides | BioStem Labs">
+<meta name="twitter:description" content="Research-grade peptides with third-party testing, lot-specific certificates of analysis, and next-business-day priority shipping. For research use only.">
+<meta name="twitter:image" content="https://www.biostemlabs.com/assets/RecoveryHero.webp">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Research-Grade Peptides | BioStem Labs","description":"Research-grade peptides with third-party testing, lot-specific certificates of analysis, and next-business-day priority shipping. For research use only.","url":"https://www.biostemlabs.com/","publisher":{"@type":"Organization","name":"BioStem Labs","url":"https://www.biostemlabs.com"}}</script>
+<link rel="preload" as="image" href="assets/RecoveryHero.webp" type="image/webp" media="(min-width: 768px)">
+<link rel="preload" as="image" href="assets/recoverymobilehero.webp" type="image/webp" media="(max-width: 767px)">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<header id="siteHeader"></header>
+
+<main>
+  <!-- ══════════ HERO ══════════ -->
+  <section class="hero">
+    <div class="wrap hero__in">
+      <div class="hero__copy">
+        <span class="eyebrow">Research-grade amino-chains</span>
+        <h1 class="h1 hero__title">
+          <span>Precision Formulas.</span>
+          <span class="accent">Proven Purity.</span>
+        </h1>
+        <p class="lede hero__lede">
+          BioStem Labs supplies research compounds with lot documentation published where available.
+          Review each certificate's stated scope and reported result before relying on a particular lot.
+        </p>
+        <div class="hero__stats" id="heroStats"></div>
+        <p class="hero__note">
+          For research use only. Not for human or animal consumption. Purchasers must be 21+.
+        </p>
+      </div>
+
+      <div class="hero__cta">
+        <a class="btn btn--primary" href="shop.html">Browse the catalog &rarr;</a>
+        <a class="btn btn--ghost" href="coa.html">Look up a lot COA</a>
+      </div>
+
+      <div class="hero__stage">
+        <div class="hero__cards" id="heroCards"></div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ══════════ TRUST STRIP ══════════ -->
+  <section class="strip"><div class="wrap strip__in" id="trustStrip"></div></section>
+
+  <!-- ══════════ CATEGORIES ══════════ -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Catalog</span>
+        <h2 class="h2"><span id="nCatsH"></span> research categories.<br><span id="nProdH"></span> compounds.</h2>
+        <p class="lede" style="margin-top:14px">
+          Every SKU carries its own batch documentation, storage spec, and reconstitution guidance.
+        </p>
+      </div>
+      <div class="cats reveal" id="catRail"></div>
+    </div>
+  </section>
+
+  <!-- ══════════ FEATURED ══════════ -->
+  <section class="section section--tint">
+    <div class="wrap">
+      <div class="section-head reveal" style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;max-width:none;flex-wrap:wrap">
+        <div style="max-width:56ch">
+          <span class="eyebrow">Most requested</span>
+          <h2 class="h2">Featured research compounds</h2>
+        </div>
+        <a class="btn btn--ghost" href="shop.html">View all <span id="nProdBtn"></span> &rarr;</a>
+      </div>
+      <div class="grid reveal" id="featGrid"></div>
+    </div>
+  </section>
+
+  <!-- ══════════ RESEARCH STACKS ══════════ -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal" style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;max-width:none;flex-wrap:wrap">
+        <div style="max-width:58ch">
+          <span class="eyebrow">Research stacks</span>
+          <h2 class="h2">Real results that compound together</h2>
+          <p class="lede" style="margin-top:14px">
+            Curated stacks built around a single research question — every component a real
+            catalog SKU with its own certificate, priced below buying the parts separately.
+          </p>
+        </div>
+        <a class="btn btn--ghost" href="bundles.html">All stacks &rarr;</a>
+      </div>
+      <div class="grid reveal" id="stackGrid" style="grid-template-columns:repeat(auto-fit,minmax(290px,1fr))"></div>
+    </div>
+  </section>
+
+  <!-- ══════════ THE STANDARD ══════════ -->
+  <section class="section home-standard">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Unmatched standards</span>
+        <h2 class="h2">The BioStem standard</h2>
+        <p class="lede" style="margin-top:14px">
+          Four commitments that apply to every vial we ship, without exception.
+        </p>
+      </div>
+      <div class="feats reveal" id="standardGrid"></div>
+    </div>
+  </section>
+
+  <!-- Mailing-list signup, rendered by mountNewsletter() in js/site.js -->
+  <div id="newsletterSlot"></div>
+
+  <!-- ══════════ TESTING / COA ══════════ -->
+  <section class="section section--tint">
+    <div class="wrap split">
+      <div class="reveal">
+        <span class="eyebrow">Testing &amp; documentation</span>
+        <h2 class="h2">Testing is the trust signal</h2>
+        <p class="lede" style="margin-top:16px">
+          In a market where quality is hard to verify, the only meaningful answer is paperwork.
+          Every BioStem batch is submitted for independent third-party analysis, and the resulting
+          certificate is tied to the specific lot number printed on the vial you receive.
+        </p>
+        <p class="lede" style="margin-top:14px">
+          You should be able to review exactly what you ordered before it reaches the bench —
+          not after.
+        </p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:26px">
+          <a class="btn btn--primary" href="coa.html">Look up a lot &rarr;</a>
+          <a class="btn btn--ghost" href="about.html#quality">How we test</a>
+        </div>
+      </div>
+      <div class="reveal" id="coaDemo"></div>
+    </div>
+  </section>
+
+  <!-- ══════════ DOC PILLARS ══════════ -->
+  <section class="section section--ink">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Documentation architecture</span>
+        <h2 class="h2">What ships with every order</h2>
+      </div>
+      <div class="feats reveal" id="docGrid"></div>
+    </div>
+  </section>
+
+  <!-- ══════════ FULFILLMENT ══════════ -->
+  <section class="section home-fulfillment">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Fulfillment</span>
+        <h2 class="h2">Ordered today. Dispatched next business day.</h2>
+        <p class="lede" style="margin-top:14px">
+          Every order is picked, packed, and dispatched on the next business day with priority shipping.
+        </p>
+      </div>
+      <div class="feats reveal" id="shipGrid"></div>
+    </div>
+  </section>
+
+  <section class="doc-journal-feature" aria-labelledby="homeJournalFeatureTitle">
+    <div class="wrap doc-journal-feature__inner">
+      <div>
+        <span class="eyebrow">BioStem Labs Research Journal</span>
+        <h2 id="homeJournalFeatureTitle">Research notes, product insights, and new articles.</h2>
+        <p>Explore research-focused articles and information about the catalog.</p>
+      </div>
+      <a class="btn btn--accent btn--sq" href="https://journal.biostemlabs.com" target="_blank" rel="noopener noreferrer">Visit the Research Journal <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </section>
+
+  <!-- ══════════ FAQ ══════════ -->
+  <section class="section section--tint">
+    <div class="wrap" style="max-width:900px">
+      <div class="section-head reveal">
+        <span class="eyebrow">Common questions</span>
+        <h2 class="h2">Before you order</h2>
+      </div>
+      <div class="faq reveal" id="faqHome"></div>
+      <p style="margin-top:26px"><a class="btn btn--ghost" href="faq.html">Read the full FAQ &rarr;</a></p>
+    </div>
+  </section>
+</main>
+
+<div id="siteFooter"></div>
+
+<script>const previewFetch=window.fetch.bind(window);window.fetch=(input,options)=>{const url=new URL(typeof input==='string'?input:input.url,location.href);if(url.origin===location.origin&&url.pathname.startsWith('/api/'))return Promise.resolve(new Response(JSON.stringify({ok:false,user:null,authenticated:false,items:[],error:'Homepage preview: backend unavailable'}),{status:503,headers:{'Content-Type':'application/json'}}));return previewFetch(input,options)};</script><script src="js/data.js"></script>
+<script src="js/coa-data.js"></script>
+<script src="js/taxonomy.js"></script>
+<script src="js/site.js"></script>
+<script src="js/bundles.js"></script>
+<script src="js/loyalty.js"></script>
+<script src="js/content.js"></script>
+<script>
+mountChrome();
+mountHeroRecoveryStack('heroCards');
+
+/* Hero stats + trust strip */
+document.getElementById('heroStats').innerHTML = HERO_STATS.map(s => `
+  <div class="hero__stat">${ico(s.icon)}<div><b>${s.title}</b><span>${s.sub}</span></div></div>`).join('');
+
+document.getElementById('trustStrip').innerHTML = TRUST_STRIP.map(t =>
+  `<div class="strip__item">${ico(t.icon)}${t.label}</div>`).join('');
+
+/* Headline counts, spelled from the catalog so they can't go stale */
+const NUMWORD=['Zero','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten',
+  'Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen','Twenty'];
+const spell = n => NUMWORD[n] || n;
+document.getElementById('nCatsH').textContent = spell(CATEGORIES.length);
+document.getElementById('nProdH').textContent = spell(PRODUCTS.length);
+document.getElementById('nProdBtn').textContent = PRODUCTS.length;
+
+/* Category rail — counts computed from the real catalog */
+document.getElementById('catRail').innerHTML = CATEGORIES.map(c => {
+  const n = PRODUCTS.filter(p => p.categorySlug === c.slug).length;
+  const t = catTheme(c.slug);
+  return `<a class="cat" href="shop.html?cat=${c.slug}" style="${catVars(c.slug)}">
+    <span class="cat__badge"></span>
+    ${ico(t.icon, 'cat__ico')}
+    <span class="cat__name">${t.name}</span>
+    <span class="cat__n">${n} compound${n === 1 ? '' : 's'}</span></a>`;
+}).join('');
+
+/* Featured grid */
+document.getElementById('featGrid').innerHTML =
+  PRODUCTS.filter(p => p.featured).slice(0, 4).map(productCard).join('');
+
+/* Feature grids */
+const featHTML = arr => arr.map(f => `
+  <div class="feat"><div class="feat__ico">${ico(f.icon)}</div>
+    <h3>${f.title}</h3><p>${f.body}</p></div>`).join('');
+document.getElementById('standardGrid').innerHTML = featHTML(STANDARD);
+document.getElementById('docGrid').innerHTML     = featHTML(DOCS);
+document.getElementById('shipGrid').innerHTML    = featHTML(SHIPPING);
+
+/* Research stacks — same card system, bundle economics */
+document.getElementById('stackGrid').innerHTML = BUNDLES_LP.map(b => stackCard(b)).join('');
+
+/* Sample COA card */
+document.getElementById('coaDemo').innerHTML = sampleCoaCard();
+
+/* FAQ */
+document.getElementById('faqHome').innerHTML = FAQ.slice(0, 5).map(f =>
+  `<details><summary>${f.q}</summary><p>${f.a}</p></details>`).join('');
+</script>
+<script>
+  // Keep this portfolio preview inside its iframe: the source site's other
+  // pages and checkout API are intentionally not included in this bundle.
+  document.addEventListener('click', event => {
+    const link = event.target.closest('a[href]');
+    if (link && !link.target) event.preventDefault();
+  });
+  document.addEventListener('submit', event => {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+  }, true);
+</script>
+</body>
+</html>
