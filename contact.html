@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Contact Decentrify about your next project or schedule a call.">
+  <title>Contact — Decentrify</title>
+  <link rel="icon" href="assets/logo.webp">
+  <link rel="stylesheet" href="style.css?v=11">
+  <link rel="stylesheet" href="contact.css">
+</head>
+<body class="contact-page">
+  <a class="skip" href="#contact-main">Skip to contact options</a>
+  <header>
+    <a class="brand" href="index.html#work"><img src="assets/logo.webp" alt=""><strong>DECENTRIFY</strong><sup>®</sup></a>
+    <div class="nav-cluster"><a class="header-services" href="services.html">Services &amp; Pricing</a><a href="contact.html" aria-current="page">Let’s talk</a></div>
+  </header>
+  <main id="contact-main" class="contact-shell">
+    <section class="contact-intro">
+      <p class="eyebrow">DECENTRIFY / CONTACT</p>
+      <h1>Let’s make<br>something matter.</h1>
+      <p>Tell us a little about what you’re building, and we’ll get back to you. Prefer to talk it through? Book a call instead.</p>
+      <a class="schedule-link" href="https://calendly.com/lane-decentrify" target="_blank" rel="noopener">Schedule a call</a>
+    </section>
+    <section class="contact-form-panel" aria-labelledby="contact-form-title">
+      <p class="eyebrow">SEND A MESSAGE</p>
+      <h2 id="contact-form-title">Start with the essentials.</h2>
+      <p class="contact-copy">We’ll respond as soon as we can.</p>
+      <form name="decentrify-contact" method="POST" action="/contact-success.html" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="decentrify-contact">
+        <p class="honeypot"><label>Leave this field empty<input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+        <label for="contact-name">Name <b aria-hidden="true">*</b><input id="contact-name" name="name" type="text" autocomplete="name" required></label>
+        <label for="contact-company">Company <b aria-hidden="true">*</b><input id="contact-company" name="company" type="text" autocomplete="organization" required></label>
+        <label for="contact-email">Email <b aria-hidden="true">*</b><input id="contact-email" name="email" type="email" autocomplete="email" required></label>
+        <label for="contact-notes">Notes <small>Optional</small><textarea id="contact-notes" name="notes" rows="6" placeholder="A little about the project, your goals, or the problem you want to solve."></textarea></label>
+        <button type="submit">Send your message</button>
+      </form>
+      <p class="schedule-note">Or <a href="https://calendly.com/lane-decentrify" target="_blank" rel="noopener">schedule a call on Calendly</a>.</p>
+    </section>
+  </main>
+  <footer><a href="https://decentrify.biz/" target="_blank" rel="noopener">DECENTRIFY © <span id="year"></span></a><a href="index.html#work">Selected work</a><a href="services.html">Services &amp; Pricing</a></footer>
+  <script>document.querySelector('#year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
