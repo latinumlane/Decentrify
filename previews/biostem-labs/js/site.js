@@ -527,7 +527,7 @@ const Cart = {
             as lyophilized powder and ${sv.forProducts.length > 1 ? 'need' : 'needs'} ${esc(sv.label)}.
             There is none in your cart.</p>
           <button class="recon__add" data-solvent="${esc(z.sku)}" data-slug="${esc(sp.slug)}">
-            Add ${esc(sp.name)}� ${money(z.price)}</button>
+            Add ${esc(sp.name)} — ${money(z.price)}</button>
           <a class="recon__skip" href="product.html?p=${esc(sp.slug)}">View details</a>
         </div>`;
       }).join(''));
@@ -864,7 +864,7 @@ function mountChrome() {
   document.getElementById('siteHeader').innerHTML = `
     <div class="announce">
       <a class="announce__full" href="account.html?new=1">Refer a friend and earn up to 10% of their order! &nbsp;·&nbsp; Free shipping on orders of $200 or more</a>
-      <a class="announce__short" href="account.html?new=1">Refer a friend� earn up to 10%! &nbsp;·&nbsp; Free shipping $200+</a>
+      <a class="announce__short" href="account.html?new=1">Refer a friend — earn up to 10%! &nbsp;·&nbsp; Free shipping $200+</a>
     </div>
     <nav class="nav"><div class="wrap nav__in">
       <a href="index.html" aria-label="BioStem Labs home">${brandLockup()}</a>
