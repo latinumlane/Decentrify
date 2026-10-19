@@ -1470,7 +1470,7 @@ strong.line__price,
 .flavor-stage__clip video { min-height: 0; height: 100%; background: var(--plate); }
 
 /* No max-height, deliberately. Capping it at 13rem hid the last two rows
-   of an 11-button rail behind a scroll nobody would guess was there â€” the
+   of an 11-button rail behind a scroll nobody would guess was there€ the
    flavours a visitor cannot see are the ones they assume are out of stock.
    The panel already scrolls as a whole (.product-modal__panel), so letting
    the rail size to its content costs nothing and loses nothing. */
@@ -1506,7 +1506,7 @@ strong.line__price,
   font-family: var(--f-label); font-size: .55rem; font-weight: 700;
   letter-spacing: var(--track-label); text-transform: uppercase; color: var(--ash);
 }
-/* Solid accent fill takes --on-ember, never white â€” see the token block. */
+/* Solid accent fill takes --on-ember, never white€ see the token block. */
 .flavor-chip[aria-pressed="true"] {
   background: var(--ember-lo); border-color: var(--ember-lo); color: var(--on-ember);
 }
@@ -1547,7 +1547,7 @@ strong.line__price,
 .product-modal__ladder tbody td:last-child { text-align: right; font-weight: 700; color: var(--ember); font-variant-numeric: tabular-nums; }
 .product-modal__ladder tbody td:first-child { color: var(--chalk); }
 .product-modal__discounts { list-style: none; margin: .25rem 0 0; padding: .6rem .8rem; display: grid; gap: .3rem; border: 1px dashed var(--edge); border-radius: var(--radius-ctl); font-family: var(--f-label); font-size: .74rem; color: var(--chalk); background: color-mix(in srgb, var(--ember) 6%, transparent); }
-.product-modal__discounts li::before { content: 'â˜…  '; color: var(--ember); }
+.product-modal__discounts li::before { content: '˜…  '; color: var(--ember); }
 .product-modal__ladder-add-col { width: 5.5rem; }
 .product-modal__ladder td.product-modal__ladder-add { text-align: right; padding: .35rem .6rem; }
 .product-modal__ladder-add .btn { padding: .3rem .7rem; font-size: .68rem; line-height: 1; }
@@ -1637,7 +1637,7 @@ strong.line__price,
   .product-modal__content h2 { padding-right: 3rem; }
 }
 
-/* Welcome savings wheel â€” a self-contained, one-session promotional moment. */
+/* Welcome savings wheel€ a self-contained, one-session promotional moment. */
 .savings-popup { position: fixed; inset: 0; z-index: var(--z-gate); display: grid; place-items: center; padding: 1rem; }
 .savings-popup__scrim { position: absolute; inset: 0; background: rgba(3, 3, 5, .78); backdrop-filter: blur(8px); }
 .savings-popup__panel { position: relative; width: min(100%, 32rem); max-height: 94vh; overflow: auto; display: flex; flex-direction: column; align-items: center; padding: clamp(1.4rem, 4vw, 2.4rem); background: rgba(20,20,24,.95); border: 1px solid rgba(255,255,255,.14); border-radius: var(--radius); text-align: center; box-shadow: 0 1rem 4rem rgba(0,0,0,.65); }
@@ -1697,9 +1697,9 @@ strong.line__price,
 @media (max-width: 699px) { .new-arrivals.grid--rail { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 /* ============================================================
-   10. HOW TO ORDER  â€” the one inverted band
+   10. HOW TO ORDER€ the one inverted band
    Placed between collections, not at the bottom. It intercepts the visitor
-   at the moment they know WHAT and now need to know HOW â€” and the how is
+   at the moment they know WHAT and now need to know HOW€ and the how is
    unusual here (scheduled window, off-rails payment, ID check). At the
    bottom of the page it would only be read by people who already converted.
    ============================================================ */
@@ -1750,7 +1750,7 @@ strong.line__price,
 .review-dialog__item p { margin-top: .5rem; color: var(--chalk); font-size: .92rem; }
 .review-dialog__item small { display: block; margin-top: .35rem; color: var(--ash); font-size: .72rem; }
 /* Sticky-feeling footer: it is the third grid row, so it never scrolls away
-   with the list above it. The panel's rows are auto / 1fr / auto â€” header,
+   with the list above it. The panel's rows are auto / 1fr / auto€ header,
    scrolling list, this. Adding a row here without updating that template is
    what collapses the list to nothing. */
 .review-dialog__foot { display: flex; justify-content: center; padding: 1rem 1.4rem 1.25rem; border-top: 1px solid var(--edge); background: var(--slab); }
@@ -1863,7 +1863,7 @@ strong.line__price,
   .step { opacity: 1; transform: none; }
   /* Stopping the animation alone would strand every quote after the first
      one or two outside a 12000px track that the container clips. Hand the
-     reader a scrollable strip instead, and drop the duplicated run â€” it
+     reader a scrollable strip instead, and drop the duplicated run€ it
      exists only to make the loop seamless and is pure repetition once
      nothing is moving. Same fix, same reason, as the announcement bar. */
   .google-trust__track { animation: none; }
@@ -1927,7 +1927,7 @@ strong.line__price,
 
    It used to be a mix: `width` and `right` were percentages (of the tile's
    WIDTH) while `top` was a percentage of its HEIGHT. That only holds while
-   the tile keeps one aspect ratio. It does not â€” the tile runs 299x180 on a
+   the tile keeps one aspect ratio. It does not€ the tile runs 299x180 on a
    1000px desktop and 166x144 on a phone, so the ratio swings from 1.66 to
    1.15 and the compositions tore themselves apart: art sized off a width
    that had shrunk 45% while its offsets tracked a height that had shrunk
@@ -1948,8 +1948,8 @@ strong.line__price,
 .category-tile__asset--vape   { width: calc(var(--tile-h) *  .947); right: calc(var(--tile-h) * -.05);  top: calc(var(--tile-h) * -.10); transform: rotate(17deg); }
 /* Carts: the battery sits BEHIND the cartridge and has to overlap it to read
    that way. Both packshots are narrow vertical strips floating in a much
-   wider transparent canvas â€” the cartridge's ink occupies only x 42â€“58% of
-   its own box, the battery's x 40â€“60% â€” so two boxes that overlap generously
+   wider transparent canvas€ the cartridge's ink occupies only x 42€58% of
+   its own box, the battery's x 40€60%€ so two boxes that overlap generously
    can still leave the two products with clear air between them. That is what
    the first attempt did: the boxes overlapped, the ink did not, and it read
    as two objects side by side. These offsets are set from the INK, not the
@@ -1958,7 +1958,7 @@ strong.line__price,
 .category-tile__asset--battery{ width: calc(var(--tile-h) *  .46);  right: calc(var(--tile-h) *  .276); top: calc(var(--tile-h) *  .02); transform: rotate(-17deg); }
 /* Vapes and Pre-Rolls are both sets of two: one slants back and high, the
    other forward and lower, so they read as depth rather than as two
-   products. DOM order does the stacking â€” every asset here is z-index 0, so
+   products. DOM order does the stacking€ every asset here is z-index 0, so
    the back one must be emitted first. */
 .category-tile__asset--pack   { width: calc(var(--tile-h) *  .631); right: calc(var(--tile-h) *  .166); top: calc(var(--tile-h) * -.27); transform: rotate(-15deg); }
 .category-tile__asset--device { width: calc(var(--tile-h) *  .831); right: calc(var(--tile-h) * -.066); top: calc(var(--tile-h) * -.06); transform: rotate(14deg); }
@@ -1967,7 +1967,7 @@ strong.line__price,
 .category-tile__asset--jar    { width: calc(var(--tile-h) *  .831); right: calc(var(--tile-h) * -.116); top: calc(var(--tile-h) * -.13); transform: rotate(-9deg); }
 /* Edibles: the gummy bag is emitted before --rope and peeks out below it.
    The bag art was supplied as a JPEG on white and is knocked out in
-   assets/aa4fa8217f2ce0aa.webp â€” a white rectangle on the tile's
+   assets/aa4fa8217f2ce0aa.webp€ a white rectangle on the tile's
    coloured gradient would read as a broken image. */
 .category-tile__asset--gummy  { width: calc(var(--tile-h) *  .565); right: calc(var(--tile-h) * -.05);  top: calc(var(--tile-h) *  .44); transform: rotate(15deg); }
 .category-tile__asset--rope   { width: calc(var(--tile-h) * 1.428); right: calc(var(--tile-h) * -.316); top: calc(var(--tile-h) * -.28); transform: rotate(-9deg); }
@@ -2061,7 +2061,7 @@ strong.line__price,
 .reviews__cta { display: flex; justify-content: center; margin-top: clamp(1.5rem, 3vw, 2.5rem); }
 /* White outline, for the same reason the hero's ghost button carries one:
    --edge is a near-black hairline tuned to sit quietly against the page
-   ground, which leaves this reading as floating text with no affordance â€”
+   ground, which leaves this reading as floating text with no affordance€
    and this is the one control on the page that asks for something back. */
 .reviews__cta .btn--ghost { border-color: #fff; }
 .reviews__cta .btn--ghost:hover,
@@ -2081,7 +2081,7 @@ strong.line__price,
 .review-form-dialog__status:not(:empty) { padding: .7rem; border: 1px solid var(--edge); border-radius: var(--radius-ctl); background: var(--void); }
 
 /* The .telegram-connect modal was removed with showTelegramConnect() in
-   app.js â€” connecting Telegram is an opt-in card on the account page now
+   app.js€ connecting Telegram is an opt-in card on the account page now
    (.acctcard--wide below), not an interstitial after registration. */
 
 .signup { display: grid; gap: 1.5rem; align-items: center; }
@@ -2095,7 +2095,7 @@ strong.line__price,
 .signup .fine { margin-top: .8rem; font-size: .78rem; color: var(--ash); }
 
 /* ============================================================
-   12. SHOP PAGE â€” filter rail
+   12. SHOP PAGE€ filter rail
    ============================================================ */
 .shopbar {
   position: sticky; top: var(--header-stack); z-index: var(--z-sticky);
@@ -2105,7 +2105,7 @@ strong.line__price,
 }
 /* Category pages opt out. Their rail sits directly under a full-bleed hero,
    and pinning it there parks a second bar under the header for the whole
-   scroll â€” on a phone that is two fixed strips eating the top of a viewport
+   scroll€ on a phone that is two fixed strips eating the top of a viewport
    that is mostly product. The chips are one tap from the top of the page,
    and the page is a single shelf, so there is nothing to keep in reach. */
 .shopbar--static { position: static; z-index: auto; }
@@ -2120,7 +2120,7 @@ strong.line__price,
 .category-filter summary::-webkit-details-marker { display: none; }
 .category-filter summary::after { content: '+'; margin-left: auto; color: var(--ember); font-size: 1.1rem; }
 .category-filter[open] summary { border-color: var(--ember); border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
-.category-filter[open] summary::after { content: 'â€“'; }
+.category-filter[open] summary::after { content: '€'; }
 #category-filter-status { color: var(--ash); font-size: .6rem; letter-spacing: .04em; text-transform: none; }
 .category-filter__panel {
   position: absolute; z-index: var(--z-sticky); left: 0; top: 100%; width: min(24rem, calc(100vw - 2rem));
@@ -2162,12 +2162,12 @@ strong.line__price,
   letter-spacing: .05em; text-transform: uppercase;
 }
 /* Desktop: product listings wrap into the base .grid's responsive
-   columns (2/3/4 up per viewport â€” see section 8), tightened further here
+   columns (2/3/4 up per viewport€ see section 8), tightened further here
    because a shelf of 40+ tiles reads better dense than a homepage
-   showcase does â€” 4-across at 1080px still left each tile pushing
+   showcase does€ 4-across at 1080px still left each tile pushing
    300px, oversized for what is basically a name, a price and an add
    button. This scope (.catalog-section .catalog-section__grid) only
-   touches product-listing shelves â€” it does not reach the homepage
+   touches product-listing shelves€ it does not reach the homepage
    "popular" strip or the product modal, which keep the roomier base
    .grid sizing on purpose. */
 .catalog-section .catalog-section__grid { gap: clamp(.7rem, 1.3vw, 1.15rem); }
@@ -2186,7 +2186,7 @@ strong.line__price,
 }
 /* All-products head. Declared AFTER the 520px block on purpose: that block
    sets align-items/flex-direction on the base class at equal specificity,
-   so anything written before it would be silently reverted on a phone â€”
+   so anything written before it would be silently reverted on a phone€
    the exact viewport where a centred title matters most.
 
    The rule under the head is a short centred segment rather than the full
@@ -2226,7 +2226,7 @@ strong.line__price,
 }
 .drawer__head h2 { font-size: 1.2rem; margin-right: auto; }
 
-/* Reservation timer â€” 20 minutes, because that is roughly how long a real
+/* Reservation timer€ 20 minutes, because that is roughly how long a real
    hold lasts. A 5-minute fake countdown that resets on reload teaches the
    customer the site lies to them. */
 .timer {
@@ -2238,7 +2238,7 @@ strong.line__price,
 .timer strong { color: var(--gold); }
 .timer.is-expired strong { color: var(--warn); }
 
-/* Threshold progress â€” raises AOV, and the travelling badge makes progress
+/* Threshold progress€ raises AOV, and the travelling badge makes progress
    legible without reading the sentence. */
 .progress { padding: .9rem 1.1rem; border-bottom: 1px solid var(--edge); }
 .progress__txt { font-size: .8rem; color: var(--ash); margin-bottom: .55rem; }
@@ -2258,7 +2258,7 @@ strong.line__price,
 .drawer__body { flex: 1; overflow-y: auto; padding: .4rem 1.1rem; }
 .line { display: flex; gap: .95rem; padding: 1.1rem 0;
         border-bottom: 1px solid var(--edge); }
-/* Same plate treatment in the cart, at thumbnail size â€” and note the wrapper.
+/* Same plate treatment in the cart, at thumbnail size€ and note the wrapper.
    The plate has to live on a PARENT, never on the blended element itself:
    mix-blend-mode blends an element (its background included) with whatever is
    painted behind it, so an img carrying its own plate multiplies against the
@@ -2281,8 +2281,8 @@ strong.line__price,
 .qty button:hover { color: var(--ember); }
 .qty span { font-family: var(--f-label); font-size: .74rem; min-width: 1.6rem;
             text-align: center; }
-/* Editable qty input styled to sit where the read-only <span> used to â€”
-   same font, same size, same width â€” so the drawer reads unchanged and
+/* Editable qty input styled to sit where the read-only <span> used to€
+   same font, same size, same width€ so the drawer reads unchanged and
    only clicking into the number reveals it is now typable. */
 .qty__input { width: 1.8rem; min-width: 1.6rem; height: auto; padding: 0;
               border: 0; background: transparent; color: inherit;
@@ -2347,7 +2347,7 @@ strong.line__price,
 .idv-field__err[hidden] { display: none; }
 
 /* Email confirmation landing page (verify.html). One card, centred, no
-   competing calls to action â€” the visitor arrived from their inbox to
+   competing calls to action€ the visitor arrived from their inbox to
    close a single loop. */
 .verify { display: grid; place-items: center; min-height: 60vh; }
 .verify__card { width: min(100%, 34rem); text-align: center; display: grid; gap: .9rem; padding: clamp(1.6rem, 4vw, 2.6rem); border: 1px solid var(--edge); border-radius: var(--radius); background: rgba(255, 255, 255, .02); }
@@ -2359,7 +2359,7 @@ strong.line__price,
 .verify__code strong { font-family: var(--f-label); font-size: 1.5rem; letter-spacing: .12em; color: var(--ember); }
 .verify__actions { display: flex; flex-wrap: wrap; gap: .6rem; justify-content: center; margin-top: .4rem; }
 .verify__actions[hidden] { display: none; }
-/* State accents. The card border is the only thing that changes colour â€”
+/* State accents. The card border is the only thing that changes colour€
    the copy already says what happened, so this is reinforcement, not the
    sole signal (which would fail for anyone who cannot distinguish them). */
 [data-verify-state="ok"] .verify__card { border-color: color-mix(in srgb, var(--gold) 55%, var(--edge)); }
@@ -2398,10 +2398,10 @@ strong.line__price,
 /* ---------- SUPPORT / HELP CLUSTER ----------------------------------
    Was .support-chat, back when the panel was a mock chat with a text input.
    It is a pre-loaded FAQ now (see supportFaq() in app.js) so the name went
-   with it â€” but the CLUSTER GEOMETRY below is load-bearing and must not
+   with it€ but the CLUSTER GEOMETRY below is load-bearing and must not
    drift: bottom 1.25rem on desktop, 5.35rem on mobile, 3rem controls. Two
    other components were positioned against those exact numbers after
-   measuring real overlaps â€” .totop in Â§23 and the hero CTA in Â§25. Move the
+   measuring real overlaps€ .totop in Â23 and the hero CTA in Â25. Move the
    cluster and you silently put it back on top of them. */
 /* .support-chat is the OLD class name, kept only as a safety alias. app.js
    and styles.css are separate cache entries, so a browser can briefly hold a
@@ -2633,7 +2633,7 @@ strong.line__price,
   display: flex; flex-direction: column; gap: .5rem;
 }
 
-/* Telegram card â€” full width under the three stat cards. It is a settings
+/* Telegram card€ full width under the three stat cards. It is a settings
    row, not a stat: state on the left, actions on the right, and it wraps to
    stacked on a phone rather than squeezing a 44px button next to text. */
 .acctcard--wide { grid-column: 1 / -1; }
@@ -2747,7 +2747,7 @@ strong.line__price,
 .order__meta { font-size: .82rem; color: var(--ash); }
 .order__total {
   font-family: var(--f-label); font-weight: 700; font-size: 1.05rem;
-  color: var(--ember);        /* prices carry the accent â€” see Â§9 */
+  color: var(--ember);        /* prices carry the accent€ see Â9 */
   font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1;
 }
 
@@ -2761,33 +2761,33 @@ strong.line__price,
 
 /* ============================================================
    20. SMOKE VEIL CURSOR  (index.html only, hero-scoped)
-   WebGL2 fluid-sim veil that follows the pointer â€” see smoke-veil.js for the
+   WebGL2 fluid-sim veil that follows the pointer€ see smoke-veil.js for the
    simulation and its three gates (hover+fine pointer, reduced-motion,
    WebGL2 feature detection). This block is the CSS half of that same
    belt-and-suspenders approach: even if smoke-veil.js never runs (script
    blocked, JS disabled, older browser), the canvas stays inert and invisible
    rather than sitting on-screen as an empty rectangle.
 
-   `position: absolute` inside `.hero` â€” deliberately NOT `fixed` to the
+   `position: absolute` inside `.hero`€ deliberately NOT `fixed` to the
    viewport. `.hero` is already `position: relative; overflow: hidden;
    isolation: isolate`, so nesting the canvas here does three things for
    free, with no extra JS:
-     Â· Clips it to the hero's box â€” it cannot bleed into the section below.
+     Â· Clips it to the hero's box€ it cannot bleed into the section below.
      Â· Scrolls it away naturally once the hero scrolls out of view.
-     Â· Contains its stacking â€” z-index below is LOCAL to .hero, not the page.
+     Â· Contains its stacking€ z-index below is LOCAL to .hero, not the page.
 
    `z-index: -1` places it above `.hero__bed` (the photo + scrim, at -2) but
    below `.hero__inner` (the h1/CTA/ZIP form, plain in-flow content, which
    therefore paints above any negative-z-index sibling regardless of DOM
    order). That ordering matters here specifically: `.hero--poster` runs
    near-black text measured down to a ~4:1 contrast floor against the photo
-   (see README "Re-tuning the hero scrim") â€” a screen-blended, lightening
+   (see README "Re-tuning the hero scrim")€ a screen-blended, lightening
    smoke layer drifting ABOVE that text would locally wash out exactly the
    contrast that was tuned pixel-by-pixel. Below the text, above the photo,
    is the only placement that can't regress it.
 
    `mix-blend-mode: screen` is what lets it sit over the photo without ever
-   reading as an opaque layer â€” screen only lightens. `pointer-events: none`
+   reading as an opaque layer€ screen only lightens. `pointer-events: none`
    is load-bearing: without it this canvas would sit above the ZIP form and
    the hero CTA and swallow every click on the one part of the page that
    converts. */
@@ -2832,7 +2832,7 @@ strong.line__price,
 }
 .legal__pending strong { color: var(--warn); }
 
-/* A control that reads as a link but is a <button> â€” used where the action
+/* A control that reads as a link but is a <button>€ used where the action
    is in-page and does not navigate. */
 .linklike {
   background: none; border: 0; padding: 0;
@@ -2858,12 +2858,12 @@ strong.line__price,
 }
 .icon-btn--social { min-width: 44px; }
 /* Header icon buttons sit at 42x42 (39x40 under 520px). Two pixels short of
-   the minimum; grow the hit box only â€” the header row is min-height 58px so
+   the minimum; grow the hit box only€ the header row is min-height 58px so
    nothing reflows. */
 .icon-btn { min-width: 44px; min-height: 44px; }
 
 /* Below 560px the header cannot hold five 44px controls next to a 120px
-   brand â€” measured at 375px it wanted 369px of a 343px content width and
+   brand€ measured at 375px it wanted 369px of a 343px content width and
    pushed the cart button off the right edge; at 320px the menu button went
    with it. The two social controls step out here and app.js mirrors them
    into the mobile nav, so nothing becomes unreachable (Instagram has no
@@ -2872,7 +2872,7 @@ strong.line__price,
    This rule has to sit AFTER the .icon-btn block, not up with the other
    breakpoints: .icon-btn--social and .icon-btn have equal specificity, so
    whichever is declared last wins, and a media query does not change that.
-   Do not answer this by shrinking .icon-btn â€” 44px is the tap target. */
+   Do not answer this by shrinking .icon-btn€ 44px is the tap target. */
 @media (max-width: 560px) { .icon-btn--social { display: none; } }
 
 /* Filter checkboxes are 13x13, but each sits inside a label. Give the label
@@ -2889,7 +2889,7 @@ strong.line__price,
    .totop sat at bottom:5.4rem and .support-help at bottom:5.35rem, both
    pinned to right:1rem. On mobile the 42px back-to-top button therefore sat
    entirely underneath the 105px support cluster, and with z-index 20 against
-   the cluster's 40 it was invisible and untappable â€” measured at 375px, both
+   the cluster's 40 it was invisible and untappable€ measured at 375px, both
    occupying 678-726px from the top of an 812px viewport.
 
    Stack them instead: support cluster on the bottom row, back-to-top above
@@ -2912,11 +2912,11 @@ strong.line__price,
 
 /* ============================================================
    25. HERO CTA vs THE FLOATING SUPPORT CLUSTER
-   Third collision in this stack (see Â§23 for the .totop one). The support
+   Third collision in this stack (see Â23 for the .totop one). The support
    cluster is fixed at bottom:5.35rem and is 3rem tall, so on a 375x812
-   viewport it occupies 678â€“726px from the top. The hero's CTA row ended at
+   viewport it occupies 678€726px from the top. The hero's CTA row ended at
    692px, which put the cluster over the bottom-right corner of the
-   secondary CTA â€” a 59x14px overlap, measured, where a tap landed on the
+   secondary CTA€ a 59x14px overlap, measured, where a tap landed on the
    support launcher instead of "How it works".
 
    Reserve the cluster's own footprint as hero bottom padding rather than
@@ -2931,10 +2931,10 @@ strong.line__price,
 /* ============================================================
    26. CATEGORY PAGES
    flower / carts / vapes / edibles / concentrates / prerolls /
-   mushrooms â€” one real URL per shelf instead of shop.html?cat=.
+   mushrooms€ one real URL per shelf instead of shop.html?cat=.
 
    Three parts, in source order down the page:
-     .crumbs             breadcrumb back to Home â†’ Shop
+     .crumbs             breadcrumb back to Home Shop
      .cat-hero-overlay   the photograph with the copy laid over it
      .cat-chips          the sticky category switcher
 
@@ -2962,7 +2962,7 @@ strong.line__price,
 
 /* ---------- THE HERO -------------------------------------------------
    One object: the photograph at its native aspect with the copy sitting on
-   top of it. The image is never cropped â€” the container takes the image's
+   top of it. The image is never cropped€ the container takes the image's
    own ratio (1600 x 901) rather than a fixed height, so the reaching hand
    and the product both survive at every width.
 
@@ -2970,7 +2970,7 @@ strong.line__price,
    right and is opaque black through the first 30% of the frame, which is
    where the yellow field is empty in all three shots; by 70% it is gone and
    the photograph is untouched. The copy is capped at 42% of the frame so no
-   line of text ever reaches past the .55 stop â€” measured, that is 6.6:1 for
+   line of text ever reaches past the .55 stop€ measured, that is 6.6:1 for
    body text at the very worst pixel, and better everywhere else.
 
    Below 800px the frame is only ~210px tall, which cannot hold an H1, a
@@ -2982,21 +2982,21 @@ strong.line__price,
   position: relative; overflow: hidden;
   width: 100%; background: var(--void);
   /* Full-bleed to match .shop-header. The prior 88rem cap left a --void
-     bar on either side above the fold on wide desktops â€” the copy is
+     bar on either side above the fold on wide desktops€ the copy is
      still measure-capped by .cat-hero-overlay__inner, so a full-width
      frame does not run the lede across the whole viewport. */
 }
 .cat-hero-overlay__media { position: relative; }
 .cat-hero-overlay__img { display: block; width: 100%; height: auto; }
-/* This is a VERBATIM COPY of the .shop-header scrim (Â§ above). The two
+/* This is a VERBATIM COPY of the .shop-header scrim (Â above). The two
    heroes sit one click apart and have to read as the same treatment, so if
-   you change one, change the other â€” there is no shared token for it
+   you change one, change the other€ there is no shared token for it
    because .shop-header composites its scrim into a background-image stack
    and this one is a real element over a real <img>.
 
-   It is much lighter than the ramp it replaced (.78 â†’ .48 rather than
-   .98 â†’ 0), which is the point: the photograph survives across the whole
-   frame. The cost is that --ash body copy no longer clears 4.5:1 over it â€”
+   It is much lighter than the ramp it replaced (.78 .48 rather than
+   .98 0), which is the point: the photograph survives across the whole
+   frame. The cost is that --ash body copy no longer clears 4.5:1 over it€
    measured 3.0:1 on the edibles shot. .shop-header has exactly the same
    problem and answers it the same way, by putting its lede in --chalk
    (.shop-hero .lede). So does this hero now; see .cat-hero__lede below. */
@@ -3013,13 +3013,13 @@ strong.line__price,
   box-sizing: border-box;
   padding-block: clamp(2rem, 4vw, 3.5rem);
 }
-/* Kept at 39% for measure, not for contrast â€” the scrim is flat enough now
+/* Kept at 39% for measure, not for contrast€ the scrim is flat enough now
    that where the line ends barely moves the ratio (.78 at the left edge,
    .70 at 39%). 44ch is the readable-line cap; the percentage stops the
    copy running under the product on a wide frame. */
 .cat-hero-overlay__inner { max-width: min(44ch, 39%); }
 
-/* Art variant â€” the four shelves with no photograph. Same frame, same
+/* Art variant€ the four shelves with no photograph. Same frame, same
    ratio, so a visitor moving between category pages sees one component and
    not two. The gradient is sampled from the photography (bright centre
    #FDC602, corners falling to #CD7D1E) so it belongs to the same set. */
@@ -3056,7 +3056,7 @@ strong.line__price,
 }
 .cat-hero__meta strong { color: var(--ember); }
 
-/* Desktop crop â€” trim the top and bottom 30% of the frame so the hero
+/* Desktop crop€ trim the top and bottom 30% of the frame so the hero
    sits as a wide band above the shelf on larger viewports. The image
    is object-cover-centred so only the middle 40% of the source photo
    shows; the copy overlay stays vertically centred inside the shorter
@@ -3081,11 +3081,11 @@ strong.line__price,
 }
 
 @media (max-width: 800px) {
-  /* .shop-header's mobile wash is a flat .70 â†’ .76 and nothing else. This
+  /* .shop-header's mobile wash is a flat .70 .76 and nothing else. This
      hero cannot use it unchanged: below 800px the copy leaves the absolute
      layer and flows underneath the frame, so a scrim that stops at .76
      leaves a hard horizontal seam where the photograph ends and --void
-     begins. The .70 â†’ .76 range is matched over the first three quarters,
+     begins. The .70 .76 range is matched over the first three quarters,
      then it carries on to --void so the image and the copy under it still
      read as one object. */
   .cat-hero-overlay__scrim {
@@ -3100,20 +3100,20 @@ strong.line__price,
   /* Both children share one grid cell, so the copy sits ON the photograph
      rather than after it, centred against the frame. This replaced a flow
      layout with a negative top margin, which could only ever tuck the copy
-     under the bottom edge â€” never centre it â€” and needed the margin
+     under the bottom edge€ never centre it€ and needed the margin
      re-tuned for every width.
 
      The row takes the height of whichever child is taller. Above roughly
      480px that is the image, and `align-self: center` lands the copy in the
      middle of it, which is what "centred on the hero image" means. On a
      narrow phone the copy is the taller of the two, so it fills the row and
-     the image sits behind its upper part â€” still an overlay, still legible
+     the image sits behind its upper part€ still an overlay, still legible
      (the mobile scrim never drops below .70, which measures 9:1 for chalk
      and 7.1:1 for the ember eyebrow over the brightest part of the frame).
 
      `position: relative` is load-bearing, not decoration: .cat-hero-overlay__media
      is positioned, so it paints in step 8 of the painting order while static
-     block content paints in step 7 â€” underneath it. A static copy box gets
+     block content paints in step 7€ underneath it. A static copy box gets
      covered by the photograph and the z-index below is inert on it. */
   .cat-hero-overlay { display: grid; }
   .cat-hero-overlay__media { grid-area: 1 / 1; align-self: start; }
@@ -3147,7 +3147,7 @@ strong.line__price,
   background: var(--ember-lo); border-color: var(--ember-lo); color: var(--on-ember);
 }
 
-/* Sibling shelves at the foot of the page â€” a second chance to convert
+/* Sibling shelves at the foot of the page€ a second chance to convert
    rather than a dead end after the last card.
 
    Four tiles, laid out so no row is ever left ragged: 2x2 on a phone,
@@ -3155,7 +3155,7 @@ strong.line__price,
    columns, which is why this is scoped to .cat-next rather than changing
    .category-tiles for everyone.
 
-   The tiles also have to shrink on a narrow phone â€” at two columns a 320px
+   The tiles also have to shrink on a narrow phone€ at two columns a 320px
    viewport gives each one ~136px, and the display word inside was sized for
    a half-width desktop tile. The overrides below step the type and the
    min-height down so "CONCENTRATES" still fits on one line instead of
@@ -3229,7 +3229,7 @@ strong.line__price,
 <a class="skip" href="#main">Skip to content</a>
 
 <!-- ===== PROMO MARQUEE ==================================================
-     Maps 1:1 onto a Shopify section with `announcement` blocks â€” one <li> per
+     Maps 1:1 onto a Shopify section with `announcement` blocks€ one <li> per
      block, `text` + optional `link`, with speed and pause-on-hover as section
      settings. See README "Porting the promo bar to Shopify".
      app.js clones the track for the seamless loop; do not hand-write the copy. -->
@@ -3238,8 +3238,8 @@ strong.line__price,
     <ul class="bar__track" data-marquee>
       <li class="bar__item"><a href="shop.html">Same-day curbside pickup for orders placed before 2pm</a></li>
       <li class="bar__item">Orders after 2pm are ready for next-day pickup</li>
-      <li class="bar__item"><a href="referrals.html">Give 10%, get 10% â€” refer a friend</a></li>
-      <li class="bar__item"><a href="flower.html?cat=jarred-bagged-flower&amp;product=2483">Featured drop â€” Perm De Lance</a></li>
+      <li class="bar__item"><a href="referrals.html">Give 10%, get 10%€ refer a friend</a></li>
+      <li class="bar__item"><a href="flower.html?cat=jarred-bagged-flower&amp;product=2483">Featured drop€ Perm De Lance</a></li>
       <li class="bar__item">21+ Â· Verification required Â· Bring ID to pickup</li>
     </ul>
   </div>
@@ -3257,17 +3257,17 @@ strong.line__price,
           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
         </button>
         <ul class="mega" id="mega-products" hidden>
-          <li><a href="shop.html"><span class="tier-mark">âœ¦</span> All Products</a></li>
-          <li><a href="flower.html?cat=exotic-flower-units"><span class="tier-mark">âœ¿</span> Exotic Flower Units</a></li>
-          <li><a href="flower.html?cat=exotic-flower-breakdowns"><span class="tier-mark">âœ¿</span> Exotic Flower Breakdowns</a></li>
-          <li><a href="flower.html?cat=indoor-flower-units"><span class="tier-mark">âœ¿</span> Indoor Flower Units</a></li>
-          <li><a href="flower.html?cat=indoor-flower-breakdowns"><span class="tier-mark">âœ¿</span> Indoor Flower Breakdowns</a></li>
-          <li><a href="flower.html?cat=jarred-bagged-flower"><span class="tier-mark">â—Œ</span> Jarred / Bagged Flower</a></li>
-          <li><a href="carts.html"><span class="tier-mark">â—‰</span> Carts</a></li>
-          <li><a href="vapes.html"><span class="tier-mark">â–¯</span> Vapes</a></li>
-          <li><a href="edibles.html"><span class="tier-mark">â—†</span> Edibles</a></li>
-          <li><a href="concentrates.html"><span class="tier-mark">â—ˆ</span> Concentrates</a></li>
-          <li><a href="mushrooms.html"><span class="tier-mark">âœ¦</span> Magic</a></li>
+          <li><a href="shop.html"><span class="tier-mark"></span> All Products</a></li>
+          <li><a href="flower.html?cat=exotic-flower-units"><span class="tier-mark">¿</span> Exotic Flower Units</a></li>
+          <li><a href="flower.html?cat=exotic-flower-breakdowns"><span class="tier-mark">¿</span> Exotic Flower Breakdowns</a></li>
+          <li><a href="flower.html?cat=indoor-flower-units"><span class="tier-mark">¿</span> Indoor Flower Units</a></li>
+          <li><a href="flower.html?cat=indoor-flower-breakdowns"><span class="tier-mark">¿</span> Indoor Flower Breakdowns</a></li>
+          <li><a href="flower.html?cat=jarred-bagged-flower"><span class="tier-mark">Œ</span> Jarred / Bagged Flower</a></li>
+          <li><a href="carts.html"><span class="tier-mark">‰</span> Carts</a></li>
+          <li><a href="vapes.html"><span class="tier-mark">–</span> Vapes</a></li>
+          <li><a href="edibles.html"><span class="tier-mark"></span> Edibles</a></li>
+          <li><a href="concentrates.html"><span class="tier-mark">ˆ</span> Concentrates</a></li>
+          <li><a href="mushrooms.html"><span class="tier-mark"></span> Magic</a></li>
         </ul>
       </div>
       
@@ -6949,7 +6949,7 @@ window.FLOWERBOMB_PRODUCTS.forEach(function (product) {
 
     if (!n) {
       body.innerHTML = '<p class="drawer__empty">Your cart is empty.<br>' +
-        '<a href="shop.html" style="color:var(--ember)">Browse the menu â†’</a>' +
+        '<a href="shop.html" style="color:var(--ember)">Browse the menu</a>' +
         '</p>';
     } else {
       body.innerHTML = Object.keys(cart).map(function (key) {

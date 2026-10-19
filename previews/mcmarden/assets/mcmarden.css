@@ -2748,7 +2748,7 @@ body[data-intro="true"] .hero__skip { opacity: 1; pointer-events: all; }
   .feature-row__go { text-align: right; }
 }
 .feature-row__go::before { content: "["; }
-.feature-row__go::after  { content: " ↗]"; white-space: pre; }
+.feature-row__go::after  { content: ""; white-space: pre; }
 
 @media (hover: hover) {
   .features:has(.feature-row__link:hover) .feature-row:not(:hover) { opacity: .38; }

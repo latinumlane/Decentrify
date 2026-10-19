@@ -527,7 +527,7 @@ const Cart = {
             as lyophilized powder and ${sv.forProducts.length > 1 ? 'need' : 'needs'} ${esc(sv.label)}.
             There is none in your cart.</p>
           <button class="recon__add" data-solvent="${esc(z.sku)}" data-slug="${esc(sp.slug)}">
-            Add ${esc(sp.name)} — ${money(z.price)}</button>
+            Add ${esc(sp.name)}� ${money(z.price)}</button>
           <a class="recon__skip" href="product.html?p=${esc(sp.slug)}">View details</a>
         </div>`;
       }).join(''));
@@ -697,7 +697,7 @@ const Checkout = {
     const value = (key, fallback = '') => esc(address[key] || fallback || '');
     host.innerHTML = `
       <form id="cartCheckoutForm" novalidate>
-        <button class="cart-checkout__back" type="button" id="cartCheckoutBack">&larr; Back to cart</button>
+        <button class="cart-checkout__back" type="button" id="cartCheckoutBack"> Back to cart</button>
         <div style="margin:8px 0 14px;font-size:12px;color:var(--ink-4)">
           ${signedIn
             ? `Signed in as <b style="color:var(--ink-2)">${esc(account.email)}</b>. Your order confirmation will go there.`
@@ -864,7 +864,7 @@ function mountChrome() {
   document.getElementById('siteHeader').innerHTML = `
     <div class="announce">
       <a class="announce__full" href="account.html?new=1">Refer a friend and earn up to 10% of their order! &nbsp;·&nbsp; Free shipping on orders of $200 or more</a>
-      <a class="announce__short" href="account.html?new=1">Refer a friend — earn up to 10%! &nbsp;·&nbsp; Free shipping $200+</a>
+      <a class="announce__short" href="account.html?new=1">Refer a friend� earn up to 10%! &nbsp;·&nbsp; Free shipping $200+</a>
     </div>
     <nav class="nav"><div class="wrap nav__in">
       <a href="index.html" aria-label="BioStem Labs home">${brandLockup()}</a>
@@ -1227,7 +1227,7 @@ function mountHeroRecoveryStack(id, base = '') {
     <span class="hero__stack-card__top"><b>Purchase the Recovery Stack</b><span>Save ${money(math.saving)}</span></span>
     <span class="hero__stack-card__foot">
       <span class="hero__stack-card__products">${products.map(line => esc(line.p.name)).join(' · ')}</span>
-      <b>${money(math.price)}</b><span aria-hidden="true">→</span>
+      <b>${money(math.price)}</b><span aria-hidden="true"></span>
     </span>
   </a>`;
 }

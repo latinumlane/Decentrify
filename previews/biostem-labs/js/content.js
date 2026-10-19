@@ -135,7 +135,7 @@ function coaPanel(p, base = '') {
         <span>${esc(COA_LAB.name)} · ${esc(COA_LAB.accreditation)}</span></span>
       </div>
       <a class="btn btn--primary btn--sq" href="${base}${r.file}" target="_blank" rel="noopener"
-         style="padding:11px 20px;font-size:13px">Open certificate &rarr;</a>
+         style="padding:11px 20px;font-size:13px">Open certificate </a>
     </div>
   </div>
   `).join('');
